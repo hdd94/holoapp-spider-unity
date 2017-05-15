@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 33875451262911062}
   - component: {fileID: 23743104172650894}
   - component: {fileID: 64796351152720136}
+  - component: {fileID: 114972482949021692}
   m_Layer: 31
   m_Name: roomMesh-0
   m_TagString: Untagged
@@ -40,6 +41,7 @@ GameObject:
   - component: {fileID: 33894338353907318}
   - component: {fileID: 23006460075167486}
   - component: {fileID: 64908836316374406}
+  - component: {fileID: 114823294874716514}
   m_Layer: 31
   m_Name: roomMesh-2
   m_TagString: Untagged
@@ -58,6 +60,7 @@ GameObject:
   - component: {fileID: 33959615001305856}
   - component: {fileID: 23992043471577880}
   - component: {fileID: 64996071496054034}
+  - component: {fileID: 114173802112518196}
   m_Layer: 31
   m_Name: roomMesh-1
   m_TagString: Untagged
@@ -294,3 +297,36 @@ MeshCollider:
   m_InflateMesh: 0
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 4300002, guid: 2663c3eaf2c531244ad01f03e32f5480, type: 3}
+--- !u!114 &114173802112518196
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1844816807083908}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e038bf700cfa444fb16c6ef963be9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114823294874716514
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1616842191277398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e038bf700cfa444fb16c6ef963be9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &114972482949021692
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1514700075054688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e038bf700cfa444fb16c6ef963be9f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

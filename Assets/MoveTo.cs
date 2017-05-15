@@ -6,7 +6,6 @@ using UnityEngine.AI;
 public class MoveTo : MonoBehaviour
 {
 
-    public Transform goal;
     NavMeshAgent agent;
 
     Vector3 viewPoint;
