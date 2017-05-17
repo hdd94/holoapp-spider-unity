@@ -15,7 +15,7 @@ public class MoveTo : MonoBehaviour
 
     Quaternion rotation;
 
-    bool move = true;
+    
 
     void Awake()
     {
@@ -31,9 +31,9 @@ public class MoveTo : MonoBehaviour
     private void FixedUpdate()
     {
         //agent.destination = goal.position;
-        viewPoint = Camera.main.transform.position;
         //viewPoint = goal.position + goal.forward * 1;
         //agent.SetDestination(GameObject.Find("Camera").transform.position);
+        viewPoint = Camera.main.transform.position;
         agent.destination = viewPoint;
 
         anim.SetFloat("Speed", agent.speed);
@@ -41,11 +41,14 @@ public class MoveTo : MonoBehaviour
         if (Vector3.Distance(viewPoint, transform.position) < 1)
         {
             agent.speed = 0;
-            //GetComponent<Rigidbody>().AddForce(new Vector3(0, 5, 0), ForceMode.Impulse);
+            GetComponent<NavMeshAgent>().enabled = false;
+            GetComponent<Rigidbody>().mass = 10;
+            GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 4, 0), ForceMode.Impulse);
         }
-        else
+        else 
         {
             agent.speed = 1;
+            //GetComponent<NavMeshAgent>().enabled = true;
         }
         Debug.Log(Vector3.Distance(viewPoint, transform.position));
 
