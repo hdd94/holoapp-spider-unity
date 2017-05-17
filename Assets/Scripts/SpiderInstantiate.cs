@@ -62,7 +62,7 @@ public class SpiderInstantiate : MonoBehaviour {
         Vector3 pos = RandomCircle(center, spawnRadius);
         //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
         var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
-        spider.transform.localScale = Vector3.one * 0.2f;       
+        spider.transform.localScale = Vector3.one * 0.1f;       
         print(spider.transform.position);
 
         timer++;
