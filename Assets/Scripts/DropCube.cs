@@ -75,7 +75,7 @@ public class DropCube : MonoBehaviour, IInputClickHandler
         //manager.AddPoint(LinePrefab, PointPrefab, TextPrefab);
 
         var spider = GameObject.Instantiate(spiderPrefab); // Create a cube
-        spider.transform.localScale = Vector3.one * 0.3f; // Make the cube smaller
+        spider.transform.localScale = Vector3.one * 0.05f; // Make the cube smaller
         spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
         spider.AddComponent<Rigidbody>(); // Apply physics
 

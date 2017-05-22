@@ -5,12 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/DefaultScene (Duc).unity
     guid: bbfbfbc16cb6cc84389635e898e9f314
   - enabled: 0
     path: Assets/HoloToolkit/SpatialMapping/Tests/SpatialMappingTap.unity
     guid: 00000000000000000000000000000000
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Test.unity
     guid: ce8f0953315ed0f46a8af5311d54c441

@@ -286,20 +286,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400100, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 400100, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 400100, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 9500000, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0657c75a1d6bdba4cb1fd03c07aa0321, type: 2}
+    - target: {fileID: 100100, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 100100, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
+      propertyPath: m_TagString
+      value: Spider
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f5a9bd478ca094495a4520e37f57420d, type: 3}
   m_IsPrefabParent: 0
@@ -1106,9 +1114,9 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1136211389}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 093ab8083e188a242a9ca3bfd0e63abf, type: 3}
+  m_Script: {fileID: 11500000, guid: b167b9c33951dfc49a5c223754ff7c10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!54 &1136211393
@@ -1138,17 +1146,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &1136211395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1136211389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b167b9c33951dfc49a5c223754ff7c10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1155135147 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1000010302963436, guid: 2ed75ffdf9031c94e8bce4b3d17b9928,
@@ -1591,6 +1588,7 @@ GameObject:
   - component: {fileID: 2128033185}
   - component: {fileID: 2128033178}
   - component: {fileID: 2128033177}
+  - component: {fileID: 2128033186}
   m_Layer: 0
   m_Name: HoloLensCamera
   m_TagString: MainCamera
@@ -1617,7 +1615,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128033176}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 61f1bc5ac617aed478586cf974830afb, type: 3}
   m_Name: 
@@ -1707,15 +1705,28 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2128033176}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.053141408, y: 0.7465432, z: -0.06006543, w: 0.66048574}
   m_LocalPosition: {x: -0.8, y: -1.16, z: -1.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 958426540}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 9.2, y: 97, z: 0}
 --- !u!114 &2128033185
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2128033176}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8682f21e292bb204692e6a230a3ba10f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
+    type: 2}
+--- !u!114 &2128033186
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1723,11 +1734,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 2128033176}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8682f21e292bb204692e6a230a3ba10f, type: 3}
+  m_Script: {fileID: 11500000, guid: d8c8607f06da67041948997bb9f3386e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
+  yourGameObject: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
     type: 2}
+  spawnTime: 3
+  updateTime: 3
+  cam: {fileID: 0}
+  camTransform: {x: 0, y: 0, z: 0}
+  RaycastLayerMask: {}
+  sizeReduction: 1
+  _pts: []
 --- !u!114 &2128033187
 MonoBehaviour:
   m_ObjectHideFlags: 0

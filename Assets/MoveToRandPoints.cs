@@ -9,11 +9,17 @@ public class MoveToRandPoints : MonoBehaviour
 
     NavMeshAgent agent;
 
-    Vector3 viewPoint;
+    Vector3 randomPosition;
 
     Vector3 direction;
 
     Quaternion rotation;
+
+    Vector3 center;
+
+    float pointRadius = 1;
+
+    float distance;
 
     void Awake()
     {
@@ -23,31 +29,48 @@ public class MoveToRandPoints : MonoBehaviour
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
             agent.speed = 1;
+            agent.acceleration = 60;
         }
+
+        center = transform.position;
+        randomPosition = RandomCircle(center, pointRadius);
+        Debug.Log(randomPosition);
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        center = transform.position;
+        randomPosition = RandomCircle(center, pointRadius);
+        Debug.Log(randomPosition);
     }
 
     private void Update()
     {
-        ////agent.destination = goal.position;
-        ////viewPoint = goal.position + goal.forward * 1;
-        ////agent.SetDestination(GameObject.Find("Camera").transform.position);
-        //viewPoint = Camera.main.transform.position;
-        //agent.destination = viewPoint;
+        agent.destination = randomPosition;
 
-        //anim.SetFloat("Speed", agent.speed);
+        anim.SetFloat("Speed", agent.speed);
 
-        //if (Vector3.Distance(viewPoint, transform.position) < 1)
-        //{
-        //    agent.speed = 0;
-        //}
-        //else
-        //{
-        //    agent.speed = 1;
-        //}
-        //Debug.Log(Vector3.Distance(viewPoint, transform.position));
+        distance = Mathf.Round(Vector3.Distance(randomPosition, transform.position) * 10) / 10;
 
-        //direction = (Camera.main.transform.position - transform.position).normalized;
-        //rotation = Quaternion.LookRotation(direction);
-        //transform.rotation = rotation;
+        if (distance < 0.5f)
+        {
+            center = transform.position;
+            randomPosition = RandomCircle(center, pointRadius);
+            Debug.Log(randomPosition);
+        }
+
+        direction = (randomPosition - transform.position).normalized;
+        rotation = Quaternion.LookRotation(direction);
+        transform.rotation = rotation;
+    }
+
+    Vector3 RandomCircle(Vector3 center, float radius)
+    {
+        float ang = Random.value * 360;
+        Vector3 pos;
+        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.y = center.y;
+        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        return pos;
     }
 }

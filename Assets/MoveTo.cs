@@ -13,7 +13,11 @@ public class MoveTo : MonoBehaviour
 
     Vector3 direction;
 
+    Vector3 oldVelocity;
+
     Quaternion rotation;
+
+    float distance;
 
     
 
@@ -24,11 +28,19 @@ public class MoveTo : MonoBehaviour
         if (agent == null)
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
-            agent.speed = 1;
         }
     }
-  
-    private void FixedUpdate()
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag == "Spider")
+        {
+            agent.speed = 0;
+        } 
+        
+    }
+
+    private void Update()
     {
         //agent.destination = goal.position;
         //viewPoint = goal.position + goal.forward * 1;
@@ -38,19 +50,32 @@ public class MoveTo : MonoBehaviour
 
         anim.SetFloat("Speed", agent.speed);
 
-        if (Vector3.Distance(viewPoint, transform.position) < 1)
+        distance = Mathf.Round(Vector3.Distance(viewPoint, transform.position) * 10) / 10;
+        //distance = Vector3.Distance(viewPoint, transform.position);
+
+        if (distance < 1)
         {
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
             agent.speed = 0;
-            GetComponent<NavMeshAgent>().enabled = false;
-            GetComponent<Rigidbody>().mass = 10;
-            GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, 4, 0), ForceMode.Impulse);
+            agent.acceleration = float.MaxValue;
+            agent.velocity = Vector3.zero;
+            agent.isStopped = true;
+
+
+            //agent.enabled = false;
+            //GetComponent<Rigidbody>().mass = 10;
+            //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
-        else 
+        else if (distance > 1.2)
         {
-            agent.speed = 1;
-            //GetComponent<NavMeshAgent>().enabled = true;
+            agent.enabled = true;
+
+            agent.speed = 0.4f;
+            agent.acceleration = 8;
+            agent.isStopped = false;
+
         }
-        Debug.Log(Vector3.Distance(viewPoint, transform.position));
+        Debug.Log(distance);
 
         direction = (Camera.main.transform.position - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
