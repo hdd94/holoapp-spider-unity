@@ -15,8 +15,6 @@ public class MoveToRandPoints : MonoBehaviour
 
     Quaternion rotation;
 
-    Vector3 center;
-
     float pointRadius = 1;
 
     float distance;
@@ -28,20 +26,22 @@ public class MoveToRandPoints : MonoBehaviour
         if (agent == null)
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
-            agent.speed = 1;
-            agent.acceleration = 60;
+            agent.speed = 0.4f;
         }
 
-        center = transform.position;
-        randomPosition = RandomCircle(center, pointRadius);
-        Debug.Log(randomPosition);
-    }
+        //randomPosition = RandomPoint(transform.position);
 
-    private void OnCollisionStay(Collision collision)
-    {
-        center = transform.position;
-        randomPosition = RandomCircle(center, pointRadius);
-        Debug.Log(randomPosition);
+        //while (CheckIfOnLayer(randomPosition) == false)
+        //{
+        //    randomPosition = RandomPoint(transform.position);
+        //}
+
+        //Debug.Log(CheckIfOnLayer(randomPosition));
+
+        randomPosition = CreateRandomPoint(transform.position);
+
+        //Debug.Log(CheckIfOnLayer(randomPosition));
+        CreatePointCube(randomPosition);
     }
 
     private void Update()
@@ -52,11 +52,21 @@ public class MoveToRandPoints : MonoBehaviour
 
         distance = Mathf.Round(Vector3.Distance(randomPosition, transform.position) * 10) / 10;
 
-        if (distance < 0.5f)
+        if (distance < 0.3f)
         {
-            center = transform.position;
-            randomPosition = RandomCircle(center, pointRadius);
-            Debug.Log(randomPosition);
+            //randomPosition = RandomPoint(transform.position);
+
+            //while (CheckIfOnLayer(randomPosition) == false)
+            //{
+            //    randomPosition = RandomPoint(transform.position);
+            //}
+
+            //Debug.Log(CheckIfOnLayer(randomPosition));
+
+            randomPosition = CreateRandomPoint(transform.position);
+
+            //Debug.Log(CheckIfOnLayer(randomPosition));
+            CreatePointCube(randomPosition);
         }
 
         direction = (randomPosition - transform.position).normalized;
@@ -64,13 +74,49 @@ public class MoveToRandPoints : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    Vector3 RandomCircle(Vector3 center, float radius)
+    Vector3 CreateValidatedPoint(Vector3 pos)
+    {
+        Vector3 randomPosition = RandomPoint(pos);
+        while (!CheckIfOnLayer(randomPosition))
+        {
+            randomPosition = RandomPoint(pos);
+        }
+        return randomPosition;
+    }
+
+    void CreatePointCube(Vector3 pos)
+    {
+        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        cube.transform.position = randomPosition;
+        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        Destroy(cube.GetComponent<Collider>());
+    }
+
+    Vector3 RandomPoint(Vector3 center)
     {
         float ang = Random.value * 360;
         Vector3 pos;
-        pos.x = center.x + radius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y;
-        pos.z = center.z + radius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        pos.y = center.y + 0.1f;
+        pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
+
+
         return pos;
+    }
+
+    Vector3 CreateRandomPoint(Vector3 pos)
+    {
+        Vector3 randomPoint = pos + Random.insideUnitSphere * pointRadius;
+        NavMeshHit hit;
+        NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas);
+        return hit.position;
+    }
+
+    bool CheckIfOnLayer(Vector3 pos)
+    {
+        Ray ray = new Ray(pos, Vector3.down);
+        //Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
+
+        return Physics.Raycast(ray);
     }
 }

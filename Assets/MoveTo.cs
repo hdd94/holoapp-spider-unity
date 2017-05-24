@@ -29,6 +29,7 @@ public class MoveTo : MonoBehaviour
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
         }
+        agent.radius = 0.8f;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -40,7 +41,7 @@ public class MoveTo : MonoBehaviour
         
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         //agent.destination = goal.position;
         //viewPoint = goal.position + goal.forward * 1;
@@ -70,7 +71,7 @@ public class MoveTo : MonoBehaviour
         {
             agent.enabled = true;
 
-            agent.speed = 0.4f;
+            agent.speed = 0.2f;
             agent.acceleration = 8;
             agent.isStopped = false;
 
