@@ -28,6 +28,7 @@ public class MoveTo : MonoBehaviour
         if (agent == null)
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
+            agent.baseOffset = 0.2f;
         }
         agent.radius = 0.8f;
     }

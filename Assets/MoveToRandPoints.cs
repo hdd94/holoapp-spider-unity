@@ -27,6 +27,7 @@ public class MoveToRandPoints : MonoBehaviour
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
             agent.speed = 0.4f;
+            agent.baseOffset = 0.2f;
         }
 
         //randomPosition = RandomPoint(transform.position);
@@ -36,11 +37,9 @@ public class MoveToRandPoints : MonoBehaviour
         //    randomPosition = RandomPoint(transform.position);
         //}
 
-        //Debug.Log(CheckIfOnLayer(randomPosition));
-
+        Debug.Log(transform.position);
         randomPosition = CreateRandomPoint(transform.position);
 
-        //Debug.Log(CheckIfOnLayer(randomPosition));
         CreatePointCube(randomPosition);
     }
 
@@ -52,7 +51,7 @@ public class MoveToRandPoints : MonoBehaviour
 
         distance = Mathf.Round(Vector3.Distance(randomPosition, transform.position) * 10) / 10;
 
-        if (distance < 0.3f)
+        if (distance < 0.2f)
         {
             //randomPosition = RandomPoint(transform.position);
 
@@ -61,11 +60,9 @@ public class MoveToRandPoints : MonoBehaviour
             //    randomPosition = RandomPoint(transform.position);
             //}
 
-            //Debug.Log(CheckIfOnLayer(randomPosition));
 
             randomPosition = CreateRandomPoint(transform.position);
 
-            //Debug.Log(CheckIfOnLayer(randomPosition));
             CreatePointCube(randomPosition);
         }
 
@@ -74,15 +71,15 @@ public class MoveToRandPoints : MonoBehaviour
         transform.rotation = rotation;
     }
 
-    Vector3 CreateValidatedPoint(Vector3 pos)
-    {
-        Vector3 randomPosition = RandomPoint(pos);
-        while (!CheckIfOnLayer(randomPosition))
-        {
-            randomPosition = RandomPoint(pos);
-        }
-        return randomPosition;
-    }
+    //Vector3 CreateValidatedPoint(Vector3 pos)
+    //{
+    //    Vector3 randomPosition = RandomPoint(pos);
+    //    while (!CheckIfOnLayer(randomPosition))
+    //    {
+    //        randomPosition = RandomPoint(pos);
+    //    }
+    //    return randomPosition;
+    //}
 
     void CreatePointCube(Vector3 pos)
     {
@@ -106,17 +103,19 @@ public class MoveToRandPoints : MonoBehaviour
 
     Vector3 CreateRandomPoint(Vector3 pos)
     {
-        Vector3 randomPoint = pos + Random.insideUnitSphere * pointRadius;
+        //Vector3 randomPoint = pos + new Vector3(Random.insideUnitSphere.x * pointRadius, transform.position.y, Random.insideUnitSphere.z * pointRadius);
+        //Vector3 randomPoint = pos + Random.insideUnitSphere * pointRadius;
+        Vector3 randomPoint = RandomPoint(pos);
         NavMeshHit hit;
         NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas);
         return hit.position;
     }
 
-    bool CheckIfOnLayer(Vector3 pos)
-    {
-        Ray ray = new Ray(pos, Vector3.down);
-        //Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
+    //bool CheckIfOnLayer(Vector3 pos)
+    //{
+    //    Ray ray = new Ray(pos, Vector3.down);
+    //    //Debug.DrawRay(ray.origin, ray.direction, Color.cyan);
 
-        return Physics.Raycast(ray);
-    }
+    //    return Physics.Raycast(ray);
+    //}
 }
