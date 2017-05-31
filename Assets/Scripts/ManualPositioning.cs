@@ -11,7 +11,7 @@
 //    /// <summary>
 //    /// Simple test script for dropping cubes with physics to observe interactions
 //    /// </summary>
-//    public class DropCube : MonoBehaviour, IInputClickHandler
+//    public class ManualPositioning : MonoBehaviour, IInputClickHandler
 //    {
 //        //GestureRecognizer recognizer;
 //        public GameObject spiderPrefab;
@@ -57,16 +57,25 @@ using HoloToolkit.Unity.InputModule;
 /// <summary>
 /// manager all measure tools here
 /// </summary>
-public class DropCube : MonoBehaviour, IInputClickHandler
+public class ManualPositioning : MonoBehaviour, IInputClickHandler
 {
 
     public GameObject spiderPrefab;
 
+    int timer = 0;
 
+    float generalTimer = 0;
+
+    TextMesh spiderCount;
+    TextMesh generalCount;
 
     private void Start()
     {
         InputManager.Instance.PushFallbackInputHandler(gameObject);
+
+        spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+
+        generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
     }
 
     // place spatial point
@@ -78,13 +87,46 @@ public class DropCube : MonoBehaviour, IInputClickHandler
         spider.transform.localScale = Vector3.one * 0.05f; // Make the cube smaller
         spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
 
+        int movementKind = GameObject.Find("Informations").GetComponent<SaveInformations>().movementKind;
+        switch (movementKind)
+        {
+            case 0: //Zufällig
+                spider.AddComponent<AddAgentRandMov>();
+                break;
+            case 1: //Direkt
+                spider.AddComponent<AddAgent>();
+                break;
+                //case 2: //Beides
+                //    Console.WriteLine("Default case");
+                //    break;
+        }
+
+        timer++;
+
+        spiderCount.text = "Spinnenanzahl: " + timer;
+
+        if (timer == 9)
+        {
+            spiderCount.text = "Spinnenanzahl: max. " + timer;
+            CancelInvoke();
+        }
+
         //GameObject.Find("HoloLensCamera").GetComponent<SpiderInstantiate>().;
     }
 
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        OnSelect();
+        if(timer < 9)
+        {
+            OnSelect();
+        }
+    }
+
+    private void Update()
+    {
+        generalTimer += Time.deltaTime;
+        generalCount.text = "Zähler: " + (int)generalTimer;
     }
 }
 

@@ -22,5 +22,8 @@ public class IncreaseCount : MonoBehaviour
         string str = number.ToString();
         GameObject.Find("lblMainCount").GetComponent<Text>().text = str;
         Debug.Log(str);
+
+        //GameObject.Find("btnConform").GetComponent<SaveInformations>().count = number;
+        GameObject.Find("Informations").GetComponent<SaveInformations>().count = number;
     }
 }

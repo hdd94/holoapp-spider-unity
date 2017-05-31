@@ -17,7 +17,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
     float generalTimer = 0;
 
-    int timerEnd = 3;
+    int timerEnd;
 
     TextMesh spiderCount;
     TextMesh generalCount;
@@ -48,6 +48,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
         generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
 
+        timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
     }
 	
 	// Update is called once per frame
@@ -64,7 +65,22 @@ public class SpiderInstantiate : MonoBehaviour {
         Vector3 pos = CreateRandomPoint(transform.position);
         //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
         var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
-        spider.transform.localScale = Vector3.one * 0.05f;       
+        spider.transform.localScale = Vector3.one * 0.05f;
+
+        int movementKind = GameObject.Find("Informations").GetComponent<SaveInformations>().movementKind;
+        switch (movementKind)
+        {
+            case 0: //Zufällig
+                spider.AddComponent<AddAgentRandMov>();
+                break;
+            case 1: //Direkt
+                spider.AddComponent<AddAgent>();
+                break;
+                //case 2: //Beides
+                //    Console.WriteLine("Default case");
+                //    break;
+        }
+
         print(spider.transform.position);
 
         timer++;
@@ -73,7 +89,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
         if (timer == timerEnd)
         {
-            spiderCount.text = "Spinnenanzahl: max";
+            spiderCount.text = "Spinnenanzahl: max. " + timer;
             CancelInvoke();
         }
     }

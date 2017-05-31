@@ -31,6 +31,7 @@ public class MoveTo : MonoBehaviour
             agent.baseOffset = 0.2f;
         }
         agent.radius = 0.8f;
+        
     }
 
     private void OnCollisionEnter(Collision collision)
