@@ -8,6 +8,16 @@ public class SaveManualPositioning : MonoBehaviour {
     public void Save()
     {
         //GameObject.Find("btnConform").GetComponent<SaveInformations>().developerMode = GameObject.Find("DeveloperMode").GetComponent<Toggle>().isOn;
-        GameObject.Find("Informations").GetComponent<SaveInformations>().manualPositioning = GameObject.Find("ManualPositioning").GetComponent<Toggle>().isOn;
+        bool manualPositioning = GameObject.Find("Informations").GetComponent<SaveInformations>().manualPositioning;
+        manualPositioning = GameObject.Find("ManualPositioning").GetComponent<Toggle>().isOn;
+
+        if (manualPositioning)
+        {
+            GameObject.Find("Count").SetActive(false);
+        }
+        else
+        {
+            GameObject.Find("Count").SetActive(true);
+        }
     }
 }

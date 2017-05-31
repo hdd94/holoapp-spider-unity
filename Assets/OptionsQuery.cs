@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class OptionsQuery : MonoBehaviour {
 
-    private int movementKind;
     private bool developerMode;
     private bool unityMode;
     private bool manualPositioning;
 
-    void Awake () {
+    void Start () {
 
         developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
         unityMode = GameObject.Find("Informations").GetComponent<SaveInformations>().unityMode;
