@@ -2114,9 +2114,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Entwicklermodus
-
-'
+  m_Text: Entwicklermodus
 --- !u!222 &834150506
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2624,7 +2622,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!1 &1187857699
 GameObject:
   m_ObjectHideFlags: 0
@@ -4014,7 +4012,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &1556142942
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4125,10 +4123,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee4c64aefd0a3d4f9bfb1197dfa8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 0
+  count: 3
   movementKind: 0
-  developerMode: 0
-  unityMode: 0
+  developerMode: 1
+  unityMode: 1
   manualPositioning: 0
 --- !u!224 &1586803657
 RectTransform:
@@ -4797,6 +4795,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdce068e21e5e1e489e20a3302f48886, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  count: {fileID: 2054429617}
 --- !u!114 &2038608383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4869,7 +4868,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2054429618
 RectTransform:
   m_ObjectHideFlags: 0

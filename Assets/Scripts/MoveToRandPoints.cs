@@ -66,6 +66,11 @@ public class MoveToRandPoints : MonoBehaviour
             CreatePointCube(randomPosition);
         }
 
+        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        //{
+        //    Debug.DrawRay(transform.position, Vector3.up * 0.5f, Color.blue, float.MinValue);
+        //}
+
         direction = (randomPosition - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
         transform.rotation = rotation;

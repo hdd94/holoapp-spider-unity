@@ -44,11 +44,13 @@ public class SpiderInstantiate : MonoBehaviour {
         //    Instantiate(spiderPrefab, pos, Quaternion.identity);
         //}
 
-        spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+        if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+            generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
 
-        generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
-
-        timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
+            timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
+        }
     }
 	
 	// Update is called once per frame

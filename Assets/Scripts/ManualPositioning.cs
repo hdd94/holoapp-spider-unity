@@ -73,9 +73,12 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     {
         InputManager.Instance.PushFallbackInputHandler(gameObject);
 
-        spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
 
-        generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+            generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+        }
     }
 
     // place spatial point
@@ -126,7 +129,7 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     private void Update()
     {
         generalTimer += Time.deltaTime;
-        generalCount.text = "Zähler: " + (int)generalTimer;
+        generalCount.text = "Zeit: " + (int)generalTimer;
     }
 }
 

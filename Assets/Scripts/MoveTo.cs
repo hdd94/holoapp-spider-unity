@@ -80,6 +80,11 @@ public class MoveTo : MonoBehaviour
         }
         Debug.Log(distance);
 
+        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        //{
+        //    Debug.DrawRay(transform.position, Vector3.up * 0.5f, Color.blue, float.MinValue);
+        //}
+
         direction = (Camera.main.transform.position - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
         transform.rotation = rotation;

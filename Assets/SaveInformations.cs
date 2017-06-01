@@ -19,10 +19,10 @@ public class SaveInformations : MonoBehaviour {
         //movementKind = GameObject.Find("Dropdown").GetComponent<Dropdown>().value;
         //developerMode = GameObject.Find("DeveloperMode").GetComponent<Toggle>().isOn;
 
-        count = 3;
-        movementKind = 0;
-        developerMode = false;
-        unityMode = false;
-        manualPositioning = false;
+        //count = 3;
+        //movementKind = 0;
+        //developerMode = false;
+        //unityMode = false;
+        //manualPositioning = false;
     }
 }
