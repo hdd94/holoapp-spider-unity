@@ -48,17 +48,20 @@ public class SpiderInstantiate : MonoBehaviour {
         {
             spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
             generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
-
-            timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
         }
+
+        timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
         center = transform.position;
 
-        generalTimer += Time.deltaTime;
-        generalCount.text = "Zähler: " + (int)generalTimer;
+        if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            generalTimer += Time.deltaTime;
+            generalCount.text = "Zähler: " + (int)generalTimer;
+        }
     }
 
     void InstantiateObject()
@@ -69,31 +72,35 @@ public class SpiderInstantiate : MonoBehaviour {
         var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
         spider.transform.localScale = Vector3.one * 0.05f;
 
-        int movementKind = GameObject.Find("Informations").GetComponent<SaveInformations>().movementKind;
-        switch (movementKind)
+        bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
+        bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
+
+        if (randomMovementToggle)
         {
-            case 0: //Zufällig
-                spider.AddComponent<AddAgentRandMov>();
-                break;
-            case 1: //Direkt
-                spider.AddComponent<AddAgent>();
-                break;
-                //case 2: //Beides
-                //    Console.WriteLine("Default case");
-                //    break;
+            spider.AddComponent<AddAgentRandMov>();
         }
-
-        print(spider.transform.position);
-
+        else if (directMovementToggle)
+        {
+            spider.AddComponent<AddAgent>();
+        }
+        
         timer++;
 
-        spiderCount.text = "Spinnenanzahl: " + timer;
+        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            spiderCount.text = "Spinnenanzahl: " + timer;
+
+            if (timer == timerEnd)
+            {
+                spiderCount.text = "Spinnenanzahl: max. " + timer;
+            }
+        }
 
         if (timer == timerEnd)
         {
-            spiderCount.text = "Spinnenanzahl: max. " + timer;
             CancelInvoke();
         }
+
     }
 
     Vector3 RandomPoint(Vector3 center)

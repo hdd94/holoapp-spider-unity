@@ -90,18 +90,16 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
         spider.transform.localScale = Vector3.one * 0.05f; // Make the cube smaller
         spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
 
-        int movementKind = GameObject.Find("Informations").GetComponent<SaveInformations>().movementKind;
-        switch (movementKind)
+        bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
+        bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
+
+        if (randomMovementToggle)
         {
-            case 0: //Zufällig
-                spider.AddComponent<AddAgentRandMov>();
-                break;
-            case 1: //Direkt
-                spider.AddComponent<AddAgent>();
-                break;
-                //case 2: //Beides
-                //    Console.WriteLine("Default case");
-                //    break;
+            spider.AddComponent<AddAgentRandMov>();
+        }
+        else if (directMovementToggle)
+        {
+            spider.AddComponent<AddAgent>();
         }
 
         timer++;

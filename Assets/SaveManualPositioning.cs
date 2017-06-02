@@ -5,18 +5,19 @@ using UnityEngine.UI;
 
 public class SaveManualPositioning : MonoBehaviour {
 
-    public GameObject count;
-
     public void Save()
     {
         GameObject.Find("Informations").GetComponent<SaveInformations>().manualPositioning = GameObject.Find("ManualPositioning").GetComponent<Toggle>().isOn;
 
         if(GameObject.Find("ManualPositioning").GetComponent<Toggle>().isOn)
         {
-            count.SetActive(false);
-        } else
+            GameObject.Find("btnCountIncrease").GetComponent<Button>().interactable = false;
+            GameObject.Find("btnCountDecrease").GetComponent<Button>().interactable = false;
+        }
+        else
         {
-            count.SetActive(true);
+            GameObject.Find("btnCountIncrease").GetComponent<Button>().interactable = true;
+            GameObject.Find("btnCountDecrease").GetComponent<Button>().interactable = true;
         }
     }
 }

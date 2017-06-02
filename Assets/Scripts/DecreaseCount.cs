@@ -12,7 +12,7 @@ public class DecreaseCount : MonoBehaviour {
         int number = Convert.ToInt32(n);
 
 
-        if(number > 0)
+        if(number > 1)
         {
             number--;
         }

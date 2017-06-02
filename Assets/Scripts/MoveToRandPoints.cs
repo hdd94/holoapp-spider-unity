@@ -19,6 +19,8 @@ public class MoveToRandPoints : MonoBehaviour
 
     float distance;
 
+    GameObject wayPoint;
+
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -40,7 +42,10 @@ public class MoveToRandPoints : MonoBehaviour
         Debug.Log(transform.position);
         randomPosition = CreateRandomPoint(transform.position);
 
-        CreatePointCube(randomPosition);
+        if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            CreatePointCube(randomPosition);
+        }
     }
 
     private void Update()
@@ -60,10 +65,15 @@ public class MoveToRandPoints : MonoBehaviour
             //    randomPosition = RandomPoint(transform.position);
             //}
 
+            Destroy(wayPoint);
 
             randomPosition = CreateRandomPoint(transform.position);
 
-            CreatePointCube(randomPosition);
+            if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+            {
+                Destroy(wayPoint);
+                CreatePointCube(randomPosition);
+            }
         }
 
         //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
@@ -88,10 +98,14 @@ public class MoveToRandPoints : MonoBehaviour
 
     void CreatePointCube(Vector3 pos)
     {
-        GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-        cube.transform.position = randomPosition;
-        cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
-        Destroy(cube.GetComponent<Collider>());
+        //GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
+        //cube.transform.position = randomPosition;
+        //cube.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        //Destroy(cube.GetComponent<Collider>());
+
+        wayPoint = Instantiate(Resources.Load("WayPoint", typeof(GameObject))) as GameObject;
+        wayPoint.transform.position = pos;
+        Destroy(wayPoint.GetComponent<BoxCollider>());
     }
 
     Vector3 RandomPoint(Vector3 center)

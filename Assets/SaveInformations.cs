@@ -7,7 +7,8 @@ using UnityEngine.UI;
 public class SaveInformations : MonoBehaviour {
 
     public int count;
-    public int movementKind;
+    public bool randomMovementToggle;
+    public bool directMovementToggle;
     public bool developerMode;
     public bool unityMode;
     public bool manualPositioning;

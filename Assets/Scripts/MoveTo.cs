@@ -13,8 +13,6 @@ public class MoveTo : MonoBehaviour
 
     Vector3 direction;
 
-    Vector3 oldVelocity;
-
     Quaternion rotation;
 
     float distance;
@@ -28,21 +26,10 @@ public class MoveTo : MonoBehaviour
         if (agent == null)
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
-            agent.baseOffset = 0.2f;
+            agent.speed = 0.2f;
         }
-        agent.radius = 0.8f;
-        
     }
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.tag == "Spider")
-        {
-            agent.speed = 0;
-        } 
-        
-    }
-
+    
     private void FixedUpdate()
     {
         //agent.destination = goal.position;
@@ -54,31 +41,31 @@ public class MoveTo : MonoBehaviour
         anim.SetFloat("Speed", agent.speed);
 
         distance = Mathf.Round(Vector3.Distance(viewPoint, transform.position) * 10) / 10;
+        Debug.Log(distance);
         //distance = Vector3.Distance(viewPoint, transform.position);
 
         if (distance < 1)
         {
             GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
             agent.speed = 0;
-            agent.acceleration = float.MaxValue;
-            agent.velocity = Vector3.zero;
-            agent.isStopped = true;
+            //agent.acceleration = float.MaxValue;
+            //agent.velocity = Vector3.zero;
+            //agent.isStopped = true;
 
 
             //agent.enabled = false;
             //GetComponent<Rigidbody>().mass = 10;
             //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
-        else if (distance > 1.2)
+        else if (distance > 1.1)
         {
-            agent.enabled = true;
+            //agent.enabled = true;
 
             agent.speed = 0.2f;
-            agent.acceleration = 8;
-            agent.isStopped = false;
+            //agent.acceleration = 8;
+            //agent.isStopped = false;
 
         }
-        Debug.Log(distance);
 
         //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
         //{
