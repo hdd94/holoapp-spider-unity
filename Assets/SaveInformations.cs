@@ -10,8 +10,8 @@ public class SaveInformations : MonoBehaviour {
     public bool randomMovementToggle;
     public bool directMovementToggle;
     public bool developerMode;
-    public bool unityMode;
     public bool manualPositioning;
+    public bool unityMode;
 
     private void Awake()
     {

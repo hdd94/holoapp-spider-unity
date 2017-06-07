@@ -24,8 +24,9 @@ public class OptionsQuery : MonoBehaviour {
         if (developerMode)
         {
             counter.SetActive(true);
-      
-            if(manualPositioning)
+            GameObject.Find("SpatialMapping").GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
+
+            if (manualPositioning)
             {
                 GameObject.Find("Positioning").GetComponent<TextMesh>().text = "Positionierung: Manuell";
             }

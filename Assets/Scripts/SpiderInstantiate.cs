@@ -7,7 +7,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
     public GameObject spiderPrefab;
 
-     float pointRadius = 1;
+     float pointRadius = 2;
 
      float spawnStartzeit = 8;
 
@@ -22,7 +22,12 @@ public class SpiderInstantiate : MonoBehaviour {
     TextMesh spiderCount;
     TextMesh generalCount;
 
+    TextMesh debug;
+    int debugTimer = 0;
+
     Vector3 center;
+
+    public bool testing;
 
 	// Use this for initialization
 	void Start () {
@@ -48,6 +53,7 @@ public class SpiderInstantiate : MonoBehaviour {
         {
             spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
             generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+            debug = GameObject.Find("Debug").GetComponent<TextMesh>();
         }
 
         timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
@@ -66,7 +72,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
     void InstantiateObject()
     {
-        Vector3 center = transform.position - new Vector3(0, -0.5f, 0);
+        //Vector3 center = transform.position - new Vector3(0, -0.5f, 0);
         Vector3 pos = CreateRandomPoint(transform.position);
         //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
         var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
@@ -108,7 +114,8 @@ public class SpiderInstantiate : MonoBehaviour {
         float ang = Random.value * 360;
         Vector3 pos;
         pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + 0.1f;
+        //pos.y = center.y + 0.1f;
+        pos.y = center.y - 1;
         pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
 
@@ -117,10 +124,29 @@ public class SpiderInstantiate : MonoBehaviour {
 
     Vector3 CreateRandomPoint(Vector3 pos)
     {
-        //Vector3 randomPoint = pos + Random.insideUnitSphere * pointRadius;
         Vector3 randomPoint = RandomPoint(pos);
+        //Vector3 randomPoint = pos + Random.insideUnitSphere * 2;
+
+
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas);
+        Debug.Log(NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas));
+        if(NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            debugTimer++;
+            debug.text = "SamplePosition True: " + debugTimer;
+        }
+
+        if (testing)
+        {
+            GameObject randomPoint1 = Instantiate(Resources.Load("Position", typeof(GameObject))) as GameObject;
+            randomPoint1.transform.position = randomPoint;
+
+            GameObject spawnPoint = Instantiate(Resources.Load("WayPoint", typeof(GameObject))) as GameObject;
+            spawnPoint.transform.position = hit.position;
+        }
+
+        
+
         return hit.position;
     }
 }

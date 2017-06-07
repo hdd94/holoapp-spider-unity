@@ -17,8 +17,6 @@ public class MoveTo : MonoBehaviour
 
     float distance;
 
-    
-
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -28,25 +26,40 @@ public class MoveTo : MonoBehaviour
             agent = this.gameObject.AddComponent<NavMeshAgent>();
             agent.speed = 0.2f;
         }
+
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        //{
+        //    position = Instantiate(Resources.Load("Position", typeof(GameObject))) as GameObject;
+        //    position.transform.position = transform.position;
+        //}
     }
-    
-    private void FixedUpdate()
+
+    private void Update()
     {
         //agent.destination = goal.position;
         //viewPoint = goal.position + goal.forward * 1;
         //agent.SetDestination(GameObject.Find("Camera").transform.position);
         viewPoint = Camera.main.transform.position;
+        viewPoint.y = transform.position.y;
         agent.destination = viewPoint;
 
         anim.SetFloat("Speed", agent.speed);
 
+
         distance = Mathf.Round(Vector3.Distance(viewPoint, transform.position) * 10) / 10;
-        Debug.Log(distance);
+
         //distance = Vector3.Distance(viewPoint, transform.position);
 
-        if (distance < 1)
+        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        //{
+        //    position.transform.position = transform.position;
+        //}
+
+
+        if (distance < 1.5f)
         {
-            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
             agent.speed = 0;
             //agent.acceleration = float.MaxValue;
             //agent.velocity = Vector3.zero;
@@ -57,14 +70,13 @@ public class MoveTo : MonoBehaviour
             //GetComponent<Rigidbody>().mass = 10;
             //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
-        else if (distance > 1.1)
+        else if (distance > 1.55f)
         {
             //agent.enabled = true;
 
             agent.speed = 0.2f;
             //agent.acceleration = 8;
             //agent.isStopped = false;
-
         }
 
         //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
@@ -72,7 +84,7 @@ public class MoveTo : MonoBehaviour
         //    Debug.DrawRay(transform.position, Vector3.up * 0.5f, Color.blue, float.MinValue);
         //}
 
-        direction = (Camera.main.transform.position - transform.position).normalized;
+        direction = (viewPoint - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);
         transform.rotation = rotation;
     }

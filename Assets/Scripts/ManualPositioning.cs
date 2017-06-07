@@ -52,6 +52,8 @@
 
 using UnityEngine;
 using HoloToolkit.Unity.InputModule;
+using UnityEngine;
+using UnityEngine.AI;
 
 
 /// <summary>
@@ -68,6 +70,8 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
 
     TextMesh spiderCount;
     TextMesh generalCount;
+
+    GameObject position;
 
     private void Start()
     {
@@ -88,7 +92,14 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
 
         var spider = GameObject.Instantiate(spiderPrefab); // Create a cube
         spider.transform.localScale = Vector3.one * 0.05f; // Make the cube smaller
-        spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
+        //spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
+
+        Vector3 point = Camera.main.transform.position + Camera.main.transform.forward;
+
+        NavMeshHit hit;
+        NavMesh.SamplePosition(point, out hit, 1.0f, NavMesh.AllAreas);
+
+        spider.transform.position = hit.position;
 
         bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
         bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
