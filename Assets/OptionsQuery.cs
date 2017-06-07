@@ -53,6 +53,7 @@ public class OptionsQuery : MonoBehaviour {
             }
 
             GameObject.Find("MovementKind").GetComponent<TextMesh>().text = "Bewegungsart: " + movementKindName;
+            GameObject.Find("HoloLensCamera").GetComponent<SpiderInstantiate>().testing = true;
         } else
         {
             GameObject.Find("DefaultCursor").SetActive(false);

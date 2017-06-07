@@ -73,10 +73,14 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
 
     GameObject position;
 
+    bool developerMode;
+
+
     private void Start()
     {
         InputManager.Instance.PushFallbackInputHandler(gameObject);
 
+        developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
 
         if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
         {
@@ -115,13 +119,27 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
 
         timer++;
 
-        spiderCount.text = "Spinnenanzahl: " + timer;
-
-        if (timer == 9)
+        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
         {
-            spiderCount.text = "Spinnenanzahl: max. " + timer;
-            CancelInvoke();
+            spiderCount.text = "Spinnenanzahl: " + timer;
         }
+
+            if (developerMode)
+        {
+            if (timer == 25)
+            {
+                spiderCount.text = "Spinnenanzahl: max. " + timer;
+                CancelInvoke();
+            }
+        } else
+        {
+            if(timer == 9)
+            {
+                spiderCount.text = "Spinnenanzahl: max. " + timer;
+                CancelInvoke();
+            }
+        }
+        
 
         //GameObject.Find("HoloLensCamera").GetComponent<SpiderInstantiate>().;
     }
@@ -129,16 +147,28 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
 
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        if(timer < 9)
+        if (developerMode)
         {
-            OnSelect();
+            if (timer < 25)
+            {
+                OnSelect();
+            }
+        } else
+        {
+            if (timer < 9)
+            {
+                OnSelect();
+            }
         }
     }
 
     private void Update()
     {
-        generalTimer += Time.deltaTime;
-        generalCount.text = "Zeit: " + (int)generalTimer;
+        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            generalTimer += Time.deltaTime;
+            generalCount.text = "Zeit: " + (int)generalTimer;
+        }
     }
 }
 

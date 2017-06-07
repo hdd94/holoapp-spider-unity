@@ -28,9 +28,10 @@ public class MoveToRandPoints : MonoBehaviour
         if (agent == null)
         {
             agent = this.gameObject.AddComponent<NavMeshAgent>();
-            agent.speed = 0.4f;
-            agent.baseOffset = 0.2f;
+            agent.speed = 0.2f;
         }
+
+        GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
 
         //randomPosition = RandomPoint(transform.position);
 
@@ -39,7 +40,6 @@ public class MoveToRandPoints : MonoBehaviour
         //    randomPosition = RandomPoint(transform.position);
         //}
 
-        Debug.Log(transform.position);
         randomPosition = CreateRandomPoint(transform.position);
 
         if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
@@ -113,7 +113,7 @@ public class MoveToRandPoints : MonoBehaviour
         float ang = Random.value * 360;
         Vector3 pos;
         pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        pos.y = center.y + 0.1f;
+        pos.y = center.y;
         pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
 

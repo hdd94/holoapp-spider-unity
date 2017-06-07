@@ -265,7 +265,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &80517366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,7 +409,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &111011001
 RectTransform:
   m_ObjectHideFlags: 0
@@ -539,7 +539,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 3
+  m_Text: 9
 --- !u!222 &197807220
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1163,7 +1163,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 1
+  m_IsOn: 0
 --- !u!114 &458969748
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3621,9 +3621,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee4c64aefd0a3d4f9bfb1197dfa8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  count: 3
-  randomMovementToggle: 1
-  directMovementToggle: 0
+  count: 9
+  randomMovementToggle: 0
+  directMovementToggle: 1
   developerMode: 0
   manualPositioning: 0
   unityMode: 0
@@ -3899,7 +3899,7 @@ MonoBehaviour:
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
-  m_IsOn: 0
+  m_IsOn: 1
 --- !u!114 &1700602543
 MonoBehaviour:
   m_ObjectHideFlags: 0

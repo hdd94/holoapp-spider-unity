@@ -9,7 +9,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
      float pointRadius = 2;
 
-     float spawnStartzeit = 8;
+     float spawnStartzeit = 4;
 
      float spawnIntervall = 2;
 
@@ -27,7 +27,7 @@ public class SpiderInstantiate : MonoBehaviour {
 
     Vector3 center;
 
-    public bool testing;
+    public bool testing = false;
 
 	// Use this for initialization
 	void Start () {
@@ -111,13 +111,17 @@ public class SpiderInstantiate : MonoBehaviour {
 
     Vector3 RandomPoint(Vector3 center)
     {
-        float ang = Random.value * 360;
-        Vector3 pos;
-        pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        //pos.y = center.y + 0.1f;
-        pos.y = center.y - 1;
-        pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
+        //float ang = Random.value * 360;
+        //Vector3 pos;
+        //pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
+        ////pos.y = center.y + 0.1f;
+        //pos.y = center.y - 1;
+        //pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
+        float screenX = center.x + Random.Range(-Camera.main.pixelWidth * 2, Camera.main.pixelWidth * 2);
+        float screenY = center.y;
+        float screenZ = 4;
+        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
 
         return pos;
     }
@@ -129,8 +133,10 @@ public class SpiderInstantiate : MonoBehaviour {
 
 
         NavMeshHit hit;
-        Debug.Log(NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas));
-        if(NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
+        NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas);
+
+        bool developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
+        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && developerMode)
         {
             debugTimer++;
             debug.text = "SamplePosition True: " + debugTimer;

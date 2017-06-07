@@ -58,7 +58,7 @@ public class MoveTo : MonoBehaviour
         //}
 
 
-        if (distance < 1.5f)
+        if (distance < 1)
         {
             agent.speed = 0;
             //agent.acceleration = float.MaxValue;
@@ -70,7 +70,7 @@ public class MoveTo : MonoBehaviour
             //GetComponent<Rigidbody>().mass = 10;
             //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
-        else if (distance > 1.55f)
+        else if (distance > 1.05f)
         {
             //agent.enabled = true;
 
