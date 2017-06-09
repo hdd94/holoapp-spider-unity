@@ -193,7 +193,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 if (surfaceWorkQueue.Count > 0)
                 {
                     // We're using a simple first-in-first-out rule for requesting meshes, but a more sophisticated algorithm could prioritize
-                    // the queue based on distance to the user or some other metric.
+                    // the queue based on stopDistance to the user or some other metric.
                     SurfaceId surfaceID = surfaceWorkQueue.Dequeue();
 
                     string surfaceName = ("Surface-" + surfaceID.handle);

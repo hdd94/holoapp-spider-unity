@@ -382,7 +382,7 @@ namespace HoloToolkit.Unity
             /// <param name="camUp_X">The user's camera/view unit up vector, x value</param>
             /// <param name="camUp_Y">The user's camera/view unit up vector, y value</param>
             /// <param name="camUp_Z">The user's camera/view unit up vector, z value</param>
-            /// <param name="searchDst">Suggested search distance for playspace center</param>
+            /// <param name="searchDst">Suggested search stopDistance for playspace center</param>
             /// <param name="optimalSize">Optimal room size. Used to determind the playspace size</param>
             [DllImport("SpatialUnderstanding")]
             public static extern void GeneratePlayspace_InitScan(

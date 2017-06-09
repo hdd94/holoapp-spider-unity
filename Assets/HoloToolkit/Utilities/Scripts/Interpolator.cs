@@ -23,7 +23,7 @@ namespace HoloToolkit.Unity
         // The rotation speed, in degrees per second
         public float RotationDegreesPerSecond = 720.0f;
 
-        // Adjusts rotation speed based on angular distance
+        // Adjusts rotation speed based on angular stopDistance
         public float RotationSpeedScaler = 0.0f;
 
         // The amount to scale per second

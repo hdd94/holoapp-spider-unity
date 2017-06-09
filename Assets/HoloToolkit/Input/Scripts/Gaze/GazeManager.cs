@@ -32,7 +32,7 @@ namespace HoloToolkit.Unity.InputModule
 
         /// <summary>
         /// Position at which the gaze manager hit an object.
-        /// If no object is currently being hit, this will use the last hit distance.
+        /// If no object is currently being hit, this will use the last hit stopDistance.
         /// </summary>
         public Vector3 HitPosition { get; private set; }
 
@@ -47,7 +47,7 @@ namespace HoloToolkit.Unity.InputModule
         public Vector3 GazeNormal { get; private set; }
 
         /// <summary>
-        /// Maximum distance at which the gaze can collide with an object.
+        /// Maximum stopDistance at which the gaze can collide with an object.
         /// </summary>
         public float MaxGazeCollisionDistance = 10.0f;
 
@@ -231,7 +231,7 @@ namespace HoloToolkit.Unity.InputModule
             // If we have a raycast result, check if we need to overwrite the 3D raycast info
             if (uiRaycastResult.gameObject != null)
             {
-                // Add the near clip distance since this is where the raycast is from
+                // Add the near clip stopDistance since this is where the raycast is from
                 float uiRaycastDistance = uiRaycastResult.distance + Camera.main.nearClipPlane;
 
                 bool superseded3DObject = false;
@@ -347,8 +347,8 @@ namespace HoloToolkit.Unity.InputModule
                 return null;
             }
 
-            // Return the minimum distance hit within the first layer that has hits.
-            // In other words, sort all hit objects first by layerMask, then by distance.
+            // Return the minimum stopDistance hit within the first layer that has hits.
+            // In other words, sort all hit objects first by layerMask, then by stopDistance.
             for (int layerMaskIdx = 0; layerMaskIdx < RaycastLayerMasks.Length; layerMaskIdx++)
             {
                 RaycastHit? minHit = null;

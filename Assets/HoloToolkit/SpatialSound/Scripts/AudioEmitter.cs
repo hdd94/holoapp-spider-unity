@@ -17,7 +17,7 @@ namespace HoloToolkit.Unity
         [Range(0.0f, 1.0f)]
         public float UpdateInterval = 0.25f;
 
-        [Tooltip("Maximum distance, in m, to look when attempting to find the user and any influencers.")]
+        [Tooltip("Maximum stopDistance, in m, to look when attempting to find the user and any influencers.")]
         [Range(1.0f, 50.0f)]
         public float MaxDistance = 20.0f;
 

@@ -94,8 +94,8 @@ namespace HoloToolkit.Unity.InputModule
 
         private void GetIndicatorPositionAndRotation(InteractionSourceState hand, out Vector3 position, out Quaternion rotation)
         {
-            // Update the distance from IndicatorParent based on the user's hand's distance from the center of the view.
-            // Bound this distance by this maxDistanceFromCenter field, in meters.
+            // Update the stopDistance from IndicatorParent based on the user's hand's stopDistance from the center of the view.
+            // Bound this stopDistance by this maxDistanceFromCenter field, in meters.
             const float maxDistanceFromCenter = 0.3f;
             float distanceFromCenter = (float)(hand.properties.sourceLossRisk * maxDistanceFromCenter);
 

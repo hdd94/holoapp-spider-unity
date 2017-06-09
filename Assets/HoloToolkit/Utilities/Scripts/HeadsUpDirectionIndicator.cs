@@ -185,8 +185,8 @@ namespace HoloToolkit.Unity
             }
 #endif
 
-            // We're not actually interested in the "distance" to the planes. But the sign
-            // of the distance tells us which quadrant the target position is in.
+            // We're not actually interested in the "stopDistance" to the planes. But the sign
+            // of the stopDistance tells us which quadrant the target position is in.
             float dDistance = d.GetDistanceToPoint(targetPosition);
             float eDistance = e.GetDistanceToPoint(targetPosition);
 

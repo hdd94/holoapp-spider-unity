@@ -9,6 +9,7 @@ public class SaveInformations : MonoBehaviour {
     public int count;
     public bool randomMovementToggle;
     public bool directMovementToggle;
+    public bool bothMovementToggle;
     public bool developerMode;
     public bool manualPositioning;
     public bool unityMode;

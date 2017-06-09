@@ -1,19 +1,24 @@
-﻿// MoveTo.cs
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.AI;
 
-public class MoveTo : MonoBehaviour
+public class MoveToBoth : MonoBehaviour
 {
     Animator anim;
     NavMeshAgent agent;
 
     Vector3 viewPoint;
-    Vector3 direction;
-    Quaternion rotation;
-
     float stopDistance;
 
+    Vector3 randomPosition;
+    float pointRadius = 1;
+    float reachDistance;
+    GameObject wayPoint;
+
+    Vector3 direction;
+    Quaternion rotation;
+    
+    // Use this for initialization
     void Awake()
     {
         anim = GetComponent<Animator>();
@@ -23,8 +28,9 @@ public class MoveTo : MonoBehaviour
             agent = this.gameObject.AddComponent<NavMeshAgent>();
             agent.speed = 0.2f;
         }
-
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
+
+
     }
 
     private void Update()
@@ -37,27 +43,14 @@ public class MoveTo : MonoBehaviour
 
         stopDistance = Mathf.Round(Vector3.Distance(viewPoint, transform.position) * 10) / 10;
 
-        if (stopDistance < 0.3f)
+        if (stopDistance < 1)
         {
             agent.speed = 0;
-            //agent.acceleration = float.MaxValue;
-            //agent.velocity = Vector3.zero;
-            //agent.isStopped = true;
-
-
-            //agent.enabled = false;
-            //GetComponent<Rigidbody>().mass = 10;
-            //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
-        else 
+        else if (stopDistance > 1.05f)
         {
             agent.speed = 0.2f;
         }
-
-        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
-        //{
-        //    Debug.DrawRay(transform.position, Vector3.up * 0.5f, Color.blue, float.MinValue);
-        //}
 
         direction = (viewPoint - transform.position).normalized;
         rotation = Quaternion.LookRotation(direction);

@@ -247,7 +247,7 @@ namespace HoloToolkit.Unity
 
             /// <summary>
             /// Constructs an object placement rule requiring the placement volume to
-            /// be placed a minimum distance away from the specified position.
+            /// be placed a minimum stopDistance away from the specified position.
             /// </summary>
             /// <param name="position">Defines the center position for the center of the invalid placement space.</param>
             /// <param name="minDistance">Defines the radius of the invalid placement space.</param>
@@ -263,9 +263,9 @@ namespace HoloToolkit.Unity
 
             /// <summary>
             /// Constructs an object placement rule requiring the placement volume to
-            /// be placed a minimum distance away from any wall
+            /// be placed a minimum stopDistance away from any wall
             /// </summary>
-            /// <param name="minDistance">Minimum distance from a wall</param>
+            /// <param name="minDistance">Minimum stopDistance from a wall</param>
             /// <param name="minWallHeight">Minimum height of a wall to be considered by this rule</param>
             /// <returns>Constructed object placement rule</returns>
             public static ObjectPlacementRule Create_AwayFromWalls(float minDistance, float minWallHeight = 0.0f)
@@ -279,9 +279,9 @@ namespace HoloToolkit.Unity
 
             /// <summary>
             /// Constructs an object placement rule requiring the placement volume to
-            /// be placed a minimum distance away from other placed objects
+            /// be placed a minimum stopDistance away from other placed objects
             /// </summary>
-            /// <param name="minDistance">Minimum distance from other placed objects</param>
+            /// <param name="minDistance">Minimum stopDistance from other placed objects</param>
             /// <returns>Constructed object placement rule</returns>
             public static ObjectPlacementRule Create_AwayFromOtherObjects(float minDistance)
             {
@@ -325,8 +325,8 @@ namespace HoloToolkit.Unity
             /// the specified position.
             /// </summary>
             /// <param name="position">The center point from switch minDistance and maxDistance define their volumes</param>
-            /// <param name="minDistance">The minimum distance from position to place the object</param>
-            /// <param name="maxDistance">The maximum distance from position to place the object</param>
+            /// <param name="minDistance">The minimum stopDistance from position to place the object</param>
+            /// <param name="maxDistance">The maximum stopDistance from position to place the object</param>
             /// <returns>Constructed object placement constraint</returns>
             public static ObjectPlacementConstraint Create_NearPoint(Vector3 position, float minDistance = 0.0f, float maxDistance = 0.0f)
             {
@@ -343,8 +343,8 @@ namespace HoloToolkit.Unity
             /// be placed no closer than minDistance and no further than maxDistance from 
             /// a wall.
             /// </summary>
-            /// <param name="minDistance">The minimum distance from position to place the object</param>
-            /// <param name="maxDistance">The maximum distance from position to place the object</param>
+            /// <param name="minDistance">The minimum stopDistance from position to place the object</param>
+            /// <param name="maxDistance">The maximum stopDistance from position to place the object</param>
             /// <param name="minWallHeight">Minimum height of a wall to be considered by this rule</param>
             /// <param name="includeVirtualWalls">Indicates virtual walls should be considered in this query</param>
             /// <returns>Constructed object placement constraint</returns>
@@ -375,8 +375,8 @@ namespace HoloToolkit.Unity
             /// Constructs an object placement constraint requesting that the placement volume
             /// be placed near the center of the playspace.
             /// </summary>
-            /// <param name="minDistance">The minimum distance from the center to place the object</param>
-            /// <param name="maxDistance">The maximum distance from the center to place the object</param>
+            /// <param name="minDistance">The minimum stopDistance from the center to place the object</param>
+            /// <param name="maxDistance">The maximum stopDistance from the center to place the object</param>
             /// <returns>Constructed object placement constraint</returns>
             public static ObjectPlacementConstraint Create_NearCenter(float minDistance = 0.0f, float maxDistance = 0.0f)
             {

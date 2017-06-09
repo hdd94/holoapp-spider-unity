@@ -17,7 +17,7 @@ public class MoveToRandPoints : MonoBehaviour
 
     float pointRadius = 1;
 
-    float distance;
+    float reachDistance;
 
     GameObject wayPoint;
 
@@ -54,9 +54,9 @@ public class MoveToRandPoints : MonoBehaviour
 
         anim.SetFloat("Speed", agent.speed);
 
-        distance = Mathf.Round(Vector3.Distance(randomPosition, transform.position) * 10) / 10;
+        reachDistance = Mathf.Round(Vector3.Distance(randomPosition, transform.position) * 10) / 10;
 
-        if (distance < 0.2f)
+        if (reachDistance < 0.2f)
         {
             //randomPosition = RandomPoint(transform.position);
 
@@ -71,7 +71,7 @@ public class MoveToRandPoints : MonoBehaviour
 
             if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
             {
-                Destroy(wayPoint);
+                //Destroy(wayPoint);
                 CreatePointCube(randomPosition);
             }
         }

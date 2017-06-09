@@ -24,7 +24,7 @@ namespace HoloToolkit.Unity
         [Range(-0.3f, 0.3f)]
         public float VisibilitySafeFactor = 0.1f;
 
-        [Tooltip("Multiplier to decrease the distance from the cursor center an object is rendered to keep it in view.")]
+        [Tooltip("Multiplier to decrease the stopDistance from the cursor center an object is rendered to keep it in view.")]
         [Range(0.1f, 1.0f)]
         public float MetersFromCursor = 0.3f;
 

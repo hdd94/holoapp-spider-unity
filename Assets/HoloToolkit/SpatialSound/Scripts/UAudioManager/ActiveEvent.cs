@@ -249,7 +249,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Creates a flat animation curve to negate Unity's distance attenuation when using Spatial Sound
+        /// Creates a flat animation curve to negate Unity's stopDistance attenuation when using Spatial Sound
         /// </summary>
         public static void CreateFlatSpatialRolloffCurve()
         {

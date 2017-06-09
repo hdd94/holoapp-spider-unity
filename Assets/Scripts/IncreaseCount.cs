@@ -13,7 +13,7 @@ public class IncreaseCount : MonoBehaviour
         int number = Convert.ToInt32(n);
 
 
-        if (number < 9)
+        if (number < 15)
         {
             number++;
         }

@@ -86,7 +86,7 @@ namespace HoloToolkit.Unity.InputModule
         private readonly HashSet<uint> newHands = new HashSet<uint>();
 
         [SerializeField]
-        [Tooltip("The total amount of hand movement that needs to happen to signal intent to start a manipulation. This is a distance, but not a distance in any one direction.")]
+        [Tooltip("The total amount of hand movement that needs to happen to signal intent to start a manipulation. This is a stopDistance, but not a stopDistance in any one direction.")]
         private float manipulationStartMovementThreshold = 0.03f;
 
         public override SupportedInputInfo GetSupportedInputInfo(uint sourceId)

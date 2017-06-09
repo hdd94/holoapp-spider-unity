@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class SpiderInstantiate : MonoBehaviour {
 
     public GameObject spiderPrefab;
 
-     float pointRadius = 2;
+     float spawnStartzeit = 0;
 
-     float spawnStartzeit = 4;
-
-     float spawnIntervall = 2;
+     float spawnIntervall = 0.5f;
 
      int timer = 0;
 
@@ -22,6 +21,8 @@ public class SpiderInstantiate : MonoBehaviour {
     TextMesh spiderCount;
     TextMesh generalCount;
 
+    float spawnDistance;
+    
     TextMesh debug;
     int debugTimer = 0;
 
@@ -72,24 +73,43 @@ public class SpiderInstantiate : MonoBehaviour {
 
     void InstantiateObject()
     {
+
         //Vector3 center = transform.position - new Vector3(0, -0.5f, 0);
         Vector3 pos = CreateRandomPoint(transform.position);
         //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
         var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
         spider.transform.localScale = Vector3.one * 0.05f;
 
+
         bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
         bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
+        bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
+
 
         if (randomMovementToggle)
         {
             spider.AddComponent<AddAgentRandMov>();
+            spawnDistance = 3;
         }
         else if (directMovementToggle)
         {
             spider.AddComponent<AddAgent>();
+            spawnDistance = 4;
         }
-        
+        else if (bothMovementToggle)
+        {
+            var randomNumber = Random.Range(0, 2);
+            if (randomNumber == 0) // Zufällig
+            {
+                spider.AddComponent<AddAgentRandMov>();
+            }
+            else if (randomNumber == 1) // Direkt
+            {
+                spider.AddComponent<AddAgent>();
+            }
+            spawnDistance = 4;
+        }
+
         timer++;
 
         if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
@@ -118,9 +138,9 @@ public class SpiderInstantiate : MonoBehaviour {
         //pos.y = center.y - 1;
         //pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
 
-        float screenX = center.x + Random.Range(-Camera.main.pixelWidth * 2, Camera.main.pixelWidth * 2);
-        float screenY = center.y;
-        float screenZ = 4;
+        float screenX = center.x + Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
+        float screenY = center.y - 1 ;
+        float screenZ = spawnDistance;
         Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
 
         return pos;
@@ -133,10 +153,10 @@ public class SpiderInstantiate : MonoBehaviour {
 
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas);
 
         bool developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas) && developerMode)
+        if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas) && developerMode)
         {
             debugTimer++;
             debug.text = "SamplePosition True: " + debugTimer;

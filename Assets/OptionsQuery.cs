@@ -8,6 +8,7 @@ public class OptionsQuery : MonoBehaviour {
 
     private bool randomMovementToggle;
     private bool directMovementToggle;
+    private bool bothMovementToggle;
     private string movementKindName;
     private bool developerMode;
     private bool unityMode;
@@ -42,6 +43,7 @@ public class OptionsQuery : MonoBehaviour {
 
             bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
             bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
+            bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
 
             if (randomMovementToggle)
             {
@@ -50,6 +52,10 @@ public class OptionsQuery : MonoBehaviour {
             else if (directMovementToggle)
             {
                 movementKindName = "Direkt";
+            }
+            else if (bothMovementToggle)
+            {
+                movementKindName = "Beides";
             }
 
             GameObject.Find("MovementKind").GetComponent<TextMesh>().text = "Bewegungsart: " + movementKindName;

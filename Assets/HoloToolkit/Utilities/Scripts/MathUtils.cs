@@ -163,7 +163,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Returns the distance between a point and an infinite line defined by two points; linePointA and linePointB
+        /// Returns the stopDistance between a point and an infinite line defined by two points; linePointA and linePointB
         /// </summary>
         /// <param name="point"></param>
         /// <param name="linePointA"></param>
@@ -321,18 +321,18 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// find unsigned distance of 3D point to an infinite line
+        /// find unsigned stopDistance of 3D point to an infinite line
         /// </summary>
         /// <param name="ray">ray that specifies an infinite line</param>
         /// <param name="point">3D point</param>
-        /// <returns>unsigned perpendicular distance from point to line</returns>
+        /// <returns>unsigned perpendicular stopDistance from point to line</returns>
         public static float DistanceOfPointToLine(Ray ray, Vector3 point)
         {
             return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
         }
 
         /// <summary>
-        /// Find 3D point that minimizes distance to 2 lines, midpoint of the shortest perpendicular line segment between them
+        /// Find 3D point that minimizes stopDistance to 2 lines, midpoint of the shortest perpendicular line segment between them
         /// </summary>
         /// <param name="p">ray that specifies a line</param>
         /// <param name="q">ray that specifies a line</param>
@@ -359,7 +359,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Find 3D point that minimizes distance to a set of 2 or more lines, ignoring outliers
+        /// Find 3D point that minimizes stopDistance to a set of 2 or more lines, ignoring outliers
         /// </summary>
         /// <param name="rays">list of rays, each specifying a line, must have at least 1</param>
         /// <param name="ransac_iterations">number of iterations:  log(1-p)/log(1-(1-E)^s)
@@ -367,7 +367,7 @@ namespace HoloToolkit.Unity
         ///      E is proportion of outliers (1-ransac_ratio)
         ///      e.g. p=0.999, ransac_ratio=0.54, s=2 ==>  log(0.001)/(log(1-0.54^2) = 20
         /// </param>
-        /// <param name="ransac_threshold">minimum distance from point to line for a line to be considered an inlier</param>
+        /// <param name="ransac_threshold">minimum stopDistance from point to line for a line to be considered an inlier</param>
         /// <param name="numActualInliers">return number of inliers: lines that are within ransac_threshold of nearest point</param>
         /// <returns>point nearest to the set of lines, ignoring outliers</returns>
         public static Vector3 NearestPointToLinesRANSAC(List<Ray> rays, int ransac_iterations, float ransac_threshold, out int numActualInliers)
@@ -409,7 +409,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Find 3D point that minimizes distance to a set of 2 or more lines
+        /// Find 3D point that minimizes stopDistance to a set of 2 or more lines
         /// </summary>
         /// <param name="rays">each ray specifies an infinite line</param>
         /// <returns>point nearest to the set of lines</returns>

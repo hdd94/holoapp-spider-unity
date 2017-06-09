@@ -6,14 +6,14 @@ using UnityEngine;
 namespace HoloToolkit.Unity
 {
     /// <summary>
-    /// A Tagalong that stays at a fixed distance from the camera and always
+    /// A Tagalong that stays at a fixed stopDistance from the camera and always
     /// seeks to have a part of itself in the view frustum of the camera.
     /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interpolator))]
     public class SimpleTagalong : MonoBehaviour
     {
-        // Simple Tagalongs seek to stay at a fixed distance from the Camera.
-        [Tooltip("The distance in meters from the camera for the Tagalong to seek when updating its position.")]
+        // Simple Tagalongs seek to stay at a fixed stopDistance from the Camera.
+        [Tooltip("The stopDistance in meters from the camera for the Tagalong to seek when updating its position.")]
         public float TagalongDistance = 2.0f;
         [Tooltip("If true, forces the Tagalong to be TagalongDistance from the camera, even if it didn't need to move otherwise.")]
         public bool EnforceDistance = true;
@@ -75,7 +75,7 @@ namespace HoloToolkit.Unity
             else if (!interpolator.Running && EnforceDistance)
             {
                 // If the Tagalong is inside the camera's view frustum, and it is
-                // supposed to stay a fixed distance from the camera, force the
+                // supposed to stay a fixed stopDistance from the camera, force the
                 // tagalong to that location (without using the Interpolator).
                 Ray ray = new Ray(Camera.main.transform.position, transform.position - Camera.main.transform.position);
                 transform.position = ray.GetPoint(TagalongDistance);
@@ -169,7 +169,7 @@ namespace HoloToolkit.Unity
             // of the calculated toPosition.
             ray = new Ray(Camera.main.transform.position, toPosition - Camera.main.transform.position);
 
-            // Find the point along that ray that is the right distance away and
+            // Find the point along that ray that is the right stopDistance away and
             // update the calculated toPosition to be that point.
             toPosition = ray.GetPoint(TagalongDistance);
 
