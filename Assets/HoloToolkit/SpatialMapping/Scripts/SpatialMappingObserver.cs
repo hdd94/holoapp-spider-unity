@@ -152,9 +152,9 @@ namespace HoloToolkit.Unity.SpatialMapping
         }
 
         /// <summary>
-        /// The direction of the observed volume, if an oriented box is choosen.
+        /// The lookDirection of the observed volume, if an oriented box is choosen.
         /// </summary>
-        [SerializeField][Tooltip("The direction of the observation volume.")]
+        [SerializeField][Tooltip("The lookDirection of the observation volume.")]
         private Quaternion orientation = Quaternion.identity;
         public Quaternion Orientation
         {

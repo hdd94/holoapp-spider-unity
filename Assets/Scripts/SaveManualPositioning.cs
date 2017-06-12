@@ -1,10 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
-public class SaveManualPositioning : MonoBehaviour {
-
+/**
+* This script saves the selection of manual positioning
+* 
+* @author: Huy Duc Do
+* 
+**/
+public class SaveManualPositioning : MonoBehaviour
+{
+    /// <summary>
+    /// Used to save the selection of manual positioning in the global variable manualPositioning and disables/enables the increase/decrease spawning buttons
+    /// </summary>
     public void Save()
     {
         GameObject.Find("Informations").GetComponent<SaveInformations>().manualPositioning = GameObject.Find("ManualPositioning").GetComponent<Toggle>().isOn;

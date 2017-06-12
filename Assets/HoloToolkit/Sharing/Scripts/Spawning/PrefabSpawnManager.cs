@@ -117,7 +117,7 @@ namespace HoloToolkit.Sharing.Spawning
         /// </summary>
         /// <param name="dataModel">Data model to use for spawning.</param>
         /// <param name="localPosition">Local position for the new instance.</param>
-        /// <param name="localRotation">Local rotation for the new instance.</param>
+        /// <param name="localRotation">Local lookRotation for the new instance.</param>
         /// <param name="localScale">optional local scale for the new instance. If not specified, uses the prefabs scale.</param>
         /// <param name="parent">Parent to assign to the object.</param>
         /// <param name="baseName">Base name to use to name the created game object.</param>
@@ -183,7 +183,7 @@ namespace HoloToolkit.Sharing.Spawning
         /// </summary>
         /// <param name="dataModel">Data model to use for spawning.</param>
         /// <param name="localPosition">Local space position for the new instance.</param>
-        /// <param name="localRotation">Local space rotation for the new instance.</param>
+        /// <param name="localRotation">Local space lookRotation for the new instance.</param>
         /// <param name="parent">Parent to assign to the object.</param>
         /// <param name="baseName">Base name to use to name the created game object.</param>
         /// <param name="isOwnedLocally">

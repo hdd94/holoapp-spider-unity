@@ -24,10 +24,10 @@ namespace HoloToolkit.Unity.InputModule
         Vector3 GetModifiedPosition(ICursor cursor);
 
         /// <summary>
-        /// Returns the cursor rotation after considering this modifier.
+        /// Returns the cursor lookRotation after considering this modifier.
         /// </summary>
         /// <param name="cursor">Cursor that is being modified.</param>
-        /// <returns>New rotation for the cursor</returns>
+        /// <returns>New lookRotation for the cursor</returns>
         Quaternion GetModifiedRotation(ICursor cursor);
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace HoloToolkit.Unity.InputModule
         /// </summary>
         /// <param name="cursor">Cursor that is being modified.</param>
         /// <param name="position">Modified position.</param>
-        /// <param name="rotation">Modified rotation.</param>
+        /// <param name="rotation">Modified lookRotation.</param>
         /// <param name="scale">Modified scale.</param>
         void GetModifiedTransform(ICursor cursor, out Vector3 position, out Quaternion rotation, out Vector3 scale);
     }

@@ -2,18 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimationScript : MonoBehaviour {
-
-    Animator anim;
+public class OptionsPanelController : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        anim = GetComponent<Animator>();
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        float move = Input.GetAxis("Vertical");
-        anim.SetFloat("Speed", move);
+		
 	}
 }

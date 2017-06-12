@@ -1,22 +1,33 @@
-﻿// MoveTo.cs
-using UnityEngine;
-using System.Collections;
+﻿using UnityEngine;
 using UnityEngine.AI;
 
+/**
+* This script enables an object to move directly
+* 
+* @author: Huy Duc Do
+* 
+**/
 public class MoveTo : MonoBehaviour
 {
     Animator anim;
     NavMeshAgent agent;
 
-    Vector3 viewPoint;
-    Vector3 direction;
-    Quaternion rotation;
+    Vector3 movePoint;
+    Vector3 lookDirection;
+    Quaternion lookRotation;
 
     float stopDistance;
 
-    void Awake()
+    /// <summary>
+    /// Called only on start if the script is enabled
+    /// Used to assign animator controller and a navmesh agent to a variable
+    /// Adds a navmesh agent script if the object has not one and assign a speed value
+    /// Freezes the object position to avoid that the object stucks and trembles
+    /// </summary>
+    void Start()
     {
         anim = GetComponent<Animator>();
+
         agent = GetComponent<NavMeshAgent>();
         if (agent == null)
         {
@@ -27,40 +38,33 @@ public class MoveTo : MonoBehaviour
         GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezePositionZ;
     }
 
+    /// <summary>
+    /// Update is called once per frame
+    /// Used to update the Vector3 movePoint position as if it moves and set the destination to let the object move to the movePoint
+    /// Updates the speed value of the animation controller and stops the object if the object and destination reach an given distance
+    /// Changes the object rotation to the destination direction
+    /// </summary>
     private void Update()
     {
-        viewPoint = Camera.main.transform.position;
-        viewPoint.y = transform.position.y;
-        agent.destination = viewPoint;
+        movePoint = Camera.main.transform.position;
+        movePoint.y = transform.position.y;
+        agent.SetDestination(movePoint);
 
         anim.SetFloat("Speed", agent.speed);
 
-        stopDistance = Mathf.Round(Vector3.Distance(viewPoint, transform.position) * 10) / 10;
+        stopDistance = Mathf.Round(Vector3.Distance(movePoint, transform.position) * 10) / 10;
 
         if (stopDistance < 0.3f)
         {
             agent.speed = 0;
-            //agent.acceleration = float.MaxValue;
-            //agent.velocity = Vector3.zero;
-            //agent.isStopped = true;
-
-
-            //agent.enabled = false;
-            //GetComponent<Rigidbody>().mass = 10;
-            //GetComponent<Rigidbody>().AddForce(transform.up * 0.3f, ForceMode.Impulse);
         }
         else 
         {
             agent.speed = 0.2f;
         }
 
-        //if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
-        //{
-        //    Debug.DrawRay(transform.position, Vector3.up * 0.5f, Color.blue, float.MinValue);
-        //}
-
-        direction = (viewPoint - transform.position).normalized;
-        rotation = Quaternion.LookRotation(direction);
-        transform.rotation = rotation;
+        lookDirection = (movePoint - transform.position).normalized;
+        lookRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = lookRotation;
     }
 }

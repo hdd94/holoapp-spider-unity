@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/Scene.unity
+  - enabled: 0
+    path: Assets/Scenes/MainMenu INDECA.unity
     guid: 87872d5cefcb46e4a971899c1e366145
   - enabled: 1
-    path: Assets/Scenes/DefaultScene (Duc).unity
+    path: Assets/Scenes/MainMenu HHN (Refactored).unity
+    guid: 6158cfe2083402145838e6576022b906
+  - enabled: 1
+    path: Assets/Scenes/HoloApp Spider.unity
     guid: bbfbfbc16cb6cc84389635e898e9f314

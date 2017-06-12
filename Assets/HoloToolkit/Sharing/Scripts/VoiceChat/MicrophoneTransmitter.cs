@@ -241,7 +241,7 @@ namespace HoloToolkit.Sharing.VoiceChat
 
             // This is where stream data starts. Write all data for one stream
 
-            msg.Write(0.0f);     // average amplitude.  Not needed in direction from client to server.
+            msg.Write(0.0f);     // average amplitude.  Not needed in lookDirection from client to server.
             msg.Write(clientId); // non-zero client ID for this client.
 
             // HRTF position bits
@@ -270,7 +270,7 @@ namespace HoloToolkit.Sharing.VoiceChat
             msg.Write(cameraPosRelativeToGlobalAnchor.y);
             msg.Write(cameraPosRelativeToGlobalAnchor.z);
 
-            // HRTF direction bits
+            // HRTF lookDirection bits
             msg.Write(cameraDirectionRelativeToGlobalAnchor.x);
             msg.Write(cameraDirectionRelativeToGlobalAnchor.y);
             msg.Write(cameraDirectionRelativeToGlobalAnchor.z);

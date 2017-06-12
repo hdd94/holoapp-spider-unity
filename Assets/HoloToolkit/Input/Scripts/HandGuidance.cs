@@ -43,7 +43,7 @@ namespace HoloToolkit.Unity.InputModule
 
             if (HandGuidanceIndicator != null)
             {
-                // Cache the initial rotation of the HandGuidanceIndicator so future rotations 
+                // Cache the initial lookRotation of the HandGuidanceIndicator so future rotations 
                 // can be done with respect to this orientation.
                 defaultHandGuidanceRotation = HandGuidanceIndicator.transform.rotation;
             }
@@ -66,7 +66,7 @@ namespace HoloToolkit.Unity.InputModule
                 return;
             }
 
-            // Get the position and rotation of the hand guidance indicator and display the indicator object.
+            // Get the position and lookRotation of the hand guidance indicator and display the indicator object.
             if (handGuidanceIndicatorGameObject != null)
             {
                 Vector3 position;
@@ -99,7 +99,7 @@ namespace HoloToolkit.Unity.InputModule
             const float maxDistanceFromCenter = 0.3f;
             float distanceFromCenter = (float)(hand.properties.sourceLossRisk * maxDistanceFromCenter);
 
-            // Subtract direction from origin so that the indicator is between the hand and the origin.
+            // Subtract lookDirection from origin so that the indicator is between the hand and the origin.
             position = Cursor.transform.position - hand.properties.sourceLossMitigationDirection * distanceFromCenter;
             rotation = Quaternion.LookRotation(Camera.main.transform.forward, hand.properties.sourceLossMitigationDirection);
         }

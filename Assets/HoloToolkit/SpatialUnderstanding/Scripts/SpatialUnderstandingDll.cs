@@ -480,9 +480,9 @@ namespace HoloToolkit.Unity
             /// <param name="rayPos_X">Ray origin, x component</param>
             /// <param name="rayPos_Y">Ray origin, y component</param>
             /// <param name="rayPos_Z">Ray origin, z component</param>
-            /// <param name="rayVec_X">Ray direction vector, x component. Length of ray indicates the length of the ray cast query.</param>
-            /// <param name="rayVec_Y">Ray direction vector, y component. Length of ray indicates the length of the ray cast query.</param>
-            /// <param name="rayVec_Z">Ray direction vector, z component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_X">Ray lookDirection vector, x component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_Y">Ray lookDirection vector, y component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_Z">Ray lookDirection vector, z component. Length of ray indicates the length of the ray cast query.</param>
             /// <param name="result">Structure to receive the results of the raycast</param>
             /// <returns>Zero if fails or no intersection, one if an intersection is detected</returns>
             [DllImport("SpatialUnderstanding")]

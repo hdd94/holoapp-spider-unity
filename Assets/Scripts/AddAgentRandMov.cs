@@ -1,23 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+﻿using UnityEngine;
 
+/**
+* This script adds the movement script to the spawning object
+* 
+* @author: Huy Duc Do
+* 
+**/
 public class AddAgentRandMov : MonoBehaviour
 {
-
-    // Use this for initialization
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         this.gameObject.AddComponent<MoveToRandPoints>();

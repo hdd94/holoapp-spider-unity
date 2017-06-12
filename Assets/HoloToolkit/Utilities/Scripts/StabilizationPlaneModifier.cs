@@ -140,7 +140,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Gets the direction of the gaze for purposes of placing the stabilization plane
+        /// Gets the lookDirection of the gaze for purposes of placing the stabilization plane
         /// </summary>
         private Vector3 GazeNormal
         {

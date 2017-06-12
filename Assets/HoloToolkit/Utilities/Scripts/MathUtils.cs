@@ -43,7 +43,7 @@ namespace HoloToolkit.Unity
 
         /// <summary>
         /// Takes a point in the coordinate space specified by the "from" transform and transforms it to be the correct point in the coordinate space specified by the "to" transform
-        /// applies rotation, scale and translation
+        /// applies lookRotation, scale and translation
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -57,8 +57,8 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Takes a direction in the coordinate space specified by the "from" transform and transforms it to be the correct direction in the coordinate space specified by the "to" transform
-        /// applies rotation only, no translation or scale
+        /// Takes a lookDirection in the coordinate space specified by the "from" transform and transforms it to be the correct lookDirection in the coordinate space specified by the "to" transform
+        /// applies lookRotation only, no translation or scale
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -72,8 +72,8 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Takes a vectpr in the coordinate space specified by the "from" transform and transforms it to be the correct direction in the coordinate space specified by the "to" transform
-        /// applies rotation and scale, no translation
+        /// Takes a vectpr in the coordinate space specified by the "from" transform and transforms it to be the correct lookDirection in the coordinate space specified by the "to" transform
+        /// applies lookRotation and scale, no translation
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -101,7 +101,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Creates a quaternion containing the rotation from the input matrix.
+        /// Creates a quaternion containing the lookRotation from the input matrix.
         /// </summary>
         /// <param name="m">Input matrix to convert to quaternion</param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Extract the translation and rotation components of a Unity matrix
+        /// Extract the translation and lookRotation components of a Unity matrix
         /// </summary>
         public static void ToTranslationRotation(Matrix4x4 unityMtx, out Vector3 translation, out Quaternion rotation)
         {
@@ -416,7 +416,7 @@ namespace HoloToolkit.Unity
         public static Vector3 NearestPointToLinesLeastSquares(IEnumerable<Ray> rays)
         {
             // finding the point nearest to the set of lines specified by rays
-            // Use the following formula, where u_i are normalized direction
+            // Use the following formula, where u_i are normalized lookDirection
             // vectors along each ray and p_i is a point along each ray.
 
             //                      -1

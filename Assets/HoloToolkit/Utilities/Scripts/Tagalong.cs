@@ -196,7 +196,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Calculates a target position for the Tagalong in either the horizontal or vertical direction.
+        /// Calculates a target position for the Tagalong in either the horizontal or vertical lookDirection.
         /// </summary>
         /// <param name="isHorizontal">If true, the calculate horizontally; vertically otherwise.</param>
         /// <param name="centermostEdge">A point along the collider that is the closest to the center of the FOV.</param>
@@ -236,7 +236,7 @@ namespace HoloToolkit.Unity
             float distanceToTarget = Vector3.Distance(cameraPosition, targetPoint);
             Vector3 recalculatedPointOnFrustum = rayTemp.GetPoint(distanceToTarget);
 
-            // Find the new calculated target position. First get the rotation
+            // Find the new calculated target position. First get the lookRotation
             // between the target and center of the collider.
             Quaternion rotQuat = Quaternion.FromToRotation(targetPoint - cameraPosition, center - cameraPosition);
             // Create the vector we want to rotate.

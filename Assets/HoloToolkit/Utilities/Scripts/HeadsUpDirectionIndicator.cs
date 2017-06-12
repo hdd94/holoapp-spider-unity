@@ -28,7 +28,7 @@ namespace HoloToolkit.Unity
             Far
         }
 
-        [Tooltip("The object the direction indicator will point to.")]
+        [Tooltip("The object the lookDirection indicator will point to.")]
         public GameObject TargetObject;
 
         [Tooltip("The camera depth at which the indicator rests.")]
@@ -89,7 +89,7 @@ namespace HoloToolkit.Unity
             };
         }
 
-        // Update the direction indicator's position and orientation every frame.
+        // Update the lookDirection indicator's position and orientation every frame.
         private void Update()
         {
             // No object to track?
@@ -235,10 +235,10 @@ namespace HoloToolkit.Unity
         // the edge of the indicator field.
         private bool TryGetIndicatorPosition(Vector3 targetPosition, Plane frustumWall, out Ray r)
         {
-            // Think of the pointer as pointing the shortest rotation a user must make to see a
-            // target. The shortest rotation can be obtained by finding the great circle defined
+            // Think of the pointer as pointing the shortest lookRotation a user must make to see a
+            // target. The shortest lookRotation can be obtained by finding the great circle defined
             // be the target, the camera position and the center position of the view. The tangent
-            // vector of the great circle points the direction of the shortest rotation. This
+            // vector of the great circle points the lookDirection of the shortest lookRotation. This
             // great circle and thus any of it's tangent vectors are coplanar with the plane
             // defined by these same three points.
             Vector3 cameraToTarget = targetPosition - cameraPosition;
@@ -276,7 +276,7 @@ namespace HoloToolkit.Unity
             }
         }
 
-        // Modify the pointer location and orientation to point along the shortest rotation,
+        // Modify the pointer location and orientation to point along the shortest lookRotation,
         // toward tergetPosition, keeping the pointer confined inside the frustum defined by
         // planes.
         private void UpdatePointerTransform(Camera camera, Plane[] planes, Vector3 targetPosition)
@@ -318,7 +318,7 @@ namespace HoloToolkit.Unity
 
             this.transform.position = indicatorPosition;
 
-            // The pointer's direction should always appear pointing away from the user's center
+            // The pointer's lookDirection should always appear pointing away from the user's center
             // of view. Thus we find the center point of the user's view in world space.
 
             // But the pointer should also appear perpendicular to the viewer so we find the

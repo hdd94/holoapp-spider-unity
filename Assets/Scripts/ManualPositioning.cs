@@ -2,56 +2,102 @@ using UnityEngine;
 using HoloToolkit.Unity.InputModule;
 using UnityEngine.AI;
 
-
-/// <summary>
-/// manager all measure tools here
-/// </summary>
+/**
+* This script enables the user to manually spawning and positioning objects with the HoloLens Tap Gesture
+* 
+* @author: Huy Duc Do
+* 
+**/
 public class ManualPositioning : MonoBehaviour, IInputClickHandler
 {
-
     public GameObject spiderPrefab;
 
-    int timer = 0;
-    int maxSpiderCount = 15;
+    int spiderCount = 0;
+    int spiderCountMax;
 
-    float generalTimer = 0;
+    float globalTimer = 0;
 
-    TextMesh spiderCount;
-    TextMesh generalCount;
+    TextMesh spiderCountText;
+    TextMesh globalTimerText;
 
-    GameObject position;
+    TextMesh successfulledPosition;
+    int successfulledPositionCount = 0;
 
     bool developerMode;
 
-
+    /// <summary>
+    /// Called only on start if the script is enabled
+    /// Used to wait for an input, assign the global option variables to script variables and enables the developerMode 
+    /// if the variable developerMode is true
+    /// </summary>
     private void Start()
     {
         InputManager.Instance.PushFallbackInputHandler(gameObject);
 
+        spiderCountMax = GameObject.Find("Informations").GetComponent<SaveInformations>().maxCount;
+
         developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
 
-        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        if (developerMode)
         {
-            spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
-            generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+            spiderCountText = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+            globalTimerText = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+            successfulledPosition = GameObject.Find("Debug").GetComponent<TextMesh>();
         }
     }
 
-    public void OnSelect()
+    /// <summary>
+    /// Update is called once per frame
+    /// Used to update the global timer if the variable developerMode is true
+    /// </summary>
+    private void Update()
     {
-        //manager.AddPoint(LinePrefab, PointPrefab, TextPrefab);
+        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        {
+            globalTimer += Time.deltaTime;
+            globalTimerText.text = "Zeit: " + (int)globalTimer;
+        }
+    }
 
-        var spider = GameObject.Instantiate(spiderPrefab); // Create a cube
-        spider.transform.localScale = Vector3.one * 0.05f; // Make the cube smaller
-        //spider.transform.position = Camera.main.transform.position + Camera.main.transform.forward; // Start to drop it in front of the camera
+    /// <summary>
+    /// Is performed if the HoloLens Tap Gesture is used
+    /// Used to manually spawning and positioning an object and validates the spawning point
+    /// Adds the movement script to the object and count the timer and counter
+    /// </summary>
+    public void SpawnObject()
+    {
+        GameObject spider = GameObject.Instantiate(spiderPrefab); 
+        spider.transform.localScale = Vector3.one * 0.05f; 
 
-        Vector3 point = Camera.main.transform.position + Camera.main.transform.forward;
-
+        Vector3 spawningPoint = Camera.main.transform.position + Camera.main.transform.forward;
         NavMeshHit hit;
-        NavMesh.SamplePosition(point, out hit, 1.0f, NavMesh.AllAreas);
+        NavMesh.SamplePosition(spawningPoint, out hit, 2.0f, NavMesh.AllAreas);
+
+        if (NavMesh.SamplePosition(spawningPoint, out hit, 2.0f, NavMesh.AllAreas) && developerMode)
+        {
+            successfulledPositionCount++;
+            successfulledPosition.text = "SamplePosition True: " + successfulledPositionCount;
+        }
 
         spider.transform.position = hit.position;
 
+        spiderCount++;
+
+        AddMovementScript(spider);
+
+        if (developerMode)
+        {
+            CountCounters();
+        }
+    }
+
+    /// <summary>
+    /// Used to query the options and add accordingly a movement script
+    /// The movement scripts are directly, randomly and both of these movements
+    /// </summary>
+    /// <param name="spider"></param> spider gameobject 
+    private void AddMovementScript(GameObject spider)
+    {
         bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
         bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
         bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
@@ -63,66 +109,46 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
         else if (directMovementToggle)
         {
             spider.AddComponent<AddAgent>();
-        } 
+        }
         else if (bothMovementToggle)
         {
-            var randomNumber = Random.Range(0, 2);
+            int randomNumber = Random.Range(0, 2);
             if (randomNumber == 0) // Zufällig
             {
-               spider.AddComponent<AddAgentRandMov>();
+                spider.AddComponent<AddAgentRandMov>();
             }
             else if (randomNumber == 1) // Direkt
             {
-               spider.AddComponent<AddAgent>();
+                spider.AddComponent<AddAgent>();
             }
         }
-
-            timer++;
-
-        if (developerMode)
-        {
-            spiderCount.text = "Spinnenanzahl: " + timer;
-        }
-
-        if (developerMode && timer == 15)
-        {
-            
-                spiderCount.text = "Spinnenanzahl: max. " + timer;
-                CancelInvoke(); 
-        }
-        else if (timer == maxSpiderCount)
-        {
-                CancelInvoke();
-        }
-        
-
-        //GameObject.Find("HoloLensCamera").GetComponent<SpiderInstantiate>().;
     }
 
+    /// <summary>
+    /// Used to count up the spider counter and stops if it reaches the maximum spider count
+    /// </summary>
+    private void CountCounters()
+    {
+        if (spiderCount == spiderCountMax)
+        {
+            spiderCountText.text = "Spinnenanzahl: max. " + spiderCount;
+            CancelInvoke();
+        }
+        else
+        {
+            spiderCountText.text = "Spinnenanzahl: " + spiderCount;
+        }
+    }
 
+    /// <summary>
+    /// Used to spawn an object if an input come's in probably the HoloLens Tap Gesture and stops if it reaches the maximum spider count
+    /// </summary>
+    /// <param name="eventData"></param>
     public void OnInputClicked(InputClickedEventData eventData)
     {
-        if (developerMode)
+        if (spiderCount < spiderCountMax)
         {
-            if (timer < 15)
-            {
-                OnSelect();
-            }
-        } else
-        {
-            if (timer < maxSpiderCount)
-            {
-                OnSelect();
-            }
-        }
-    }
-
-    private void Update()
-    {
-        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
-        {
-            generalTimer += Time.deltaTime;
-            generalCount.text = "Zeit: " + (int)generalTimer;
+            SpawnObject();
         }
     }
 }

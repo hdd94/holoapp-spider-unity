@@ -122,7 +122,7 @@ namespace HoloToolkit.Unity
             {
                 // If the Tagalong needs to move to the right, that means it is to
                 // the left of the left frustum plane. Remember that plane and set
-                // our Ray's direction to point towards that plane (remember the
+                // our Ray's lookDirection to point towards that plane (remember the
                 // Ray's origin is already inside the view frustum.
                 plane = frustumPlanes[frustumLeft];
                 ray.direction = -Camera.main.transform.right;
@@ -136,7 +136,7 @@ namespace HoloToolkit.Unity
             }
             if (moveRight || moveLeft)
             {
-                // If the Tagalong needed to move in the X direction, cast a Ray
+                // If the Tagalong needed to move in the X lookDirection, cast a Ray
                 // from the default position to the plane we are working with.
                 plane.Raycast(ray, out distanceOffset);
 
@@ -165,7 +165,7 @@ namespace HoloToolkit.Unity
                 toPosition.y = ray.GetPoint(distanceOffset).y;
             }
 
-            // Create a ray that starts at the camera and points in the direction
+            // Create a ray that starts at the camera and points in the lookDirection
             // of the calculated toPosition.
             ray = new Ray(Camera.main.transform.position, toPosition - Camera.main.transform.position);
 

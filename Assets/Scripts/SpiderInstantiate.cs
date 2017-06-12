@@ -1,83 +1,77 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.SceneManagement;
 
-public class SpiderInstantiate : MonoBehaviour {
-
+/**
+* This script enables to spawn objects randomly with validated spawning position in a set interval time with developer mode funtions 
+* like spider counter, global timer and showed dataPoints
+* 
+* @author: Huy Duc Do
+* 
+**/
+public class SpiderInstantiate : MonoBehaviour
+{
     public GameObject spiderPrefab;
 
-     float spawnStartzeit = 0;
+    float spawningStartTime = 0;
+    float spawningIntervalTime = 0.5f;
+    float spawningDistance;
 
-     float spawnIntervall = 0.5f;
+    int spiderCount = 0;
+    int spiderCountMax;
+    float globalTimer = 0;
 
-     int timer = 0;
-
-    float generalTimer = 0;
-
-    int timerEnd;
-
-    TextMesh spiderCount;
-    TextMesh generalCount;
-
-    float spawnDistance;
+    TextMesh spiderCountText;
+    TextMesh globalTimerText;
     
-    TextMesh debug;
-    int debugTimer = 0;
+    TextMesh successfulledPosition;
+    int successfulledPositionCount = 0;
 
-    Vector3 center;
+    public bool showDataPoints = false;
+    bool developerMode;
+    bool unityMode;
 
-    public bool testing = false;
+    /// <summary>
+    /// Called only on start if the script is enabled
+    /// Used to spawn objects in a set interval time with developer mode if set
+    /// </summary>
+    void Start () {
+        InvokeRepeating("InstantiateObject", spawningStartTime, spawningIntervalTime);
 
-	// Use this for initialization
-	void Start () {
-        //for (int i = 0; i < numObjects; i++)
-        //{
-        //    Vector3 position = new Vector3(Random.Range(-spawnRadius, spawnRadius), 0, Random.Range(-spawnRadius, spawnRadius));
-        //    Instantiate(spiderPrefab, position, Quaternion.identity);
-        //}
+        unityMode = GameObject.Find("Informations").GetComponent<SaveInformations>().unityMode;
+        developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
 
-        //Zwischen spawnRadius in Meter und -spawnRadius in Meter
-
-        InvokeRepeating("InstantiateObject", spawnStartzeit, spawnIntervall);
-
-        //for (int i = 0; i < numObjects; i++)
-        //{
-
-        //    Vector3 pos = RandomCircle(center, spawnRadius);
-        //    //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
-        //    Instantiate(spiderPrefab, pos, Quaternion.identity);
-        //}
-
-        if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        if (developerMode)
         {
-            spiderCount = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
-            generalCount = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
-            debug = GameObject.Find("Debug").GetComponent<TextMesh>();
+            spiderCountText = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
+            globalTimerText = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
+            successfulledPosition = GameObject.Find("Debug").GetComponent<TextMesh>();
         }
 
-        timerEnd = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
+        spiderCountMax = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
     }
 
-    // Update is called once per frame
+    /// <summary>
+    /// Update is called once per frame
+    /// Used to update the global timer if the variable developerMode is true
+    /// </summary>
     void Update () {
-        center = transform.position;
 
         if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
         {
-            generalTimer += Time.deltaTime;
-            generalCount.text = "Zähler: " + (int)generalTimer;
+            globalTimer += Time.deltaTime;
+            globalTimerText.text = "Zähler: " + (int)globalTimer;
         }
     }
 
+    /// <summary>
+    /// Used to spawn objects in random positions and add them a movement script
+    /// Stop spawning if the number reaches the maximum object count
+    /// </summary>
     void InstantiateObject()
     {
-
-        //Vector3 center = transform.position - new Vector3(0, -0.5f, 0);
-        Vector3 pos = CreateRandomPoint(transform.position);
-        //Quaternion rot = Quaternion.FromToRotation(Vector3.forward, center - pos);
-        var spider = Instantiate(spiderPrefab, pos, Quaternion.identity);
+        var t = transform.position;
+        Vector3 randomPosition = ValidateRandomPoint(transform.position);
+        var spider = Instantiate(spiderPrefab, randomPosition, Quaternion.identity);
         spider.transform.localScale = Vector3.one * 0.05f;
 
 
@@ -89,15 +83,17 @@ public class SpiderInstantiate : MonoBehaviour {
         if (randomMovementToggle)
         {
             spider.AddComponent<AddAgentRandMov>();
-            spawnDistance = 3;
+            spawningDistance = 3;
         }
         else if (directMovementToggle)
         {
             spider.AddComponent<AddAgent>();
-            spawnDistance = 4;
+            spawningDistance = 4;
         }
         else if (bothMovementToggle)
         {
+            spawningDistance = 4;
+
             var randomNumber = Random.Range(0, 2);
             if (randomNumber == 0) // Zufällig
             {
@@ -107,72 +103,88 @@ public class SpiderInstantiate : MonoBehaviour {
             {
                 spider.AddComponent<AddAgent>();
             }
-            spawnDistance = 4;
         }
 
-        timer++;
+        spiderCount++;
 
-        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        if (developerMode)
         {
-            spiderCount.text = "Spinnenanzahl: " + timer;
-
-            if (timer == timerEnd)
-            {
-                spiderCount.text = "Spinnenanzahl: max. " + timer;
-            }
+            CountCounters();
         }
 
-        if (timer == timerEnd)
+        if (spiderCount == spiderCountMax)
         {
             CancelInvoke();
         }
-
     }
 
+    /// <summary>
+    /// Used to count up the spider count
+    /// </summary>
+    private void CountCounters()
+    {
+        spiderCountText.text = "Spinnenanzahl: " + spiderCount;
+
+        if (spiderCount == spiderCountMax)
+        {
+            spiderCountText.text = "Spinnenanzahl: max. " + spiderCount;
+        }
+    }
+
+    /// <summary>
+    /// Used to return an random point in the current view of the camera
+    /// </summary>
+    /// <param name="center"></param> camera position
+    /// <returns></returns> random point 
     Vector3 RandomPoint(Vector3 center)
     {
-        //float ang = Random.value * 360;
-        //Vector3 pos;
-        //pos.x = center.x + pointRadius * Mathf.Sin(ang * Mathf.Deg2Rad);
-        ////pos.y = center.y + 0.1f;
-        //pos.y = center.y - 1;
-        //pos.z = center.z + pointRadius * Mathf.Cos(ang * Mathf.Deg2Rad);
-
         float screenX = center.x + Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
-        float screenY = center.y - 1 ;
-        float screenZ = spawnDistance;
-        Vector3 pos = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
+        float screenY = center.y - 1;
+        float screenZ = spawningDistance;
+        Vector3 randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
 
-        return pos;
+        return randomPosition;
     }
 
-    Vector3 CreateRandomPoint(Vector3 pos)
+    /// <summary>
+    /// Used to validate if it is able to spawn an object on the given random point and queries if it should show the data points
+    /// </summary>
+    /// <param name="pos"></param> given random point
+    /// <returns></returns> nearest validated point to the given random point
+    Vector3 ValidateRandomPoint(Vector3 pos)
     {
         Vector3 randomPoint = RandomPoint(pos);
-        //Vector3 randomPoint = pos + Random.insideUnitSphere * 2;
-
 
         NavMeshHit hit;
-        NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas);
+        bool validate = NavMesh.SamplePosition(randomPoint, out hit, 3.0f, NavMesh.AllAreas);
 
-        bool developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
-        if (NavMesh.SamplePosition(randomPoint, out hit, 2.0f, NavMesh.AllAreas) && developerMode)
+        if (validate && developerMode)
         {
-            debugTimer++;
-            debug.text = "SamplePosition True: " + debugTimer;
+            successfulledPositionCount++;
+            successfulledPosition.text = "SamplePosition True: " + successfulledPositionCount;
         }
 
-        if (testing)
+        if (showDataPoints)
         {
-            GameObject randomPoint1 = Instantiate(Resources.Load("Position", typeof(GameObject))) as GameObject;
-            randomPoint1.transform.position = randomPoint;
-
-            GameObject spawnPoint = Instantiate(Resources.Load("WayPoint", typeof(GameObject))) as GameObject;
-            spawnPoint.transform.position = hit.position;
+            ShowDataPoints(randomPoint, hit);
         }
-
         
-
         return hit.position;
+    }
+
+    /// <summary>
+    /// Used to show data points like spawn position and destination position marked as cube
+    /// </summary>
+    /// <param name="randomPoint"></param>
+    /// <param name="hit"></param>
+    private void ShowDataPoints(Vector3 randomPoint, NavMeshHit hit)
+    {
+        GameObject randomPoint1 = Instantiate(Resources.Load("SpawningPosition", typeof(GameObject))) as GameObject;
+        randomPoint1.transform.position = randomPoint;
+        Destroy(randomPoint1.GetComponent<BoxCollider>());
+
+        GameObject spawnPoint = Instantiate(Resources.Load("WayPoint", typeof(GameObject))) as GameObject;
+        spawnPoint.transform.position = hit.position;
+        Destroy(spawnPoint.GetComponent<BoxCollider>());
     }
 }

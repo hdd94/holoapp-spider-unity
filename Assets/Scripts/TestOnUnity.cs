@@ -1,12 +1,20 @@
 ﻿using HoloToolkit.Unity.SpatialMapping;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TestOnUnity : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+/**
+* This script enables the user to play and test the app in the game engine unity
+* 
+* @author: Huy Duc Do
+* 
+**/
+public class TestOnUnity : MonoBehaviour
+{
+    /// <summary>
+    /// Called only on start if the script is enabled
+    /// Adds a mass and gravity to the camera  to be able to move on the spatial mesh room and show the spatial mesh with an predefined 
+    /// spatial map
+    /// </summary>
+    void Start () {
         GameObject camera = GameObject.Find("HoloLensCamera");
         camera.AddComponent<Rigidbody>();
         camera.GetComponent<Rigidbody>().mass = 1e+09f;
@@ -15,11 +23,5 @@ public class TestOnUnity : MonoBehaviour {
         GameObject spatialMapping = GameObject.Find("SpatialMapping");
         spatialMapping.GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
         spatialMapping.GetComponent<ObjectSurfaceObserver>().enabled = true;
-
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
 }

@@ -91,7 +91,7 @@ namespace HoloToolkit.Unity
         public float pitchCenter = 1.0f;
 
         /// <summary>
-        /// The amount in either direction from Pitch Center that the pitch can randomly vary upon playing the event.
+        /// The amount in either lookDirection from Pitch Center that the pitch can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 2.0f.</remarks>
         [HideInInspector]
@@ -102,7 +102,7 @@ namespace HoloToolkit.Unity
         public float volumeCenter = 1.0f;
 
         /// <summary>
-        /// The amount in either direction from Volume Center that the volume can randomly vary upon playing the event.
+        /// The amount in either lookDirection from Volume Center that the volume can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 0.5f.</remarks>
         [HideInInspector]
@@ -113,7 +113,7 @@ namespace HoloToolkit.Unity
         public float panCenter = 0;
 
         /// <summary>
-        /// The amount in either direction from Pan Center that panning can randomly vary upon playing the event.
+        /// The amount in either lookDirection from Pan Center that panning can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 0.5f.</remarks>
         [HideInInspector]

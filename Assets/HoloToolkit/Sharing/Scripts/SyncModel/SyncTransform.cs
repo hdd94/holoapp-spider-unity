@@ -11,7 +11,7 @@ namespace HoloToolkit.Sharing.SyncModel
     /// <summary>
     /// This class implements the Transform object primitive for the syncing system.
     /// It does the heavy lifting to make adding new transforms to a class easy.
-    /// A transform defines the position, rotation and scale of an object.
+    /// A transform defines the position, lookRotation and scale of an object.
     /// </summary>
     public class SyncTransform : SyncObject
     {
