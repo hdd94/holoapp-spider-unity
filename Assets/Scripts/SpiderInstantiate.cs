@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 /**
 * This script enables to spawn objects randomly with validated spawning position in a set interval time with developer mode funtions 
-* like spider counter, global timer and showed dataPoints
+* like spider counterGameObject, global timer and showed dataPoints
 * 
 * @author: Huy Duc Do
 * 
@@ -18,12 +18,11 @@ public class SpiderInstantiate : MonoBehaviour
 
     int spiderCount = 0;
     int spiderCountMax;
-    float globalTimer = 0;
+    float generalCounter = 0;
 
-    TextMesh spiderCountText;
-    TextMesh globalTimerText;
-    
-    TextMesh successfulledPosition;
+    public TextMesh spiderCountTextMesh;
+    public TextMesh generalCountTextmesh;
+    public TextMesh successfulledPositionTextMesh;
     int successfulledPositionCount = 0;
 
     public bool showDataPoints = false;
@@ -40,12 +39,9 @@ public class SpiderInstantiate : MonoBehaviour
         unityMode = SaveInformations.Instance.unityMode;
         developerMode = SaveInformations.Instance.developerMode;
 
-        if (developerMode)
-        {
-            spiderCountText = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
-            globalTimerText = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
-            successfulledPosition = GameObject.Find("Debug").GetComponent<TextMesh>();
-        }
+        spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
+        generalCountTextmesh.text = "Zähler: " + (int)generalCounter;
+        successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCount;
 
         spiderCountMax = GameObject.Find("Informations").GetComponent<SaveInformations>().count;
     }
@@ -58,8 +54,8 @@ public class SpiderInstantiate : MonoBehaviour
 
         if(developerMode)
         {
-            globalTimer += Time.deltaTime;
-            globalTimerText.text = "Zähler: " + (int)globalTimer;
+            generalCounter += Time.deltaTime;
+            generalCountTextmesh.text = "Zähler: " + (int)generalCounter;
         }
     }
 
@@ -72,37 +68,6 @@ public class SpiderInstantiate : MonoBehaviour
         Vector3 randomPosition = ValidateRandomPoint(transform.position);
         var spider = Instantiate(spiderPrefab, randomPosition, Quaternion.identity);
         spider.transform.localScale = Vector3.one * 0.05f;
-
-
-        bool randomMovementToggle = SaveInformations.Instance.randomMovementToggle;
-        bool directMovementToggle = SaveInformations.Instance.directMovementToggle;
-        bool bothMovementToggle = SaveInformations.Instance.bothMovementToggle;
-
-
-        if (randomMovementToggle)
-        {
-            spider.AddComponent<AddAgentRandMov>();
-            spawningDistance = 3;
-        }
-        else if (directMovementToggle)
-        {
-            spider.AddComponent<AddAgent>();
-            spawningDistance = 4;
-        }
-        else if (bothMovementToggle)
-        {
-            spawningDistance = 4;
-
-            var randomNumber = Random.Range(0, 2);
-            if (randomNumber == 0) // Zufällig
-            {
-                spider.AddComponent<AddAgentRandMov>();
-            }
-            else if (randomNumber == 1) // Direkt
-            {
-                spider.AddComponent<AddAgent>();
-            }
-        }
 
         spiderCount++;
 
@@ -122,11 +87,11 @@ public class SpiderInstantiate : MonoBehaviour
     /// </summary>
     private void CountCounters()
     {
-        spiderCountText.text = "Spinnenanzahl: " + spiderCount;
+        spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
 
         if (spiderCount == spiderCountMax)
         {
-            spiderCountText.text = "Spinnenanzahl: max. " + spiderCount;
+            spiderCountTextMesh.text = "Spinnenanzahl: max. " + spiderCount;
         }
     }
 
@@ -160,7 +125,7 @@ public class SpiderInstantiate : MonoBehaviour
         if (validate && developerMode)
         {
             successfulledPositionCount++;
-            successfulledPosition.text = "SamplePosition True: " + successfulledPositionCount;
+            successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCount;
         }
 
         if (showDataPoints)

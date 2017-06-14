@@ -11,9 +11,6 @@ public class SaveInformations : Singleton<SaveInformations>
 {
     public int maxCount;
     public int count;
-    public bool randomMovementToggle;
-    public bool directMovementToggle;
-    public bool bothMovementToggle;
     public bool developerMode;
     public bool manualPositioning;
     public bool unityMode;
@@ -24,6 +21,7 @@ public class SaveInformations : Singleton<SaveInformations>
     /// </summary>
     private void Awake()
     {
+        base.Awake();
         DontDestroyOnLoad(this);
     }
 }

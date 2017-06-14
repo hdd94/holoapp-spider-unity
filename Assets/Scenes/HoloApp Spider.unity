@@ -340,7 +340,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 706683289}
-  m_Text: 'Zeit: 0'
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 0.04
   m_LineSpacing: 1
@@ -408,6 +408,8 @@ GameObject:
   m_Component:
   - component: {fileID: 734533110}
   - component: {fileID: 734533113}
+  - component: {fileID: 734533112}
+  - component: {fileID: 734533111}
   m_Layer: 0
   m_Name: Countdown
   m_TagString: Untagged
@@ -429,6 +431,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734533111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734533109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be8bd2ebd8277c448d6d81c75517fee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  TagalongDistance: 2
+  EnforceDistance: 1
+  PositionUpdateSpeed: 10
+  SmoothMotion: 1
+  SmoothingFactor: 0.75
+--- !u!114 &734533112
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 734533109}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb69de839bd015f4099b5bd2c45e53e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  UseUnscaledTime: 1
+  PositionPerSecond: 30
+  RotationDegreesPerSecond: 720
+  RotationSpeedScaler: 0
+  ScalePerSecond: 5
+  SmoothLerpToTarget: 0
+  SmoothPositionLerpRatio: 0.5
+  SmoothRotationLerpRatio: 0.5
+  SmoothScaleLerpRatio: 0.5
 --- !u!65 &734533113
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -670,6 +708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startNumber: 5
   countdown: {fileID: 1060716415}
+  countDownTextMesh: {fileID: 1060716418}
 --- !u!102 &1060716418
 TextMesh:
   serializedVersion: 3
@@ -774,6 +813,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000011792100794, guid: a611e772ef8ddf64d8106a9cbb70f31c,
     type: 2}
   m_PrefabInternal: {fileID: 1063772797}
+--- !u!1 &1063772799 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012072213228, guid: a611e772ef8ddf64d8106a9cbb70f31c,
+    type: 2}
+  m_PrefabInternal: {fileID: 1063772797}
 --- !u!1 &1085329977
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,7 +842,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1085329977}
-  m_Text: 'Spinnenanzahl: 0'
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 0.04
   m_LineSpacing: 1
@@ -851,7 +895,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1085329977}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.31, y: 1.6899999, z: 6.27}
+  m_LocalPosition: {x: -3.31, y: 1.63, z: 6.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1837317078}
@@ -933,11 +977,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1219922295}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3099997, y: 0.17, z: 6.27}
+  m_LocalPosition: {x: -3.3099997, y: 0.69, z: 6.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1837317078}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1219922297
 TextMesh:
@@ -946,7 +990,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1219922295}
-  m_Text: 'Positionierung: -'
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 0.04
   m_LineSpacing: 1
@@ -1055,7 +1099,7 @@ GameObject:
   - component: {fileID: 1543631140}
   - component: {fileID: 1543631139}
   m_Layer: 0
-  m_Name: Debug
+  m_Name: SuccessfulledPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1068,11 +1112,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1543631137}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.3099997, y: -0.292, z: 6.27}
+  m_LocalPosition: {x: -3.3099997, y: 0.23, z: 6.27}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1837317078}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &1543631139
 TextMesh:
@@ -1081,7 +1125,7 @@ TextMesh:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1543631137}
-  m_Text: 'SamplePosition True: 0'
+  m_Text: 
   m_OffsetZ: 0
   m_CharacterSize: 0.04
   m_LineSpacing: 1
@@ -1342,7 +1386,6 @@ Transform:
   m_Children:
   - {fileID: 1085329980}
   - {fileID: 706683292}
-  - {fileID: 1890444883}
   - {fileID: 1219922296}
   - {fileID: 1543631138}
   m_Father: {fileID: 0}
@@ -1408,89 +1451,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PivotAxis: 1
---- !u!1 &1890444882
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1890444883}
-  - component: {fileID: 1890444885}
-  - component: {fileID: 1890444884}
-  m_Layer: 0
-  m_Name: MovementKind
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1890444883
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1890444882}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.31, y: 0.68, z: 6.27}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1837317078}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!102 &1890444884
-TextMesh:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1890444882}
-  m_Text: 'Bewegungsart: -'
-  m_OffsetZ: 0
-  m_CharacterSize: 0.04
-  m_LineSpacing: 1
-  m_Anchor: 0
-  m_Alignment: 0
-  m_TabSize: 4
-  m_FontSize: 100
-  m_FontStyle: 0
-  m_RichText: 1
-  m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Color:
-    serializedVersion: 2
-    rgba: 4294967295
---- !u!23 &1890444885
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1890444882}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_Materials:
-  - {fileID: 10100, guid: 0000000000000000e000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
 --- !u!1 &2011604554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1635,8 +1595,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c813fee6f4e59b140a9e5f9fcf93694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counter: {fileID: 1837317077}
-  countdown: {fileID: 734533109}
+  counterGameObject: {fileID: 1837317077}
+  countdownGameObject: {fileID: 734533109}
+  defaultCursor: {fileID: 1063772799}
+  positioningTextMesh: {fileID: 1219922297}
+  spiderInstantiateScript: {fileID: 2128033186}
+  manualPositioningScript: {fileID: 2128033185}
 --- !u!81 &2128033179
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1737,6 +1701,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
     type: 2}
+  spiderCountTextMesh: {fileID: 1085329978}
+  generalCountTextmesh: {fileID: 706683290}
+  successfulledPositionTextMesh: {fileID: 1543631139}
 --- !u!114 &2128033186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1750,6 +1717,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
     type: 2}
+  spiderCountTextMesh: {fileID: 1085329978}
+  generalCountTextmesh: {fileID: 706683290}
+  successfulledPositionTextMesh: {fileID: 1543631139}
   showDataPoints: 0
 --- !u!114 &2128033187
 MonoBehaviour:

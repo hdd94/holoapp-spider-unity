@@ -6,7 +6,8 @@
 * @author: Huy Duc Do
 * 
 **/
-public class AddAgent : MonoBehaviour {
+public class AddAgent : MonoBehaviour
+{
     /// <summary>
     /// Used to add the movement script to the spawning object when it enters the collision with the ground
     /// and destroys this script after adding the script

@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 15921587}
   - component: {fileID: 15921586}
   - component: {fileID: 15921585}
-  - component: {fileID: 15921588}
   m_Layer: 5
   m_Name: btnCountDecrease
   m_TagString: Untagged
@@ -188,7 +187,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 15921588}
+      - m_Target: {fileID: 111011004}
         m_MethodName: DecreaseMainCount
         m_Mode: 1
         m_Arguments:
@@ -236,17 +235,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 15921582}
---- !u!114 &15921588
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 15921582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &80517365
 GameObject:
   m_ObjectHideFlags: 0
@@ -264,7 +252,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &80517366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -285,8 +273,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 1dd1927790291514e845dc8f2b654c1c, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -341,7 +329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &111011001
 RectTransform:
   m_ObjectHideFlags: 0
@@ -411,6 +399,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCountText: {fileID: 197807219}
+  mainMenuCountText: {fileID: 327387509}
+  countIncreaseButton: {fileID: 532492370}
+  countDecreaseButton: {fileID: 15921585}
+  developerModeToggle: {fileID: 1556142941}
+  manualPositioningToggle: {fileID: 2038608383}
+  unityModeToggle: {fileID: 1134354718}
 --- !u!1 &197807217
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +642,6 @@ GameObject:
   - component: {fileID: 327387508}
   - component: {fileID: 327387510}
   - component: {fileID: 327387509}
-  - component: {fileID: 327387511}
   m_Layer: 5
   m_Name: lblCountMain
   m_TagString: Untagged
@@ -715,17 +709,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 327387507}
---- !u!114 &327387511
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 327387507}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 561d293c8a80cd740839cea10a021e0a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &397604378
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,7 +946,6 @@ GameObject:
   - component: {fileID: 532492372}
   - component: {fileID: 532492371}
   - component: {fileID: 532492370}
-  - component: {fileID: 532492373}
   m_Layer: 5
   m_Name: btnCountIncrease
   m_TagString: Untagged
@@ -1031,7 +1013,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 532492373}
+      - m_Target: {fileID: 111011004}
         m_MethodName: IncreaseMainCount
         m_Mode: 1
         m_Arguments:
@@ -1079,17 +1061,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 532492367}
---- !u!114 &532492373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 532492367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &552976449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1721,9 +1692,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1134354716}
   - component: {fileID: 1134354718}
-  - component: {fileID: 1134354719}
   m_Layer: 5
-  m_Name: UnityMode
+  m_Name: tglUnityMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1793,7 +1763,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1134354719}
+      - m_Target: {fileID: 111011004}
         m_MethodName: SaveUnityModeToggle
         m_Mode: 1
         m_Arguments:
@@ -1807,17 +1777,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &1134354719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1134354715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1187857699
 GameObject:
   m_ObjectHideFlags: 0
@@ -2003,7 +1962,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Entwicklungsoptionen:'
+  m_Text: 'Entwicklung-soptionen:'
 --- !u!222 &1217540848
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2977,9 +2936,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1556142940}
   - component: {fileID: 1556142941}
-  - component: {fileID: 1556142942}
   m_Layer: 5
-  m_Name: DeveloperMode
+  m_Name: tglDeveloperMode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3049,7 +3007,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1556142942}
+      - m_Target: {fileID: 111011004}
         m_MethodName: SaveDeveloperModeToggle
         m_Mode: 1
         m_Arguments:
@@ -3063,17 +3021,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &1556142942
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1556142939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1565857532
 GameObject:
   m_ObjectHideFlags: 0
@@ -3175,9 +3122,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxCount: 15
   count: 15
-  randomMovementToggle: 0
-  directMovementToggle: 1
-  bothMovementToggle: 0
   developerMode: 0
   manualPositioning: 0
   unityMode: 0
@@ -3349,7 +3293,6 @@ RectTransform:
   - {fileID: 234912375}
   - {fileID: 1931215752}
   - {fileID: 327387508}
-  - {fileID: 1799347717}
   m_Father: {fileID: 80517368}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3363,96 +3306,6 @@ Camera:
   m_PrefabParentObject: {fileID: 20000013304850028, guid: d379ed0a5618c9f479f58bd83a2d0ad3,
     type: 2}
   m_PrefabInternal: {fileID: 912495494}
---- !u!1 &1799347716
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 1163104519125416, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1799347717}
-  - component: {fileID: 1799347720}
-  - component: {fileID: 1799347719}
-  - component: {fileID: 1799347718}
-  m_Layer: 5
-  m_Name: lblMovementKind
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1799347717
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 224210826663808020, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1799347716}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0026058, y: 1.0026058, z: 1.0026058}
-  m_Children: []
-  m_Father: {fileID: 1602891138}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 40, y: -60.2}
-  m_SizeDelta: {x: 240, y: 40}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1799347718
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1799347716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47ef110fd43259e45babd9b5d5ba47b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1799347719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114657012724832808, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1799347716}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 12
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 0
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
-    m_LineSpacing: 1
-  m_Text: 'Bewegungsart: direkt'
---- !u!222 &1799347720
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 222657333220303476, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1799347716}
 --- !u!1001 &1800329372
 Prefab:
   m_ObjectHideFlags: 0
@@ -3737,7 +3590,7 @@ GameObject:
   - component: {fileID: 2003844355}
   - component: {fileID: 2003844354}
   m_Layer: 5
-  m_Name: btnConform
+  m_Name: btnConfirm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3872,9 +3725,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2038608381}
   - component: {fileID: 2038608383}
-  - component: {fileID: 2038608384}
   m_Layer: 5
-  m_Name: ManualPositioning
+  m_Name: tglManualPositioning
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3944,7 +3796,7 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038608384}
+      - m_Target: {fileID: 111011004}
         m_MethodName: SaveManualPositioningToggle
         m_Mode: 1
         m_Arguments:
@@ -3958,17 +3810,6 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
---- !u!114 &2038608384
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2038608380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2054429617
 GameObject:
   m_ObjectHideFlags: 0

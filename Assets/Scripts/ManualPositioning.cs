@@ -15,12 +15,11 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     int spiderCount = 0;
     int spiderCountMax;
 
-    float globalTimer = 0;
+    float generalCounter = 0;
 
-    TextMesh spiderCountText;
-    TextMesh globalTimerText;
-
-    TextMesh successfulledPosition;
+    public TextMesh spiderCountTextMesh;
+    public TextMesh generalCountTextmesh;
+    public TextMesh successfulledPositionTextMesh;
     int successfulledPositionCount = 0;
 
     bool developerMode;
@@ -34,16 +33,13 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     {
         InputManager.Instance.PushFallbackInputHandler(gameObject);
 
-        spiderCountMax = GameObject.Find("Informations").GetComponent<SaveInformations>().maxCount;
+        spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
+        generalCountTextmesh.text = "Zähler: " + (int)generalCounter;
+        successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCount;
 
-        developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
+        spiderCountMax = SaveInformations.Instance.maxCount;
 
-        if (developerMode)
-        {
-            spiderCountText = GameObject.Find("SpiderCount").GetComponent<TextMesh>();
-            globalTimerText = GameObject.Find("GeneralCount").GetComponent<TextMesh>();
-            successfulledPosition = GameObject.Find("Debug").GetComponent<TextMesh>();
-        }
+        developerMode = SaveInformations.Instance.developerMode;
     }
 
     /// <summary>
@@ -52,17 +48,17 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     /// </summary>
     private void Update()
     {
-        if (GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        if (developerMode)
         {
-            globalTimer += Time.deltaTime;
-            globalTimerText.text = "Zeit: " + (int)globalTimer;
+            generalCounter += Time.deltaTime;
+            generalCountTextmesh.text = "Zeit: " + (int)generalCounter;
         }
     }
 
     /// <summary>
     /// Is performed if the HoloLens Tap Gesture is used
     /// Used to manually spawning and positioning an object and validates the spawning point
-    /// Adds the movement script to the object and count the timer and counter
+    /// Adds the movement script to the object and count the timer and counterGameObject
     /// </summary>
     public void SpawnObject()
     {
@@ -76,14 +72,12 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
         if (NavMesh.SamplePosition(spawningPoint, out hit, 2.0f, NavMesh.AllAreas) && developerMode)
         {
             successfulledPositionCount++;
-            successfulledPosition.text = "SamplePosition True: " + successfulledPositionCount;
+            successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCount;
         }
 
         spider.transform.position = hit.position;
 
         spiderCount++;
-
-        AddMovementScript(spider);
 
         if (developerMode)
         {
@@ -92,51 +86,18 @@ public class ManualPositioning : MonoBehaviour, IInputClickHandler
     }
 
     /// <summary>
-    /// Used to query the options and add accordingly a movement script
-    /// The movement scripts are directly, randomly and both of these movements
-    /// </summary>
-    /// <param name="spider"></param> spider gameobject 
-    private void AddMovementScript(GameObject spider)
-    {
-        bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
-        bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
-        bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
-
-        if (randomMovementToggle)
-        {
-            spider.AddComponent<AddAgentRandMov>();
-        }
-        else if (directMovementToggle)
-        {
-            spider.AddComponent<AddAgent>();
-        }
-        else if (bothMovementToggle)
-        {
-            int randomNumber = Random.Range(0, 2);
-            if (randomNumber == 0) // Zufällig
-            {
-                spider.AddComponent<AddAgentRandMov>();
-            }
-            else if (randomNumber == 1) // Direkt
-            {
-                spider.AddComponent<AddAgent>();
-            }
-        }
-    }
-
-    /// <summary>
-    /// Used to count up the spider counter and stops if it reaches the maximum spider count
+    /// Used to count up the spider counterGameObject and stops if it reaches the maximum spider count
     /// </summary>
     private void CountCounters()
     {
         if (spiderCount == spiderCountMax)
         {
-            spiderCountText.text = "Spinnenanzahl: max. " + spiderCount;
+            spiderCountTextMesh.text = "Spinnenanzahl: max. " + spiderCount;
             CancelInvoke();
         }
         else
         {
-            spiderCountText.text = "Spinnenanzahl: " + spiderCount;
+            spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
         }
     }
 

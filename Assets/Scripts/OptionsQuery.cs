@@ -14,9 +14,12 @@ public class OptionsQuery : MonoBehaviour
     private bool developerMode;
     private bool unityMode;
     private bool manualPositioning;
-    public GameObject counter;
-    public GameObject countdown;
-
+    public GameObject counterGameObject;
+    public GameObject countdownGameObject;
+    public GameObject defaultCursor;
+    public TextMesh positioningTextMesh;
+    public SpiderInstantiate spiderInstantiateScript;
+    public ManualPositioning manualPositioningScript;
 
     /// <summary>
     /// Called only on start if the script is enabled
@@ -25,20 +28,19 @@ public class OptionsQuery : MonoBehaviour
     /// </summary>
     void Start () {
 
-
-        developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
-        unityMode = GameObject.Find("Informations").GetComponent<SaveInformations>().unityMode;
-        manualPositioning = GameObject.Find("Informations").GetComponent<SaveInformations>().manualPositioning;
+        developerMode = SaveInformations.Instance.developerMode;
+        unityMode = SaveInformations.Instance.unityMode;
+        manualPositioning = SaveInformations.Instance.manualPositioning;
 
         if (developerMode)
         {
             SetDeveloperMode();
         } else
         {
-            GameObject.Find("DefaultCursor").SetActive(false);
+            defaultCursor.SetActive(false);
             if(!manualPositioning)
             {
-                countdown.SetActive(true);
+                countdownGameObject.SetActive(true);
             }
         }
 
@@ -56,18 +58,16 @@ public class OptionsQuery : MonoBehaviour
         }
     }
 
-
-
     /// <summary>
     /// Used to start the app in developer mode and shows the visual mesh of the spatial map and the set options
     /// </summary>
     private void SetDeveloperMode()
     {
-        counter.SetActive(true);
+        counterGameObject.SetActive(true);
 
         GameObject.Find("SpatialMapping").GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
 
-        string positioning = GameObject.Find("Positioning").GetComponent<TextMesh>().text;
+        string positioning;
 
         if (manualPositioning)
         {
@@ -78,24 +78,8 @@ public class OptionsQuery : MonoBehaviour
             positioning = "Positionierung: Zufall";
         }
 
-        bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
-        bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
-        bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
+        positioningTextMesh.text = positioning;
 
-        if (randomMovementToggle)
-        {
-            movementKindName = "Zufall";
-        }
-        else if (directMovementToggle)
-        {
-            movementKindName = "Direkt";
-        }
-        else if (bothMovementToggle)
-        {
-            movementKindName = "Beides";
-        }
-
-        GameObject.Find("MovementKind").GetComponent<TextMesh>().text = "Bewegungsart: " + movementKindName;
-        GameObject.Find("HoloLensCamera").GetComponent<SpiderInstantiate>().showDataPoints = true;
+        spiderInstantiateScript.showDataPoints = true;
     }
 }

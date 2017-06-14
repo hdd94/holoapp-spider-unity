@@ -94,14 +94,14 @@ namespace HoloToolkit.Unity
                 // calculate the key time for the evaluation point. Multiple timers can have this value.
                 int keyTime = GetKeyTime(Time.time + timer.Duration);
 
-                // re-add spiderCountText to queue
+                // re-add spiderCountTextMesh to queue
                 timers.Push(keyTime, timer);
 
                 // add to list of active timers
                 activeTimers.Add(new TimerIdPair { Id = timer.Id, KeyTime = keyTime });
             }
 
-            // make sure the scheduler is enabled now that we have a new spiderCountText.
+            // make sure the scheduler is enabled now that we have a new spiderCountTextMesh.
             enabled = true;
 
             return timer.Id;
@@ -171,7 +171,7 @@ namespace HoloToolkit.Unity
                 // loop events by just reinserting them
                 if (timer.Loop)
                 {
-                    // re-add spiderCountText
+                    // re-add spiderCountTextMesh
                     AddTimer(timer);
                 }
 
@@ -190,7 +190,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Creates a new spiderCountText event which will be added next frame.
+        /// Creates a new spiderCountTextMesh event which will be added next frame.
         /// </summary>
         /// <param name="timeSeconds"></param>
         /// <param name="callback"></param>
@@ -200,12 +200,12 @@ namespace HoloToolkit.Unity
         {
             int id = AddTimer(new TimerData(timeSeconds, callback, loop, nextTimerId++), deferred);
 
-            // create a new id, and make a new spiderCountText with it
+            // create a new id, and make a new spiderCountTextMesh with it
             return new Timer(id);
         }
 
         /// <summary>
-        /// Disable an active spiderCountText. 
+        /// Disable an active spiderCountTextMesh. 
         /// </summary>
         /// <param name="timerId"></param>
         /// <returns></returns>
