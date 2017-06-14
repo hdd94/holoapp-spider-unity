@@ -15,6 +15,7 @@ public class OptionsQuery : MonoBehaviour
     private bool unityMode;
     private bool manualPositioning;
     public GameObject counter;
+    public GameObject countdown;
 
 
     /// <summary>
@@ -35,6 +36,10 @@ public class OptionsQuery : MonoBehaviour
         } else
         {
             GameObject.Find("DefaultCursor").SetActive(false);
+            if(!manualPositioning)
+            {
+                countdown.SetActive(true);
+            }
         }
 
         if (manualPositioning)
@@ -50,6 +55,8 @@ public class OptionsQuery : MonoBehaviour
             gameObject.AddComponent<TestOnUnity>();
         }
     }
+
+
 
     /// <summary>
     /// Used to start the app in developer mode and shows the visual mesh of the spatial map and the set options

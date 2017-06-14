@@ -12,9 +12,9 @@ public class SpiderInstantiate : MonoBehaviour
 {
     public GameObject spiderPrefab;
 
-    float spawningStartTime = 0;
+    float spawningStartTime = 0.5f;
     float spawningIntervalTime = 0.5f;
-    float spawningDistance;
+    float spawningDistance = 4f;
 
     int spiderCount = 0;
     int spiderCountMax;
@@ -37,8 +37,8 @@ public class SpiderInstantiate : MonoBehaviour
     void Start () {
         InvokeRepeating("InstantiateObject", spawningStartTime, spawningIntervalTime);
 
-        unityMode = GameObject.Find("Informations").GetComponent<SaveInformations>().unityMode;
-        developerMode = GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode;
+        unityMode = SaveInformations.Instance.unityMode;
+        developerMode = SaveInformations.Instance.developerMode;
 
         if (developerMode)
         {
@@ -56,7 +56,7 @@ public class SpiderInstantiate : MonoBehaviour
     /// </summary>
     void Update () {
 
-        if(GameObject.Find("Informations").GetComponent<SaveInformations>().developerMode)
+        if(developerMode)
         {
             globalTimer += Time.deltaTime;
             globalTimerText.text = "Zähler: " + (int)globalTimer;
@@ -69,15 +69,14 @@ public class SpiderInstantiate : MonoBehaviour
     /// </summary>
     void InstantiateObject()
     {
-        var t = transform.position;
         Vector3 randomPosition = ValidateRandomPoint(transform.position);
         var spider = Instantiate(spiderPrefab, randomPosition, Quaternion.identity);
         spider.transform.localScale = Vector3.one * 0.05f;
 
 
-        bool randomMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().randomMovementToggle;
-        bool directMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().directMovementToggle;
-        bool bothMovementToggle = GameObject.Find("Informations").GetComponent<SaveInformations>().bothMovementToggle;
+        bool randomMovementToggle = SaveInformations.Instance.randomMovementToggle;
+        bool directMovementToggle = SaveInformations.Instance.directMovementToggle;
+        bool bothMovementToggle = SaveInformations.Instance.bothMovementToggle;
 
 
         if (randomMovementToggle)
@@ -179,11 +178,7 @@ public class SpiderInstantiate : MonoBehaviour
     /// <param name="hit"></param>
     private void ShowDataPoints(Vector3 randomPoint, NavMeshHit hit)
     {
-        GameObject randomPoint1 = Instantiate(Resources.Load("SpawningPosition", typeof(GameObject))) as GameObject;
-        randomPoint1.transform.position = randomPoint;
-        Destroy(randomPoint1.GetComponent<BoxCollider>());
-
-        GameObject spawnPoint = Instantiate(Resources.Load("WayPoint", typeof(GameObject))) as GameObject;
+        GameObject spawnPoint = Instantiate(Resources.Load("SpawningPosition", typeof(GameObject))) as GameObject;
         spawnPoint.transform.position = hit.position;
         Destroy(spawnPoint.GetComponent<BoxCollider>());
     }

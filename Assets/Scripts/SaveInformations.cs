@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using HoloToolkit.Unity;
+using UnityEngine;
 
 /**
 * This script saves all option variables and makes them global
@@ -6,7 +7,7 @@
 * @author: Huy Duc Do
 * 
 **/
-public class SaveInformations : MonoBehaviour
+public class SaveInformations : Singleton<SaveInformations>
 {
     public int maxCount;
     public int count;

@@ -120,7 +120,7 @@ GameObject:
   - component: {fileID: 15921587}
   - component: {fileID: 15921586}
   - component: {fileID: 15921585}
-  - component: {fileID: 15921584}
+  - component: {fileID: 15921588}
   m_Layer: 5
   m_Name: btnCountDecrease
   m_TagString: Untagged
@@ -148,18 +148,6 @@ RectTransform:
   m_AnchoredPosition: {x: 15, y: 30}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &15921584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114736508240002658, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 15921582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 891bd043b7dce36419b688d1d7b5f444, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &15921585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -200,8 +188,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 15921584}
-        m_MethodName: Decrease
+      - m_Target: {fileID: 15921588}
+        m_MethodName: DecreaseMainCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -248,6 +236,17 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 15921582}
+--- !u!114 &15921588
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 15921582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &80517365
 GameObject:
   m_ObjectHideFlags: 0
@@ -964,7 +963,7 @@ GameObject:
   - component: {fileID: 532492372}
   - component: {fileID: 532492371}
   - component: {fileID: 532492370}
-  - component: {fileID: 532492369}
+  - component: {fileID: 532492373}
   m_Layer: 5
   m_Name: btnCountIncrease
   m_TagString: Untagged
@@ -992,18 +991,6 @@ RectTransform:
   m_AnchoredPosition: {x: 87.4, y: 30}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &532492369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 114281621730399554, guid: b93309e734f0f7842a94947081a7ab1f,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 532492367}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6ce16768262c9f46bf5d83ec385194d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &532492370
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,8 +1031,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 532492369}
-        m_MethodName: Increase
+      - m_Target: {fileID: 532492373}
+        m_MethodName: IncreaseMainCount
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1092,6 +1079,17 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 532492367}
+--- !u!114 &532492373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 532492367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &552976449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1723,7 +1721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1134354716}
   - component: {fileID: 1134354718}
-  - component: {fileID: 1134354717}
+  - component: {fileID: 1134354719}
   m_Layer: 5
   m_Name: UnityMode
   m_TagString: Untagged
@@ -1752,17 +1750,6 @@ RectTransform:
   m_AnchoredPosition: {x: 80.00003, y: -102.2}
   m_SizeDelta: {x: 160, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1134354717
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1134354715}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b54be5ed5279914596b2f4f4dd53a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1134354718
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1806,8 +1793,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1134354717}
-        m_MethodName: Save
+      - m_Target: {fileID: 1134354719}
+        m_MethodName: SaveUnityModeToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1820,6 +1807,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &1134354719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1134354715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1187857699
 GameObject:
   m_ObjectHideFlags: 0
@@ -3052,7 +3050,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1556142942}
-        m_MethodName: Save
+        m_MethodName: SaveDeveloperModeToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3073,7 +3071,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1556142939}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de11dbe85a5200c469adb859ffff8261, type: 3}
+  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1565857532
@@ -3874,7 +3872,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2038608381}
   - component: {fileID: 2038608383}
-  - component: {fileID: 2038608382}
+  - component: {fileID: 2038608384}
   m_Layer: 5
   m_Name: ManualPositioning
   m_TagString: Untagged
@@ -3903,17 +3901,6 @@ RectTransform:
   m_AnchoredPosition: {x: 80, y: -80.5}
   m_SizeDelta: {x: 160, y: 40}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &2038608382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2038608380}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdce068e21e5e1e489e20a3302f48886, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &2038608383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3957,8 +3944,8 @@ MonoBehaviour:
   onValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2038608382}
-        m_MethodName: Save
+      - m_Target: {fileID: 2038608384}
+        m_MethodName: SaveManualPositioningToggle
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3971,6 +3958,17 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.Toggle+ToggleEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
   m_IsOn: 0
+--- !u!114 &2038608384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2038608380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d5da2adff0b50747ae57c0690ceb8d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2054429617
 GameObject:
   m_ObjectHideFlags: 0
