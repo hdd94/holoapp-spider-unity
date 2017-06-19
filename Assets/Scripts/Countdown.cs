@@ -37,5 +37,5 @@ public class Countdown : MonoBehaviour
         {
             countdown.SetActive(false);
         }
-	}
+    }
 }
