@@ -7,14 +7,19 @@ using UnityEngine.SceneManagement;
 * @author: Huy Duc Do
 * 
 **/
-public class ResetScript : MonoBehaviour {
-
-    /// <summary>
-    /// Used to delete the gameobject "informations" and "SpatialMapping" and load the main menu scene
-    /// </summary>
-	public void Reset () {
-        Destroy(GameObject.Find("Informations"));
-        Destroy(GameObject.Find("SpatialMapping"));
-        SceneManager.LoadScene(0);
+namespace HoloAppSpider
+{
+    public class VoiceScript: MonoBehaviour
+    {
+        /// <summary>
+        /// Used to delete the gameobject "informations" and "SpatialMapping" and load the main menu scene
+        /// </summary>
+        public void Reset()
+        {
+            var dontDestroyGameObjects = SaveInformations.Instance.gameObject.scene.GetRootGameObjects();
+            foreach (GameObject dontDestroyGameObject in dontDestroyGameObjects)
+                Destroy(dontDestroyGameObject);
+            SceneManager.LoadScene(0);
+        }
     }
 }

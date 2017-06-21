@@ -7,14 +7,17 @@ using UnityEngine.SceneManagement;
 * @author: Huy Duc Do
 * 
 **/
-public class LoadSceneOnClick : MonoBehaviour
+namespace HoloAppSpider
 {
-    /// <summary>
-    /// Used to load the scene by given index number
-    /// </summary>
-    /// <param name="sceneIndex"></param> index number of a scene
-	public void LoadByIndex(int sceneIndex)
+    public class LoadSceneOnClick : MonoBehaviour
     {
-        SceneManager.LoadScene(sceneIndex);
+        /// <summary>
+        /// Used to load the scene by given index number
+        /// </summary>
+        /// <param name="sceneIndex">index number of a scene</param> 
+        public void LoadByIndex(int sceneIndex)
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
     }
 }

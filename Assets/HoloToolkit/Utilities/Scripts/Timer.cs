@@ -4,7 +4,7 @@
 namespace HoloToolkit.Unity
 {
     /// <summary>
-    /// Structure that defines a spiderCountTextMesh. A spiderCountTextMesh can be scheduled through the TimerScheduler.
+    /// Structure that defines a SpiderCountTextMesh. A SpiderCountTextMesh can be scheduled through the TimerScheduler.
     /// </summary>
     public struct Timer
     {

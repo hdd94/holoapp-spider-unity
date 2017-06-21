@@ -8,78 +8,60 @@ using UnityEngine;
 * @author: Huy Duc Do
 * 
 **/
-public class OptionsQuery : MonoBehaviour
+namespace HoloAppSpider
 {
-    private string movementKindName;
-    private bool developerMode;
-    private bool unityMode;
-    private bool manualPositioning;
-    public GameObject counterGameObject;
-    public GameObject countdownGameObject;
-    public GameObject defaultCursor;
-    public TextMesh positioningTextMesh;
-    public SpiderInstantiate spiderInstantiateScript;
-    public ManualPositioning manualPositioningScript;
-
-    /// <summary>
-    /// Called only on start if the script is enabled
-    /// Used to assign the global option variables to script variables and depends on the option variables the app starts in developer mode, 
-    /// manually/randomly spawning and test in the game engine unity
-    /// </summary>
-    void Start () {
-
-        developerMode = SaveInformations.Instance.developerMode;
-        unityMode = SaveInformations.Instance.unityMode;
-        manualPositioning = SaveInformations.Instance.manualPositioning;
-
-        if (developerMode)
-        {
-            SetDeveloperMode();
-        } else
-        {
-            defaultCursor.SetActive(false);
-            if(!manualPositioning)
-            {
-                countdownGameObject.SetActive(true);
-            }
-        }
-
-        if (manualPositioning)
-        {
-            GetComponent<ManualPositioning>().enabled = true;
-        } else
-        {
-            GetComponent<SpiderInstantiate>().enabled = true;
-        }
-
-        if (unityMode)
-        {
-            gameObject.AddComponent<TestOnUnity>();
-        }
-    }
-
-    /// <summary>
-    /// Used to start the app in developer mode and shows the visual mesh of the spatial map and the set options
-    /// </summary>
-    private void SetDeveloperMode()
+    public class OptionsQuery : MonoBehaviour
     {
-        counterGameObject.SetActive(true);
+        public GameObject CounterGameObject;
+        public GameObject CountdownGameObject;
+        public GameObject DefaultCursorGameObject;
+        public TextMesh PositioningTextMesh;
+        public SpiderInstantiate SpiderInstantiateScript;
+        public ManualPositioning ManualPositioningScript;
 
-        GameObject.Find("SpatialMapping").GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
+        private string movementKindName;
 
-        string positioning;
-
-        if (manualPositioning)
+        /// <summary>
+        /// Called only on start if the script is enabled
+        /// Used to assign the global option variables to script variables and depends on the option variables the app starts in developer mode, 
+        /// manually/randomly spawning and test in the game engine unity
+        /// </summary>
+        private void Start()
         {
-            positioning = "Positionierung: Manuell";
+            if (SaveInformations.Instance.IsDeveloperMode)
+                SetDeveloperMode();
+            else
+            {
+                DefaultCursorGameObject.SetActive(false);
+                if (!SaveInformations.Instance.IsManualPositioning)
+                    CountdownGameObject.SetActive(true);
+            }
+
+            if (SaveInformations.Instance.IsManualPositioning)
+                GetComponent<ManualPositioning>().enabled = true;
+            else
+                GetComponent<SpiderInstantiate>().enabled = true;
+
+#if UNITY_EDITOR
+            gameObject.AddComponent<TestOnUnity>();
+#endif
         }
-        else
+
+        /// <summary>
+        /// Used to start the app in developer mode and shows the visual mesh of the spatial map and the set options
+        /// </summary>
+        private void SetDeveloperMode()
         {
-            positioning = "Positionierung: Zufall";
+            CounterGameObject.SetActive(true);
+            SpiderInstantiateScript.IsShowDataPoints = true;
+            GameObject.Find("SpatialMapping").GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
+
+            string positioningText;
+            if (SaveInformations.Instance.IsManualPositioning)
+                positioningText = "Positionierung: Manuell";
+            else
+                positioningText = "Positionierung: Zufall";
+            PositioningTextMesh.text = positioningText;
         }
-
-        positioningTextMesh.text = positioning;
-
-        spiderInstantiateScript.showDataPoints = true;
     }
 }

@@ -77,7 +77,7 @@ namespace HoloToolkit.Unity.InputModule
         protected Animator CursorAnimator = null;
 
         /// <summary>
-        /// Change anim stage when enabled
+        /// Change animator stage when enabled
         /// </summary>
         public override void OnInputEnabled()
         {
@@ -86,7 +86,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Change anim stage when disabled
+        /// Change animator stage when disabled
         /// </summary>
         public override void OnInputDisabled()
         {
@@ -95,7 +95,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Override to set the cursor anim trigger
+        /// Override to set the cursor animator trigger
         /// </summary>
         /// <param name="modifier"></param>
         protected override void OnActiveModifier(CursorModifier modifier)

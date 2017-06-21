@@ -719,9 +719,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3a622c5672cd54c9141c454535c655, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startNumber: 5
-  countdown: {fileID: 1060716415}
-  countDownTextMesh: {fileID: 1060716418}
+  StartNumber: 5
+  CountdownGameObject: {fileID: 734533109}
+  CountdownTextMesh: {fileID: 1060716418}
 --- !u!102 &1060716418
 TextMesh:
   serializedVersion: 3
@@ -1283,24 +1283,6 @@ MonoBehaviour:
           m_CallState: 2
       m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
         PublicKeyToken=null
-  - Keyword: Option
-    KeyCode: 0
-    Response:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 2128033183}
-          m_MethodName: Reset
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
-      m_TypeName: UnityEngine.Events.UnityEvent, UnityEngine, Version=0.0.0.0, Culture=neutral,
-        PublicKeyToken=null
 --- !u!4 &1616611756
 Transform:
   m_ObjectHideFlags: 0
@@ -1608,12 +1590,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c813fee6f4e59b140a9e5f9fcf93694f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  counterGameObject: {fileID: 1837317077}
-  countdownGameObject: {fileID: 734533109}
-  defaultCursor: {fileID: 1063772799}
-  positioningTextMesh: {fileID: 1219922297}
-  spiderInstantiateScript: {fileID: 2128033186}
-  manualPositioningScript: {fileID: 2128033185}
+  CounterGameObject: {fileID: 1837317077}
+  CountdownGameObject: {fileID: 734533109}
+  DefaultCursorGameObject: {fileID: 1063772799}
+  PositioningTextMesh: {fileID: 1219922297}
+  SpiderInstantiateScript: {fileID: 2128033186}
+  ManualPositioningScript: {fileID: 2128033185}
 --- !u!81 &2128033179
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1712,11 +1694,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61f1bc5ac617aed478586cf974830afb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
+  SpiderPrefabGameObject: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
     type: 2}
-  spiderCountTextMesh: {fileID: 1085329978}
-  generalCountTextmesh: {fileID: 706683290}
-  successfulledPositionTextMesh: {fileID: 1543631139}
+  SpiderCountTextMesh: {fileID: 1085329978}
+  GeneralCountTextmesh: {fileID: 706683290}
+  SuccessfulledPositionTextMesh: {fileID: 1543631139}
 --- !u!114 &2128033186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,12 +1710,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8682f21e292bb204692e6a230a3ba10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
-    type: 2}
   spiderCountTextMesh: {fileID: 1085329978}
   generalCountTextmesh: {fileID: 706683290}
   successfulledPositionTextMesh: {fileID: 1543631139}
-  showDataPoints: 0
+  spiderPrefab: {fileID: 1319193851890780, guid: 723ee027bd7dbb344b522bcc52a199cc,
+    type: 2}
+  IsShowDataPoints: 0
 --- !u!114 &2128033187
 MonoBehaviour:
   m_ObjectHideFlags: 0

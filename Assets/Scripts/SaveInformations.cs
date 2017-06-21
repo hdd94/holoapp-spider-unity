@@ -7,21 +7,23 @@ using UnityEngine;
 * @author: Huy Duc Do
 * 
 **/
-public class SaveInformations : Singleton<SaveInformations>
+namespace HoloAppSpider
 {
-    public int maxCount;
-    public int count;
-    public bool developerMode;
-    public bool manualPositioning;
-    public bool unityMode;
-
-    /// <summary>
-    /// Called on start independently if the script is enabled/disabled
-    /// Don't destroy this script after loading a new scene
-    /// </summary>
-    private void Awake()
+    public class SaveInformations : Singleton<SaveInformations>
     {
-        base.Awake();
-        DontDestroyOnLoad(this);
+        public int MaxCount;
+        public int Count;
+        public bool IsDeveloperMode;
+        public bool IsManualPositioning;
+
+        /// <summary>
+        /// Called on start independently if the script is enabled/disabled
+        /// Don't destroy this script after loading a new scene
+        /// </summary>
+        protected override void Awake()
+        {
+            base.Awake();
+            DontDestroyOnLoad(this);
+        }
     }
 }

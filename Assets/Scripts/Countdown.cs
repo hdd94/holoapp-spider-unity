@@ -6,36 +6,50 @@
 * @author: Huy Duc Do
 * 
 **/
-public class Countdown : MonoBehaviour
+namespace HoloAppSpider
 {
-    public float startNumber = 5;
-    bool developerMode;
+    public class Countdown : MonoBehaviour
+    {
+        /// <summary>
+        /// Startnumber of CountdownGameObject
+        /// </summary>
+        [Tooltip("Startnumber of CountdownGameObject")]
+        public float StartNumber = 5;
 
-    public GameObject countdown;
-    public TextMesh countDownTextMesh;
+        /// <summary>
+        /// Linked CountdownGameObject
+        /// </summary>
+        [Tooltip("Linked CountdownGameObject")]
+        public GameObject CountdownGameObject;
 
+        /// <summary>
+        /// TextMesh of CountdownGameObject
+        /// </summary>
+        [Tooltip("Textmesh of CountdownGameObject")]
+        public TextMesh CountdownTextMesh;
 
-    /// <summary>
-    /// Called only on start if the script is enabled
-    /// Used to assign the global option variable to a script variable and write the variable startNumber in the textMesh
-    /// </summary>
-    void Start () {
-        developerMode = SaveInformations.Instance.developerMode;
-        countDownTextMesh.text = startNumber.ToString();
+        /// <summary>
+        /// Called only on start if the script is enabled
+        /// Used to assign the global option variable to a script variable and write the variable StartNumber in the textMesh
+        /// </summary>
+        private void Start()
+        {
+            CountdownTextMesh.text = StartNumber.ToString();
         }
 
-    /// <summary>
-    /// Update is called once per frame
-    /// Used to positioning the textmesh in front of the camera and count the start number down
-    /// </summary>    
-    void Update () {
-        if (!developerMode && startNumber > 0)
+        /// <summary>
+        /// Update is called once per frame
+        /// Used to positioning the textmesh in front of the camera and Count the start number down
+        /// </summary>    
+        private void Update()
         {
-            startNumber -= Time.deltaTime;
-            countDownTextMesh.text = ((int)startNumber).ToString();
-        } else
-        {
-            countdown.SetActive(false);
+            if (!SaveInformations.Instance.IsDeveloperMode && StartNumber > 0)
+            {
+                StartNumber -= Time.deltaTime;
+                CountdownTextMesh.text = ((int)StartNumber).ToString();
+            }
+            else
+                CountdownGameObject.SetActive(false);
         }
     }
 }

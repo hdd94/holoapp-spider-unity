@@ -6,16 +6,19 @@
 * @author: Huy Duc Do
 * 
 **/
-public class AddAgent : MonoBehaviour
+namespace HoloAppSpider
 {
-    /// <summary>
-    /// Used to add the movement script to the spawning object when it enters the collision with the ground
-    /// and destroys this script after adding the script
-    /// </summary>
-    /// <param name="collision"></param> ground collision
-    private void OnCollisionEnter(Collision collision)
+    public class AddAgent : MonoBehaviour
     {
-        this.gameObject.AddComponent<MoveTo>();
-        Destroy(this);
+        /// <summary>
+        /// Used to add the movement script to the spawning object when it enters the collision with the ground
+        /// and destroys this script after adding the script
+        /// </summary>
+        /// <param name="collision">ground collision</param> 
+        private void OnCollisionEnter(Collision collision)
+        {
+            this.gameObject.AddComponent<MoveTo>();
+            Destroy(this);
+        }
     }
 }
