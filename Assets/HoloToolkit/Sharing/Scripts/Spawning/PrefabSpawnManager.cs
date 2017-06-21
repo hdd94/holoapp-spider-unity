@@ -145,7 +145,7 @@ namespace HoloToolkit.Sharing.Spawning
                 parent = gameObject;
             }
 
-            // Validate that the prefab is valid
+            // IsValidatedPosition that the prefab is valid
             GameObject prefabToSpawn = GetPrefab(dataModel, baseName);
             if (!prefabToSpawn)
             {

@@ -2873,7 +2873,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxCount: 15
-  Count: 0
+  Count: 15
   IsDeveloperMode: 0
   IsManualPositioning: 0
 --- !u!224 &1586803657

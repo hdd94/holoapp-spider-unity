@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using HoloToolkit.Unity.InputModule;
+using System;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.AI;
 
 /**
@@ -10,34 +13,30 @@ using UnityEngine.AI;
 **/
 namespace HoloAppSpider
 {
-    public class SpiderInstantiate : MonoBehaviour
+    public class SpiderInstantiate: MonoBehaviour, IInputClickHandler
     {
-        public TextMesh spiderCountTextMesh;
-        public TextMesh generalCountTextmesh;
-        public TextMesh successfulledPositionTextMesh;
-        public GameObject spiderPrefab;
+        public GameObject SpiderPrefabGameObject;
+        public TextMesh SpiderCountTextMesh;
+        public TextMesh GeneralCountTextmesh;
         public bool IsShowDataPoints = false;
 
-        private float spawningStartTime = 0.5f;
-        private float spawningIntervalTime = 0.5f;
-        private float spawningDistance = 4f;
-
-        private int spiderCount = 0, successfulledPositionCountNumber = 0;
+        private float spawningDistance = 4;
         private float generalCountNumber = 0;
+        private int spiderCountNumber = 0;
+        private float _spawningStartTime = 0.5f;
+        private float _spawningIntervalTime = 0.5f;
 
-        /// <summary>
-        /// Called only on start if the script is enabled
-        /// Used to spawn objects in a set interval time with developer mode if set
-        /// </summary>
         private void Start()
         {
-            InvokeRepeating("InstantiateObject", spawningStartTime, spawningIntervalTime);
+            if (SaveInformations.Instance.IsManualPositioning)
+                InputManager.Instance.AddGlobalListener(gameObject);
+            else
+                InvokeRepeating("InstantiateObject", _spawningStartTime, _spawningIntervalTime);
+        }
 
-            if (SaveInformations.Instance.IsDeveloperMode)
-            {
-                spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
-                successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCountNumber;
-            }
+        public void OnInputClicked(InputClickedEventData eventData)
+        {
+            InstantiateObject();
         }
 
         /// <summary>
@@ -49,7 +48,7 @@ namespace HoloAppSpider
             if (SaveInformations.Instance.IsDeveloperMode)
             {
                 generalCountNumber += Time.deltaTime;
-                generalCountTextmesh.text = "Zähler: " + (int)generalCountNumber;
+                GeneralCountTextmesh.text = "Zähler: " + (int)generalCountNumber;
             }
         }
 
@@ -57,48 +56,42 @@ namespace HoloAppSpider
         /// Used to spawn objects in random positions and add them a movement script
         /// Stop spawning if the number reaches the maximum object Count
         /// </summary>
-        private void InstantiateObject()
+        protected void InstantiateObject()
         {
-            Vector3 randomPosition;
-            do
-                randomPosition = RandomPosition(transform.position);
-            while
-                (!IsRandomPositionValid(randomPosition));
-
-            var spider = Instantiate(spiderPrefab, randomPosition, Quaternion.identity);
-            //spider.transform.localScale = Vector3.one * 0.05f;
-
-            if (IsValidate && SaveInformations.Instance.IsDeveloperMode)
+            StartCoroutine(GetSpawnPosition((spawnPosition) =>
             {
-                successfulledPositionCountNumber++;
-                successfulledPositionTextMesh.text = "SamplePosition True: " + successfulledPositionCountNumber;
-            }
+                var spider = Instantiate(SpiderPrefabGameObject, spawnPosition, Quaternion.identity);
+                spiderCountNumber++;
 
-            if (IsShowDataPoints)
-                ShowDataPoints(hit.position);
+                //int randomNumber = Random.Range(0, 3);
+                //switch (randomNumber)
+                //{
+                //    case 0: // klein
+                //        spider.transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f);
+                //        break;
+                //    case 1: // normal
+                //        break;
+                //    case 2: // groß
+                //        spider.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
+                //        break;
+                //}
 
-            spiderCount++;
+                if (IsShowDataPoints)
+                    ShowDataPoints(spawnPosition);
+                if (SaveInformations.Instance.IsDeveloperMode)
+                    CountCounters();
+                if (spiderCountNumber == SaveInformations.Instance.Count)
+                    CancelInvoke();
+            }));
 
-            if (SaveInformations.Instance.IsDeveloperMode)
-                CountCounters();
-
-            if (spiderCount == SaveInformations.Instance.Count)
-                CancelInvoke();
         }
-        
-        private void InstantiateObject1()
+
+        public IEnumerator GetSpawnPosition(Action<Vector3> callback)
         {
-            NavMeshHit hit;
-            do
-                hit = ValidatedRandomPosition(transform.position);
-            while (hit.hit);
-
-            var spider = Instantiate(spiderPrefab, hit.position, Quaternion.identity);
-
-            // !!!!!!!!!!!!! Hier weiterschreiben, nähmlich wie es nach erfolgreichen Spawnen weiter geht (Timer hoch zählen)
-
-            //Vector3 randomPosition = RandomPosition(transform.position);
-            //Vector3 validatedRandomPosition = ValidatedRandomPosition(randomPosition);
+            Vector3 validatedPosition;
+            while (!GetValidatedPosition(out validatedPosition)) ;
+            callback(validatedPosition);
+            yield return null;
         }
 
         /// <summary>
@@ -106,50 +99,11 @@ namespace HoloAppSpider
         /// </summary>
         private void CountCounters()
         {
-            spiderCountTextMesh.text = "Spinnenanzahl: " + spiderCount;
+            SpiderCountTextMesh.text = "Spinnenanzahl: " + spiderCountNumber;
 
-            if (spiderCount == SaveInformations.Instance.Count)
-                spiderCountTextMesh.text = "Spinnenanzahl: max. " + spiderCount;
+            if (spiderCountNumber == SaveInformations.Instance.Count)
+                SpiderCountTextMesh.text = "Spinnenanzahl: max. " + spiderCountNumber;
         }
-
-        /// <summary>
-        /// Used to return an random point in the current view of the camera
-        /// </summary>
-        /// <param name="position">camera position</param> 
-        /// <returns>random point</returns>
-        private NavMeshHit ValidatedRandomPosition(Vector3 position)
-        {
-            float screenX = position.x + Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
-            float screenY = position.y - 1;
-            float screenZ = spawningDistance;
-            Vector3 randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
-
-            NavMeshHit hit;
-            NavMesh.SamplePosition(randomPosition, out hit, 3.0f, NavMesh.AllAreas);
-
-            return hit;
-        }
-
-        /// <summary>
-        /// Used to IsValidate if it is able to spawn an object on the given random point and queries if it should show the data points
-        /// </summary>
-        /// <param name="pos">given random point</param> 
-        /// <returns>nearest validated point to the given random point</returns> 
-        private bool IsRandomPositionValid(Vector3 randomPosition)
-        {
-            NavMeshHit hit;
-            bool IsValidate = NavMesh.SamplePosition(randomPosition, out hit, 5.0f, NavMesh.AllAreas);
-
-            return IsValidate;
-        }
-
-        //private Vector3 ValidatedRandomPosition(Vector3 randomPosition)
-        //{
-        //    NavMeshHit hit;
-        //    NavMesh.SamplePosition(randomPosition, out hit, 5.0f, NavMesh.AllAreas);
-
-        //    return hit.position;
-        //}
 
         /// <summary>
         /// Used to show data points like spawn position and destination position marked as cube
@@ -158,6 +112,21 @@ namespace HoloAppSpider
         private void ShowDataPoints(Vector3 hitPosition)
         {
             Instantiate(Resources.Load<GameObject>("SpawningPosition"), hitPosition, Quaternion.identity);
+        }
+
+        private bool GetValidatedPosition(out Vector3 position)
+        {
+            float screenX = transform.position.x + UnityEngine.Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
+            float screenY = transform.position.y - 1;
+            float screenZ = spawningDistance;
+
+            var randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
+
+            NavMeshHit hit;
+            var result = NavMesh.SamplePosition(randomPosition, out hit, 3.0f, NavMesh.AllAreas);
+            position = hit.position;
+
+            return result;
         }
     }
 }

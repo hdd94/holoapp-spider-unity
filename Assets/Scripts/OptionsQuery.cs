@@ -16,8 +16,6 @@ namespace HoloAppSpider
         public GameObject CountdownGameObject;
         public GameObject DefaultCursorGameObject;
         public TextMesh PositioningTextMesh;
-        public SpiderInstantiate SpiderInstantiateScript;
-        public ManualPositioning ManualPositioningScript;
 
         private string movementKindName;
 
@@ -37,10 +35,10 @@ namespace HoloAppSpider
                     CountdownGameObject.SetActive(true);
             }
 
-            if (SaveInformations.Instance.IsManualPositioning)
-                GetComponent<ManualPositioning>().enabled = true;
-            else
-                GetComponent<SpiderInstantiate>().enabled = true;
+            //if (SaveInformations.Instance.IsManualPositioning)
+            //    GetComponent<ManualPositioning>().enabled = true;
+            //else
+            //    GetComponent<SpiderInstantiate>().enabled = true;
 
 #if UNITY_EDITOR
             gameObject.AddComponent<TestOnUnity>();
@@ -53,7 +51,7 @@ namespace HoloAppSpider
         private void SetDeveloperMode()
         {
             CounterGameObject.SetActive(true);
-            SpiderInstantiateScript.IsShowDataPoints = true;
+            GetComponent<SpiderInstantiate>().IsShowDataPoints = true;
             GameObject.Find("SpatialMapping").GetComponent<SpatialMappingManager>().DrawVisualMeshes = true;
 
             string positioningText;

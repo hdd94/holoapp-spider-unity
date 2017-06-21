@@ -186,7 +186,7 @@ namespace HoloToolkit.Unity.SpatialMapping
         private static List<GCHandle> reusedPinnedMemoryHandles = new List<GCHandle>();
 
         /// <summary>
-        /// Validate that no other PlaneFinding API call is currently in progress. As a performance
+        /// IsValidatedPosition that no other PlaneFinding API call is currently in progress. As a performance
         /// optimization to avoid unnecessarily thrashing the garbage collector, each call into the
         /// PlaneFinding DLL reuses a couple of static data structures. As a result, we can't handle
         /// multiple concurrent calls into these APIs.
