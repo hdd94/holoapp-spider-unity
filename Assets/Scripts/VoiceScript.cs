@@ -12,7 +12,7 @@ namespace HoloAppSpider
     public class VoiceScript: MonoBehaviour
     {
         /// <summary>
-        /// Used to delete the gameobject "informations" and "SpatialMapping" and load the main menu scene
+        /// Used to search all dontDestroyGameObjects, delete all objects and load the main menu scene
         /// </summary>
         public void Reset()
         {

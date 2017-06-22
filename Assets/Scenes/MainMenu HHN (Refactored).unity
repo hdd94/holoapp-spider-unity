@@ -475,7 +475,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 15
+  m_Text: 20
 --- !u!222 &197807220
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2872,8 +2872,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ee4c64aefd0a3d4f9bfb1197dfa8e3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxCount: 15
-  Count: 15
+  MaxCount: 25
+  Count: 20
   IsDeveloperMode: 0
   IsManualPositioning: 0
 --- !u!224 &1586803657

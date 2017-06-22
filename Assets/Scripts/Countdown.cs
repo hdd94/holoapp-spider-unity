@@ -17,20 +17,20 @@ namespace HoloAppSpider
         public float StartNumber = 5;
 
         /// <summary>
-        /// Linked CountdownGameObject
+        /// GameObject of countdown
         /// </summary>
-        [Tooltip("Linked CountdownGameObject")]
+        [Tooltip("GameObject of countdown")]
         public GameObject CountdownGameObject;
 
         /// <summary>
-        /// TextMesh of CountdownGameObject
+        /// TextMeshObject of countdown
         /// </summary>
-        [Tooltip("Textmesh of CountdownGameObject")]
+        [Tooltip("TextmeshObject of countdown")]
         public TextMesh CountdownTextMesh;
 
         /// <summary>
         /// Called only on start if the script is enabled
-        /// Used to assign the global option variable to a script variable and write the variable StartNumber in the textMesh
+        /// Used to write the variable StartNumber in the textMesh
         /// </summary>
         private void Start()
         {
@@ -39,7 +39,7 @@ namespace HoloAppSpider
 
         /// <summary>
         /// Update is called once per frame
-        /// Used to positioning the textmesh in front of the camera and Count the start number down
+        /// Used to count the start number down and let it disappear if it reaches 0
         /// </summary>    
         private void Update()
         {

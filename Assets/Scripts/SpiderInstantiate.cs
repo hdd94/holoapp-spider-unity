@@ -15,28 +15,54 @@ namespace HoloAppSpider
 {
     public class SpiderInstantiate: MonoBehaviour, IInputClickHandler
     {
+        /// <summary>
+        /// GameObject of spider prefab
+        /// </summary>
+        [Tooltip("GameObject of spider prefab")]
         public GameObject SpiderPrefabGameObject;
+
+        /// <summary>
+        /// TextMeshObject of spider counter 
+        /// </summary>
+        [Tooltip("TextMeshObject of spider counter")]
         public TextMesh SpiderCountTextMesh;
+
+        /// <summary>
+        /// TextmeshObject of general counter
+        /// </summary>
+        [Tooltip("TextmeshObject of general counter")]
         public TextMesh GeneralCountTextmesh;
+
+        /// <summary>
+        /// Bool variable if dataPoint should be showed
+        /// </summary>
+        [Tooltip("Bool variable if dataPoint should be showed")]
         public bool IsShowDataPoints = false;
 
-        private float spawningDistance = 4;
-        private float generalCountNumber = 0;
-        private int spiderCountNumber = 0;
+        private float _spawningDistance = 3;
+        private float _generalCountNumber = 0;
+        private int _spiderCountNumber = 0;
         private float _spawningStartTime = 0.5f;
         private float _spawningIntervalTime = 0.5f;
 
+        /// <summary>
+        /// Called only on start if the script is enabled
+        /// Used to query if spider spawning should be manual or random
+        /// </summary>
         private void Start()
         {
             if (SaveInformations.Instance.IsManualPositioning)
                 InputManager.Instance.AddGlobalListener(gameObject);
             else
-                InvokeRepeating("InstantiateObject", _spawningStartTime, _spawningIntervalTime);
+                InvokeRepeating("InstantiateSpider", _spawningStartTime, _spawningIntervalTime);
         }
 
+        /// <summary>
+        /// Used to be performed by click event
+        /// </summary>
         public void OnInputClicked(InputClickedEventData eventData)
         {
-            InstantiateObject();
+            InstantiateSpider();
         }
 
         /// <summary>
@@ -47,46 +73,42 @@ namespace HoloAppSpider
         {
             if (SaveInformations.Instance.IsDeveloperMode)
             {
-                generalCountNumber += Time.deltaTime;
-                GeneralCountTextmesh.text = "Zähler: " + (int)generalCountNumber;
+                _generalCountNumber += Time.deltaTime;
+                GeneralCountTextmesh.text = "Zähler: " + (int)_generalCountNumber;
             }
         }
 
         /// <summary>
-        /// Used to spawn objects in random positions and add them a movement script
-        /// Stop spawning if the number reaches the maximum object Count
+        /// Used to spawn objects in random positions which are validated in the background through a coroutine
+        /// This routine will be given an anonym method which use the validated position to instantiate a spider in a random size
+        /// The anonym method queries if dataPoint should be showed and count up counters if developerMode is active 
+        /// Stop instantiating if spider number reaches the maximum spider Count
         /// </summary>
-        protected void InstantiateObject()
+        protected void InstantiateSpider()
         {
-            StartCoroutine(GetSpawnPosition((spawnPosition) =>
+            StartCoroutine(GetSpawnPosition( (spawnPosition) =>
             {
                 var spider = Instantiate(SpiderPrefabGameObject, spawnPosition, Quaternion.identity);
-                spiderCountNumber++;
+                _spiderCountNumber++;
 
-                //int randomNumber = Random.Range(0, 3);
-                //switch (randomNumber)
-                //{
-                //    case 0: // klein
-                //        spider.transform.localScale -= new Vector3(0.01f, 0.01f, 0.01f);
-                //        break;
-                //    case 1: // normal
-                //        break;
-                //    case 2: // groß
-                //        spider.transform.localScale += new Vector3(0.01f, 0.01f, 0.01f);
-                //        break;
-                //}
+                spider.transform.localScale *= UnityEngine.Random.Range(0.6f, 1.4f);
 
                 if (IsShowDataPoints)
                     ShowDataPoints(spawnPosition);
                 if (SaveInformations.Instance.IsDeveloperMode)
                     CountCounters();
-                if (spiderCountNumber == SaveInformations.Instance.Count)
+                if (_spiderCountNumber == SaveInformations.Instance.Count)
                     CancelInvoke();
-            }));
-
+            })
+            );
         }
 
-        public IEnumerator GetSpawnPosition(Action<Vector3> callback)
+        /// <summary>
+        /// Used to search for an random position until a validated position is found and performs afterwards the anonym method
+        /// </summary>
+        /// <param name="callback">anonym method which will be peformed when a validated position is found</param>
+        /// <returns>IEnumerator which is null</returns>
+        private IEnumerator GetSpawnPosition(Action<Vector3> callback)
         {
             Vector3 validatedPosition;
             while (!GetValidatedPosition(out validatedPosition)) ;
@@ -95,14 +117,34 @@ namespace HoloAppSpider
         }
 
         /// <summary>
-        /// Used to Count up the spider Count
+        /// Used to return a bool variable if position can be placed on a spatial mesh
+        /// Creates a random point in the front view of camera and search a nearest point on the spatial mesh 
+        /// </summary>
+        /// <param name="position">random position variable which is referenced</param>
+        /// <returns>bool variable if position can be placed on a spatial mesh</returns>
+        private bool GetValidatedPosition(out Vector3 position)
+        {
+            float screenX = transform.position.x + UnityEngine.Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
+            float screenY = transform.position.y - 1;
+            float screenZ = _spawningDistance;
+            var randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
+
+            NavMeshHit hit;
+            var result = NavMesh.SamplePosition(randomPosition, out hit, 3.0f, NavMesh.AllAreas);
+            position = hit.position;
+
+            return result;
+        }
+
+        /// <summary>
+        /// Used to count up the spider count and show max count if it reaches max spider count
         /// </summary>
         private void CountCounters()
         {
-            SpiderCountTextMesh.text = "Spinnenanzahl: " + spiderCountNumber;
+            SpiderCountTextMesh.text = "Spinnenanzahl: " + _spiderCountNumber;
 
-            if (spiderCountNumber == SaveInformations.Instance.Count)
-                SpiderCountTextMesh.text = "Spinnenanzahl: max. " + spiderCountNumber;
+            if (_spiderCountNumber == SaveInformations.Instance.Count)
+                SpiderCountTextMesh.text = "Spinnenanzahl: max. " + _spiderCountNumber;
         }
 
         /// <summary>
@@ -112,21 +154,6 @@ namespace HoloAppSpider
         private void ShowDataPoints(Vector3 hitPosition)
         {
             Instantiate(Resources.Load<GameObject>("SpawningPosition"), hitPosition, Quaternion.identity);
-        }
-
-        private bool GetValidatedPosition(out Vector3 position)
-        {
-            float screenX = transform.position.x + UnityEngine.Random.Range(-Camera.main.pixelWidth, Camera.main.pixelWidth);
-            float screenY = transform.position.y - 1;
-            float screenZ = spawningDistance;
-
-            var randomPosition = Camera.main.ScreenToWorldPoint(new Vector3(screenX, screenY, screenZ));
-
-            NavMeshHit hit;
-            var result = NavMesh.SamplePosition(randomPosition, out hit, 3.0f, NavMesh.AllAreas);
-            position = hit.position;
-
-            return result;
         }
     }
 }

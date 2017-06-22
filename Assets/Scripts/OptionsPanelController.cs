@@ -12,26 +12,69 @@ namespace HoloAppSpider
 {
     public class OptionsPanelController : MonoBehaviour
     {
+        /// <summary>
+        /// TextObject of main count number
+        /// </summary>
+        [Tooltip("TextObject of main count number")]
         public Text MainCountText;
+
+        /// <summary>
+        /// TextObject of main menu count number
+        /// </summary>
+        [Tooltip("TextObject of main menu count number")]
         public Text MainMenuCountText;
+
+        /// <summary>
+        /// ButtonObject of increase count number button
+        /// </summary>
+        [Tooltip("ButtonObject of increase count number button")]
         public Button CountIncreaseButton;
+
+        /// <summary>
+        /// ButtonObject of decrease count number button
+        /// </summary>
+        [Tooltip("ButtonObject of decrease count number button")]
         public Button CountDecreaseButton;
+
+        /// <summary>
+        /// ToggleObject of developerMode
+        /// </summary>
+        [Tooltip("ToggleObject of developerMode")]
         public Toggle DeveloperModeToggle;
+
+        /// <summary>
+        /// ToggleObject of manualPositioning
+        /// </summary>
+        [Tooltip("ToggleObject of manualPositioning")]
         public Toggle ManualPositioningToggle;
+
+        /// <summary>
+        /// Called only on start if the script is enabled
+        /// Used to write the number of count to MainCountText
+        /// </summary>
+        private void Start()
+        {
+            MainCountText.text = SaveInformations.Instance.Count.ToString();
+        }
 
         /// <summary>
         /// Used to increase the number of spawning objects if number is less than maximum Count
         /// </summary>
         public void OnClickIncreaseMainCount()
         {
+            Debug.Log("Hallo");
+
             int number = SaveInformations.Instance.Count;
 
             if (number < SaveInformations.Instance.MaxCount)
+            {
                 number++;
+                CountDecreaseButton.interactable = true;
+            }
+            else
+                CountIncreaseButton.interactable = false;
 
-            MainCountText.text = number.ToString();
-            MainMenuCountText.text = "Spinnenanzahl: " + number;
-            SaveInformations.Instance.Count = number;
+            WriteNumberToText(number);
         }
 
         /// <summary>
@@ -42,8 +85,22 @@ namespace HoloAppSpider
             int number = SaveInformations.Instance.Count;
 
             if (number > 1)
+            {
                 number--;
+                CountIncreaseButton.interactable = true;
+            }
+            else
+                CountDecreaseButton.interactable = false;
 
+            WriteNumberToText(number);
+        }
+
+        /// <summary>
+        /// Used to write the number of spider to Textmesh
+        /// </summary>
+        /// <param name="number">number of spider</param>
+        public void WriteNumberToText(int number)
+        {
             MainCountText.text = number.ToString();
             MainMenuCountText.text = "Spinnenanzahl: " + number;
             SaveInformations.Instance.Count = number;

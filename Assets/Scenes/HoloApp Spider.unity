@@ -445,7 +445,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TagalongDistance: 2
   EnforceDistance: 1
-  PositionUpdateSpeed: 10
+  PositionUpdateSpeed: 15
   SmoothMotion: 1
   SmoothingFactor: 0.75
 --- !u!114 &734533112
@@ -1275,8 +1275,8 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1837317078}
-  - component: {fileID: 1837317082}
   - component: {fileID: 1837317081}
+  - component: {fileID: 1837317082}
   - component: {fileID: 1837317080}
   - component: {fileID: 1837317079}
   m_Layer: 0
@@ -1293,7 +1293,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1837317077}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.8000001, y: -1.16, z: -1.27}
+  m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1085329980}
