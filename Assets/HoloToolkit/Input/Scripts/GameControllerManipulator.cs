@@ -32,20 +32,20 @@ namespace HoloToolkit.Unity.InputModule
 
         [Tooltip("Name of the joystick axis that rotates around X as set in InputManager")]
         public string RotateAroundXAxisName = "ControllerLeftStickY";
-        [Tooltip("Speed of lookRotation around X")]
+        [Tooltip("Speed of rotation around X")]
         public float RotateAroundXAxisSpeed = -1f;
 
         [Tooltip("Name of the joystick axis that rotates around Y as set in InputManager")]
         public string RotateAroundYAxisName = "ControllerLeftStickX";
-        [Tooltip("Speed of lookRotation around Y")]
+        [Tooltip("Speed of rotation around Y")]
         public float RotateAroundYAxisSpeed = -1f;
 
         [Tooltip("Name of the joystick axis that rotates around Z as set in InputManager")]
         public string RotateAroundZAxisName = "";
-        [Tooltip("Speed of lookRotation around Z")]
+        [Tooltip("Speed of rotation around Z")]
         public float RotateAroundZAxisSpeed = 1f;
 
-        [Tooltip("Name of the button used to enable lookRotation. Useful for single stick controllers")]
+        [Tooltip("Name of the button used to enable rotation. Useful for single stick controllers")]
         public string RotateModifierButtonName = "Fire2";
 
         [Tooltip("Move the gaze target instead of the GameObject this script is attached to")]
@@ -99,7 +99,7 @@ namespace HoloToolkit.Unity.InputModule
             float x = 0;
             float y = 0;
 
-            //only move if the movement axis has not been used for lookRotation
+            //only move if the movement axis has not been used for rotation
             if (!(enableRotate && usingSameAxisForRotateAndMove))
             {
                 x = Input.GetAxis(MoveXAxisName) * MoveXAxisSpeed * 60 * Time.deltaTime;
@@ -147,8 +147,8 @@ namespace HoloToolkit.Unity.InputModule
         /// <param name="objectToRotate">the gameObject to rotate</param>
         /// <param name="joyAxisName">the name of the joystick axis</param>
         /// <param name="vectorToRotateAround">vector to rotate around</param>
-        /// <param name="speed">lookRotation speed</param>
-        /// <returns>the amount of lookRotation applied</returns>
+        /// <param name="speed">rotation speed</param>
+        /// <returns>the amount of rotation applied</returns>
         private float RotateAroundAxis(GameObject objectToRotate, string joyAxisName, Vector3 vectorToRotateAround, float speed)
         {
             if (string.IsNullOrEmpty(joyAxisName))

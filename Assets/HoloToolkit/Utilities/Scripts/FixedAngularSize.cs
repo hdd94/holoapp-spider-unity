@@ -7,7 +7,7 @@ namespace HoloToolkit.Unity
 {
     /// <summary>
     /// Causes a Hologram to maintain a fixed angular size, which is to say it
-    /// occupies the same pixels in the view regardless of its stopDistance from
+    /// occupies the same pixels in the view regardless of its distance from
     /// the camera.
     /// </summary>
     public class FixedAngularSize : MonoBehaviour
@@ -16,14 +16,14 @@ namespace HoloToolkit.Unity
         public float SizeRatio = 0;
 
         // The ratio between the transform's local scale and its starting
-        // stopDistance from the camera.
+        // distance from the camera.
         private float startingDistance;
         private Vector3 startingScale;
 
         private void Start()
         {
             // Calculate the XYZ ratios for the transform's localScale over its
-            // initial stopDistance from the camera.
+            // initial distance from the camera.
             startingDistance = Vector3.Distance(Camera.main.transform.position, transform.position);
             startingScale = transform.localScale;
 
@@ -46,7 +46,7 @@ namespace HoloToolkit.Unity
                 else
                 {
                     // If the transform and the camera are both in the same
-                    // position (that is, the stopDistance between them is zero),
+                    // position (that is, the distance between them is zero),
                     // disable this Behaviour so we don't get a DivideByZero
                     // error later on.
                     enabled = false;

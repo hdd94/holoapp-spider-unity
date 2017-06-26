@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HoloToolkit.Unity
 {
     /// <summary>
-    /// A Tagalong that stays at a fixed stopDistance from the camera and always
+    /// A Tagalong that stays at a fixed distance from the camera and always
     /// seeks to stay on the edge or inside a sphere that is straight in front of the camera.
     /// </summary>
     public class SphereBasedTagalong : MonoBehaviour

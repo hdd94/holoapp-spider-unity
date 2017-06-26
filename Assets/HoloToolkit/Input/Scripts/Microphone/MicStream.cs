@@ -162,10 +162,10 @@ namespace HoloToolkit.Unity.InputModule
             switch (returnCode)
             {
                 case (int)ErrorCodes.ALREADY_RECORDING:
-                    Debug.LogError("WARNING: Tried to start recording when you were already doing so. You need to stop your previous recording before you can start again.");
+                    Debug.LogWarning("WARNING: Tried to start recording when you were already doing so. You need to stop your previous recording before you can start again.");
                     return false;
                 case (int)ErrorCodes.ALREADY_RUNNING:
-                    Debug.LogError("WARNING: Tried to initialize microphone more than once");
+                    Debug.LogWarning("WARNING: Tried to initialize microphone more than once");
                     return false;
                 case (int)ErrorCodes.GRAPH_NOT_EXIST:
                     Debug.LogError("ERROR: Tried to do microphone things without a properly initialized microphone. \n Do you have a mic plugged into a functional audio system and did you call MicInitialize() before anything else ??");
@@ -177,7 +177,7 @@ namespace HoloToolkit.Unity.InputModule
                     Debug.LogError("ERROR: Tried to start microphone, but you don't have one plugged in, do you?");
                     return false;
                 case (int)ErrorCodes.CHANNEL_COUNT_MISMATCH:
-                    Debug.LogError("ERROR: Microphone had a channel Count mismatch internally on device. Try setting different mono/stereo options in OS mic settings.");
+                    Debug.LogError("ERROR: Microphone had a channel count mismatch internally on device. Try setting different mono/stereo options in OS mic settings.");
                     return false;
                 case (int)ErrorCodes.FILE_CREATION_PERMISSION_ERROR:
                     Debug.LogError("ERROR: Didn't have access to create file in Music library. Make sure permissions to write to Music library are set granted.");

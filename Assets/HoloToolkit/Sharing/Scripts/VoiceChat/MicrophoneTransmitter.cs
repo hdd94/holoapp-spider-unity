@@ -231,7 +231,7 @@ namespace HoloToolkit.Sharing.VoiceChat
             channelCountPacker.SetBits(ref pack, 1);              // ChannelCount
             sampleRatePacker.SetBits(ref pack, sampleRateType);   // SampleRate: 1 = 16000, 3 = 48000
             sampleTypePacker.SetBits(ref pack, 0);                // SampleType
-            sampleCountPacker.SetBits(ref pack, dataCountFloats); // SampleCount (data Count is in bytes and the actual data is in floats, so div by 4)
+            sampleCountPacker.SetBits(ref pack, dataCountFloats); // SampleCount (data count is in bytes and the actual data is in floats, so div by 4)
             codecTypePacker.SetBits(ref pack, 0);                 // CodecType
             mutePacker.SetBits(ref pack, Mute ? 1 : 0);
             sequenceNumberPacker.SetBits(ref pack, sequenceNumber++);
@@ -241,7 +241,7 @@ namespace HoloToolkit.Sharing.VoiceChat
 
             // This is where stream data starts. Write all data for one stream
 
-            msg.Write(0.0f);     // average amplitude.  Not needed in lookDirection from client to server.
+            msg.Write(0.0f);     // average amplitude.  Not needed in direction from client to server.
             msg.Write(clientId); // non-zero client ID for this client.
 
             // HRTF position bits
@@ -270,7 +270,7 @@ namespace HoloToolkit.Sharing.VoiceChat
             msg.Write(cameraPosRelativeToGlobalAnchor.y);
             msg.Write(cameraPosRelativeToGlobalAnchor.z);
 
-            // HRTF lookDirection bits
+            // HRTF direction bits
             msg.Write(cameraDirectionRelativeToGlobalAnchor.x);
             msg.Write(cameraDirectionRelativeToGlobalAnchor.y);
             msg.Write(cameraDirectionRelativeToGlobalAnchor.z);

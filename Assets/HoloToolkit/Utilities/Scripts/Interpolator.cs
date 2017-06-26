@@ -6,7 +6,7 @@ using UnityEngine;
 namespace HoloToolkit.Unity
 {
     /// <summary>
-    /// A MonoBehaviour that interpolates a transform's position, lookRotation or scale.
+    /// A MonoBehaviour that interpolates a transform's position, rotation or scale.
     /// </summary>
     public class Interpolator : MonoBehaviour
     {
@@ -20,10 +20,10 @@ namespace HoloToolkit.Unity
         // The movement speed in meters per second
         public float PositionPerSecond = 30.0f;
 
-        // The lookRotation speed, in degrees per second
+        // The rotation speed, in degrees per second
         public float RotationDegreesPerSecond = 720.0f;
 
-        // Adjusts lookRotation speed based on angular stopDistance
+        // Adjusts rotation speed based on angular distance
         public float RotationSpeedScaler = 0.0f;
 
         // The amount to scale per second
@@ -52,7 +52,7 @@ namespace HoloToolkit.Unity
         private Quaternion targetRotation;
 
         /// <summary>
-        /// True if the transform's lookRotation is animating; false otherwise.
+        /// True if the transform's rotation is animating; false otherwise.
         /// </summary>
         public bool AnimatingRotation { get; private set; }
 
@@ -60,7 +60,7 @@ namespace HoloToolkit.Unity
         private Quaternion targetLocalRotation;
 
         /// <summary>
-        /// True if the transform's local lookRotation is animating; false otherwise.
+        /// True if the transform's local rotation is animating; false otherwise.
         /// </summary>
         public bool AnimatingLocalRotation { get; private set; }
 
@@ -90,7 +90,7 @@ namespace HoloToolkit.Unity
         private Vector3 oldPosition = Vector3.zero;
 
         /// <summary>
-        /// True if position, lookRotation or scale are animating; false otherwise.
+        /// True if position, rotation or scale are animating; false otherwise.
         /// </summary>
         public bool Running
         {
@@ -141,10 +141,10 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Sets the target lookRotation for the transform and if lookRotation wasn't
+        /// Sets the target rotation for the transform and if rotation wasn't
         /// already animating, fires the InterpolationStarted event.
         /// </summary>
-        /// <param name="target">The new target lookRotation for the transform.</param>
+        /// <param name="target">The new target rotation for the transform.</param>
         public void SetTargetRotation(Quaternion target)
         {
             bool wasRunning = Running;
@@ -170,10 +170,10 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Sets the target local lookRotation for the transform and if lookRotation
+        /// Sets the target local rotation for the transform and if rotation
         /// wasn't already animating, fires the InterpolationStarted event.
         /// </summary>
-        /// <param name="target">The new target local lookRotation for the transform.</param>
+        /// <param name="target">The new target local rotation for the transform.</param>
         public void SetTargetLocalRotation(Quaternion target)
         {
             bool wasRunning = Running;
@@ -202,7 +202,7 @@ namespace HoloToolkit.Unity
         /// Sets the target local scale for the transform and if scale
         /// wasn't already animating, fires the InterpolationStarted event.
         /// </summary>
-        /// <param name="target">The new target local lookRotation for the transform.</param>
+        /// <param name="target">The new target local rotation for the transform.</param>
         public void SetTargetLocalScale(Vector3 target)
         {
             bool wasRunning = Running;
@@ -313,7 +313,7 @@ namespace HoloToolkit.Unity
                 }
                 else
                 {
-                    // Only lerp lookRotation here, as ratio is NaN if angleDiff is 0.0f
+                    // Only lerp rotation here, as ratio is NaN if angleDiff is 0.0f
                     transform.rotation = Quaternion.Slerp(transform.rotation, lerpTargetRotation, ratio);
                     interpOccuredThisFrame = true;
                 }
@@ -339,7 +339,7 @@ namespace HoloToolkit.Unity
                 }
                 else
                 {
-                    // Only lerp lookRotation here, as ratio is NaN if angleDiff is 0.0f
+                    // Only lerp rotation here, as ratio is NaN if angleDiff is 0.0f
                     transform.localRotation = Quaternion.Slerp(transform.localRotation, lerpTargetLocalRotation, ratio);
                     interpOccuredThisFrame = true;
                 }
@@ -457,8 +457,8 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// If animating lookRotation, specifies the target lookRotation as specified
-        /// by SetTargetRotation. Otherwise returns the current lookRotation of
+        /// If animating rotation, specifies the target rotation as specified
+        /// by SetTargetRotation. Otherwise returns the current rotation of
         /// the transform.
         /// </summary>
         public Quaternion TargetRotation
@@ -474,9 +474,9 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// If animating local lookRotation, specifies the target local lookRotation as
+        /// If animating local rotation, specifies the target local rotation as
         /// specified by SetTargetLocalRotation. Otherwise returns the current
-        /// local lookRotation of the transform.
+        /// local rotation of the transform.
         /// </summary>
         public Quaternion TargetLocalRotation
         {

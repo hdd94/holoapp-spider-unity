@@ -34,7 +34,7 @@ namespace HoloToolkit.Unity
         /// </summary>
         /// <param name="minHeightOfWallSpace">Minimum height of space to be found by the query</param>
         /// <param name="minWidthOfWallSpace">Minimum width of space to be found by the query</param>
-        /// <param name="minHeightAboveFloor">Minimum stopDistance above the floor for the bottom edge of the space</param>
+        /// <param name="minHeightAboveFloor">Minimum distance above the floor for the bottom edge of the space</param>
         /// <param name="minFacingClearance">Minimum amount of space in front of the space</param>
         /// <param name="locationCount">Number of location results supplied by the user in locationData</param>
         /// <param name="locationData">Location result array of TopologyResult to be filled with the spaces found by the query</param>
@@ -54,7 +54,7 @@ namespace HoloToolkit.Unity
         /// </summary>
         /// <param name="minHeightOfWallSpace">Minimum height of space to be found by the query</param>
         /// <param name="minWidthOfWallSpace">Minimum width of space to be found by the query</param>
-        /// <param name="minHeightAboveFloor">Minimum stopDistance above the floor for the bottom edge of the space</param>
+        /// <param name="minHeightAboveFloor">Minimum distance above the floor for the bottom edge of the space</param>
         /// <param name="minFacingClearance">Minimum amount of space in front of the space</param>
         /// <param name="locationCount">Number of location results supplied by the user in locationData</param>
         /// <param name="locationData">Location result array of TopologyResult to be filled with the spaces found by the query</param>

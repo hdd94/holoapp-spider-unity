@@ -75,11 +75,11 @@ namespace HoloToolkit.Unity
         [Tooltip("The reverb attenuation curve for simple 3D sounds. Only used when positioning is set to 3D")]
         public AnimationCurve reverbCurve = AnimationCurve.EaseInOut(0f, 0f, 1f, 0f); // by default no reverb
 
-        [Tooltip("The maximum attenuation stopDistance for simple 3D sounds. Only used when positioning is set to 3D")]
+        [Tooltip("The maximum attenuation distance for simple 3D sounds. Only used when positioning is set to 3D")]
         [Range(1f, 500f)]
         public float maxDistanceAttenuation3D = 100f;
 
-        [Tooltip("The stopDistance, in meters at which the gain is 0 decibels.  Only used when positioning is set to SpatialSound.")]
+        [Tooltip("The distance, in meters at which the gain is 0 decibels.  Only used when positioning is set to SpatialSound.")]
         [Range(SpatialSoundSettings.MinimumUnityGainDistanceMeters, SpatialSoundSettings.MaximumUnityGainDistanceMeters)]
         public float unityGainDistance = SpatialSoundSettings.DefaultUnityGainDistance;
 
@@ -91,7 +91,7 @@ namespace HoloToolkit.Unity
         public float pitchCenter = 1.0f;
 
         /// <summary>
-        /// The amount in either lookDirection from Pitch Center that the pitch can randomly vary upon playing the event.
+        /// The amount in either direction from Pitch Center that the pitch can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 2.0f.</remarks>
         [HideInInspector]
@@ -102,7 +102,7 @@ namespace HoloToolkit.Unity
         public float volumeCenter = 1.0f;
 
         /// <summary>
-        /// The amount in either lookDirection from Volume Center that the volume can randomly vary upon playing the event.
+        /// The amount in either direction from Volume Center that the volume can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 0.5f.</remarks>
         [HideInInspector]
@@ -113,7 +113,7 @@ namespace HoloToolkit.Unity
         public float panCenter = 0;
 
         /// <summary>
-        /// The amount in either lookDirection from Pan Center that panning can randomly vary upon playing the event.
+        /// The amount in either direction from Pan Center that panning can randomly vary upon playing the event.
         /// </summary>
         /// <remarks>The supported range is 0.0f - 0.5f.</remarks>
         [HideInInspector]

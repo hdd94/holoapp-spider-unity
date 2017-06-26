@@ -306,13 +306,13 @@ namespace HoloToolkit.Unity
                 public float VirtualCeilingSurfaceArea;     // In m2 : estimation of surface of virtual Ceiling.
                 public float VirtualWallSurfaceArea;        // In m2 : estimation of surface of virtual Walls.
 
-                public int NumFloor;                        // List of Area of each Floor surface (contains Count)
-                public int NumCeiling;                      // List of Area of each Ceiling surface (contains Count)
-                public int NumWall_XNeg;                    // List of Area of each Wall XNeg surface (contains Count)
-                public int NumWall_XPos;                    // List of Area of each Wall XPos surface (contains Count)
-                public int NumWall_ZNeg;                    // List of Area of each Wall ZNeg surface (contains Count)
-                public int NumWall_ZPos;                    // List of Area of each Wall ZPos surface (contains Count)
-                public int NumPlatform;                     // List of Area of each Horizontal not Floor surface (contains Count)
+                public int NumFloor;                        // List of Area of each Floor surface (contains count)
+                public int NumCeiling;                      // List of Area of each Ceiling surface (contains count)
+                public int NumWall_XNeg;                    // List of Area of each Wall XNeg surface (contains count)
+                public int NumWall_XPos;                    // List of Area of each Wall XPos surface (contains count)
+                public int NumWall_ZNeg;                    // List of Area of each Wall ZNeg surface (contains count)
+                public int NumWall_ZPos;                    // List of Area of each Wall ZPos surface (contains count)
+                public int NumPlatform;                     // List of Area of each Horizontal not Floor surface (contains count)
 
                 public int CellCount_IsPaintMode;           // Number paint cells (could deduce surface of painted area) => 8cm x 8cm cell
                 public int CellCount_IsSeenQualtiy_None;    // Number of not seen cells => 8cm x 8cm cell
@@ -382,7 +382,7 @@ namespace HoloToolkit.Unity
             /// <param name="camUp_X">The user's camera/view unit up vector, x value</param>
             /// <param name="camUp_Y">The user's camera/view unit up vector, y value</param>
             /// <param name="camUp_Z">The user's camera/view unit up vector, z value</param>
-            /// <param name="searchDst">Suggested search stopDistance for playspace center</param>
+            /// <param name="searchDst">Suggested search distance for playspace center</param>
             /// <param name="optimalSize">Optimal room size. Used to determind the playspace size</param>
             [DllImport("SpatialUnderstanding")]
             public static extern void GeneratePlayspace_InitScan(
@@ -480,9 +480,9 @@ namespace HoloToolkit.Unity
             /// <param name="rayPos_X">Ray origin, x component</param>
             /// <param name="rayPos_Y">Ray origin, y component</param>
             /// <param name="rayPos_Z">Ray origin, z component</param>
-            /// <param name="rayVec_X">Ray lookDirection vector, x component. Length of ray indicates the length of the ray cast query.</param>
-            /// <param name="rayVec_Y">Ray lookDirection vector, y component. Length of ray indicates the length of the ray cast query.</param>
-            /// <param name="rayVec_Z">Ray lookDirection vector, z component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_X">Ray direction vector, x component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_Y">Ray direction vector, y component. Length of ray indicates the length of the ray cast query.</param>
+            /// <param name="rayVec_Z">Ray direction vector, z component. Length of ray indicates the length of the ray cast query.</param>
             /// <param name="result">Structure to receive the results of the raycast</param>
             /// <returns>Zero if fails or no intersection, one if an intersection is detected</returns>
             [DllImport("SpatialUnderstanding")]

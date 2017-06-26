@@ -43,7 +43,7 @@ namespace HoloToolkit.Unity
 
         /// <summary>
         /// Takes a point in the coordinate space specified by the "from" transform and transforms it to be the correct point in the coordinate space specified by the "to" transform
-        /// applies lookRotation, scale and translation
+        /// applies rotation, scale and translation
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -57,8 +57,8 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Takes a lookDirection in the coordinate space specified by the "from" transform and transforms it to be the correct lookDirection in the coordinate space specified by the "to" transform
-        /// applies lookRotation only, no translation or scale
+        /// Takes a direction in the coordinate space specified by the "from" transform and transforms it to be the correct direction in the coordinate space specified by the "to" transform
+        /// applies rotation only, no translation or scale
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -72,8 +72,8 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Takes a vectpr in the coordinate space specified by the "from" transform and transforms it to be the correct lookDirection in the coordinate space specified by the "to" transform
-        /// applies lookRotation and scale, no translation
+        /// Takes a vectpr in the coordinate space specified by the "from" transform and transforms it to be the correct direction in the coordinate space specified by the "to" transform
+        /// applies rotation and scale, no translation
         /// </summary>
         /// <param name="from"></param>
         /// <param name="to"></param>
@@ -101,7 +101,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Creates a quaternion containing the lookRotation from the input matrix.
+        /// Creates a quaternion containing the rotation from the input matrix.
         /// </summary>
         /// <param name="m">Input matrix to convert to quaternion</param>
         /// <returns></returns>
@@ -122,7 +122,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Extract the translation and lookRotation components of a Unity matrix
+        /// Extract the translation and rotation components of a Unity matrix
         /// </summary>
         public static void ToTranslationRotation(Matrix4x4 unityMtx, out Vector3 translation, out Quaternion rotation)
         {
@@ -163,7 +163,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Returns the stopDistance between a point and an infinite line defined by two points; linePointA and linePointB
+        /// Returns the distance between a point and an infinite line defined by two points; linePointA and linePointB
         /// </summary>
         /// <param name="point"></param>
         /// <param name="linePointA"></param>
@@ -321,18 +321,18 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// find unsigned stopDistance of 3D point to an infinite line
+        /// find unsigned distance of 3D point to an infinite line
         /// </summary>
         /// <param name="ray">ray that specifies an infinite line</param>
         /// <param name="point">3D point</param>
-        /// <returns>unsigned perpendicular stopDistance from point to line</returns>
+        /// <returns>unsigned perpendicular distance from point to line</returns>
         public static float DistanceOfPointToLine(Ray ray, Vector3 point)
         {
             return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
         }
 
         /// <summary>
-        /// Find 3D point that minimizes stopDistance to 2 lines, midpoint of the shortest perpendicular line segment between them
+        /// Find 3D point that minimizes distance to 2 lines, midpoint of the shortest perpendicular line segment between them
         /// </summary>
         /// <param name="p">ray that specifies a line</param>
         /// <param name="q">ray that specifies a line</param>
@@ -359,7 +359,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Find 3D point that minimizes stopDistance to a set of 2 or more lines, ignoring outliers
+        /// Find 3D point that minimizes distance to a set of 2 or more lines, ignoring outliers
         /// </summary>
         /// <param name="rays">list of rays, each specifying a line, must have at least 1</param>
         /// <param name="ransac_iterations">number of iterations:  log(1-p)/log(1-(1-E)^s)
@@ -367,7 +367,7 @@ namespace HoloToolkit.Unity
         ///      E is proportion of outliers (1-ransac_ratio)
         ///      e.g. p=0.999, ransac_ratio=0.54, s=2 ==>  log(0.001)/(log(1-0.54^2) = 20
         /// </param>
-        /// <param name="ransac_threshold">minimum stopDistance from point to line for a line to be considered an inlier</param>
+        /// <param name="ransac_threshold">minimum distance from point to line for a line to be considered an inlier</param>
         /// <param name="numActualInliers">return number of inliers: lines that are within ransac_threshold of nearest point</param>
         /// <returns>point nearest to the set of lines, ignoring outliers</returns>
         public static Vector3 NearestPointToLinesRANSAC(List<Ray> rays, int ransac_iterations, float ransac_threshold, out int numActualInliers)
@@ -381,7 +381,7 @@ namespace HoloToolkit.Unity
                 {
                     Vector3 testPoint = NearestPointToLines(rays[Random.Range(0, rays.Count)], rays[Random.Range(0, rays.Count)]);
 
-                    // Count inliers
+                    // count inliers
                     int numInliersForIteration = 0;
                     for (int ind = 0; ind < rays.Count; ++ind)
                     {
@@ -398,7 +398,7 @@ namespace HoloToolkit.Unity
                 }
             }
 
-            // now find and Count actual inliers and do least-squares to find best fit
+            // now find and count actual inliers and do least-squares to find best fit
             var inlierList = rays.Where(r => DistanceOfPointToLine(r, nearestPoint) < ransac_threshold);
             numActualInliers = inlierList.Count();
             if (numActualInliers >= 2)
@@ -409,14 +409,14 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Find 3D point that minimizes stopDistance to a set of 2 or more lines
+        /// Find 3D point that minimizes distance to a set of 2 or more lines
         /// </summary>
         /// <param name="rays">each ray specifies an infinite line</param>
         /// <returns>point nearest to the set of lines</returns>
         public static Vector3 NearestPointToLinesLeastSquares(IEnumerable<Ray> rays)
         {
             // finding the point nearest to the set of lines specified by rays
-            // Use the following formula, where u_i are normalized lookDirection
+            // Use the following formula, where u_i are normalized direction
             // vectors along each ray and p_i is a point along each ray.
 
             //                      -1

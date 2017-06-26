@@ -55,13 +55,13 @@ namespace HoloToolkit.Unity
                     break;
             }
 
-            // If we are right next to the camera the lookRotation is undefined. 
+            // If we are right next to the camera the rotation is undefined. 
             if (directionToTarget.sqrMagnitude < 0.001f)
             {
                 return;
             }
 
-            // Calculate and apply the lookRotation required to reorient the object
+            // Calculate and apply the rotation required to reorient the object
             transform.rotation = Quaternion.LookRotation(-directionToTarget);
         }
     }

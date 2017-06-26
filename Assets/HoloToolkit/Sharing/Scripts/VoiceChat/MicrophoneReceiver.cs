@@ -290,7 +290,7 @@ namespace HoloToolkit.Sharing.VoiceChat
                         Vector3 myUp = Quaternion.Euler(90, 0, 0) * cameraDirectionRelativeToGlobalAnchor;
                         float fltz = (KPanMaximum / PanMaximumMetres) * Vector3.Dot(soundVector, myUp);
 
-                        // Hacky stopDistance check so we don't get too close to source.
+                        // Hacky distance check so we don't get too close to source.
                         Vector3 flt = new Vector3(fltx, flty, fltz);
                         if (flt.magnitude < (MinimumDistance * KDropOffMaximum))
                         {

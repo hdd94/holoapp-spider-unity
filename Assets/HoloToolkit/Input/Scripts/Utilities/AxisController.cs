@@ -302,7 +302,7 @@ namespace HoloToolkit.Unity.InputModule
         {
             Vector3 rot = Vector3.zero;
 
-            // Use frame-to-frame mouse delta in pixels to determine mouse lookRotation. The traditional
+            // Use frame-to-frame mouse delta in pixels to determine mouse rotation. The traditional
             // GetAxis("Mouse X") method doesn't work under Remote Desktop.
             Vector3 mousePositionDelta = Input.mousePosition - this.lastMousePosition;
             this.lastMousePosition = Input.mousePosition;
@@ -437,7 +437,7 @@ namespace HoloToolkit.Unity.InputModule
         }
 
         /// <summary>
-        /// Only allow the mouse to control lookRotation when Unity has focus. This enables
+        /// Only allow the mouse to control rotation when Unity has focus. This enables
         /// the player to temporarily alt-tab away without having the player look around randomly
         /// back in the Unity Game window.
         /// </summary>

@@ -46,7 +46,7 @@ namespace HoloToolkit.Unity.InputModule
         [Range(0.01f, 1.0f)]
         public float PositionLerpSpeed = 0.2f;
 
-        [Tooltip("Controls the speed at which the object will interpolate toward the desired lookRotation")]
+        [Tooltip("Controls the speed at which the object will interpolate toward the desired rotation")]
         [Range(0.01f, 1.0f)]
         public float RotationLerpSpeed = 0.2f;
 

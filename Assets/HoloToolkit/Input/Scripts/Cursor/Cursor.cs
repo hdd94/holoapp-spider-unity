@@ -55,22 +55,22 @@ namespace HoloToolkit.Unity.InputModule
         private CursorStateEnum cursorState = CursorStateEnum.None;
 
         /// <summary>
-        /// Minimum stopDistance for cursor if nothing is hit
+        /// Minimum distance for cursor if nothing is hit
         /// </summary>
         [Header("Cusor Distance")]
-        [Tooltip("The minimum stopDistance the cursor can be with nothing hit")]
+        [Tooltip("The minimum distance the cursor can be with nothing hit")]
         public float MinCursorDistance = 1.0f;
 
         /// <summary>
-        /// Maximum stopDistance for cursor if nothing is hit
+        /// Maximum distance for cursor if nothing is hit
         /// </summary>
-        [Tooltip("The maximum stopDistance the cursor can be with nothing hit")]
+        [Tooltip("The maximum distance the cursor can be with nothing hit")]
         public float DefaultCursorDistance = 2.0f;
 
         /// <summary>
-        /// Surface stopDistance to place the cursor off of the surface at
+        /// Surface distance to place the cursor off of the surface at
         /// </summary>
-        [Tooltip("The stopDistance from the hit surface to place the cursor")]
+        [Tooltip("The distance from the hit surface to place the cursor")]
         public float SurfaceCursorDistance = 0.02f;
 
         [Header("Motion")]
@@ -290,7 +290,7 @@ namespace HoloToolkit.Unity.InputModule
             // Normalize scale on before update
             targetScale = Vector3.one;
 
-            // If no game object is hit, put the cursor at the default stopDistance
+            // If no game object is hit, put the cursor at the default distance
             if (newTargetedObject == null)
             {
                 this.TargetedObject = null;
@@ -328,7 +328,7 @@ namespace HoloToolkit.Unity.InputModule
         /// <summary>
         /// Updates the visual representation of the cursor.
         /// </summary>
-        public void SetVisiblity(bool visible)
+        public virtual void SetVisiblity(bool visible)
         {
             if (PrimaryCursorVisual != null)
             {

@@ -77,10 +77,10 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Sets the Spatial Sound unity gain stopDistance.
+        /// Sets the Spatial Sound unity gain distance.
         /// </summary>
-        /// <param name="audioSource">The AudioSource on which the unity gain stopDistance will be set.</param>
-        /// <param name="room">The stopDistance, in meters, at which the AudioSource gain will be 0 decibels.</param>
+        /// <param name="audioSource">The AudioSource on which the unity gain distance will be set.</param>
+        /// <param name="room">The distance, in meters, at which the AudioSource gain will be 0 decibels.</param>
         public static void SetUnityGainDistance(AudioSource audioSource, float distance)
         {
             SetParameter(audioSource, SpatialSoundParameters.UnityGainDistance, distance);

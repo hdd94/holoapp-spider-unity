@@ -43,7 +43,7 @@ namespace HoloToolkit.Unity.InputModule
 
             if (HandGuidanceIndicator != null)
             {
-                // Cache the initial lookRotation of the HandGuidanceIndicator so future rotations 
+                // Cache the initial rotation of the HandGuidanceIndicator so future rotations 
                 // can be done with respect to this orientation.
                 defaultHandGuidanceRotation = HandGuidanceIndicator.transform.rotation;
             }
@@ -66,7 +66,7 @@ namespace HoloToolkit.Unity.InputModule
                 return;
             }
 
-            // Get the position and lookRotation of the hand guidance indicator and display the indicator object.
+            // Get the position and rotation of the hand guidance indicator and display the indicator object.
             if (handGuidanceIndicatorGameObject != null)
             {
                 Vector3 position;
@@ -94,12 +94,12 @@ namespace HoloToolkit.Unity.InputModule
 
         private void GetIndicatorPositionAndRotation(InteractionSourceState hand, out Vector3 position, out Quaternion rotation)
         {
-            // Update the stopDistance from IndicatorParent based on the user's hand's stopDistance from the center of the view.
-            // Bound this stopDistance by this maxDistanceFromCenter field, in meters.
+            // Update the distance from IndicatorParent based on the user's hand's distance from the center of the view.
+            // Bound this distance by this maxDistanceFromCenter field, in meters.
             const float maxDistanceFromCenter = 0.3f;
             float distanceFromCenter = (float)(hand.properties.sourceLossRisk * maxDistanceFromCenter);
 
-            // Subtract lookDirection from origin so that the indicator is between the hand and the origin.
+            // Subtract direction from origin so that the indicator is between the hand and the origin.
             position = Cursor.transform.position - hand.properties.sourceLossMitigationDirection * distanceFromCenter;
             rotation = Quaternion.LookRotation(Camera.main.transform.forward, hand.properties.sourceLossMitigationDirection);
         }

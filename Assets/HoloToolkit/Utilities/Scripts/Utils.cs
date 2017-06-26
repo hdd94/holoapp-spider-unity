@@ -55,7 +55,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Position transform along the gaze lookDirection and orient yaw to match, with the specified offset
+        /// Position transform along the gaze direction and orient yaw to match, with the specified offset
         /// </summary>
         /// <param name="stageTransform">transform of higher-level space where 0,1,0 is up</param>
         /// <param name="tran">transform to be repositioned</param>
@@ -79,7 +79,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Given two points and the transform that they are in, set position, lookRotation, and scale of a cylinder transform to connect it between the two points
+        /// Given two points and the transform that they are in, set position, rotation, and scale of a cylinder transform to connect it between the two points
         /// </summary>
         /// <param name="endPointSpace"></param>
         /// <param name="a">One end point in the space of endPointSpace</param>

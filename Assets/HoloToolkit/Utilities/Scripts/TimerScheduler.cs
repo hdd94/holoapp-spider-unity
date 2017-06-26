@@ -94,14 +94,14 @@ namespace HoloToolkit.Unity
                 // calculate the key time for the evaluation point. Multiple timers can have this value.
                 int keyTime = GetKeyTime(Time.time + timer.Duration);
 
-                // re-add SpiderCountTextMesh to queue
+                // re-add timer to queue
                 timers.Push(keyTime, timer);
 
                 // add to list of active timers
                 activeTimers.Add(new TimerIdPair { Id = timer.Id, KeyTime = keyTime });
             }
 
-            // make sure the scheduler is enabled now that we have a new SpiderCountTextMesh.
+            // make sure the scheduler is enabled now that we have a new timer.
             enabled = true;
 
             return timer.Id;
@@ -171,7 +171,7 @@ namespace HoloToolkit.Unity
                 // loop events by just reinserting them
                 if (timer.Loop)
                 {
-                    // re-add SpiderCountTextMesh
+                    // re-add timer
                     AddTimer(timer);
                 }
 
@@ -190,7 +190,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Creates a new SpiderCountTextMesh event which will be added next frame.
+        /// Creates a new timer event which will be added next frame.
         /// </summary>
         /// <param name="timeSeconds"></param>
         /// <param name="callback"></param>
@@ -200,12 +200,12 @@ namespace HoloToolkit.Unity
         {
             int id = AddTimer(new TimerData(timeSeconds, callback, loop, nextTimerId++), deferred);
 
-            // create a new id, and make a new SpiderCountTextMesh with it
+            // create a new id, and make a new timer with it
             return new Timer(id);
         }
 
         /// <summary>
-        /// Disable an active SpiderCountTextMesh. 
+        /// Disable an active timer. 
         /// </summary>
         /// <param name="timerId"></param>
         /// <returns></returns>

@@ -263,7 +263,7 @@ namespace HoloToolkit.Unity.SpatialMapping
                 destPlane.transform.parent = planesParent.transform;
                 SurfacePlane surfacePlane = destPlane.GetComponent<SurfacePlane>();
 
-                // Set the Plane property to adjust transform position/scale/lookRotation and determine plane type.
+                // Set the Plane property to adjust transform position/scale/rotation and determine plane type.
                 surfacePlane.Plane = boundedPlane;
 
                 SetPlaneVisibility(surfacePlane);

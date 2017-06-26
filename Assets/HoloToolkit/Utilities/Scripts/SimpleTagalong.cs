@@ -6,14 +6,14 @@ using UnityEngine;
 namespace HoloToolkit.Unity
 {
     /// <summary>
-    /// A Tagalong that stays at a fixed stopDistance from the camera and always
+    /// A Tagalong that stays at a fixed distance from the camera and always
     /// seeks to have a part of itself in the view frustum of the camera.
     /// </summary>
     [RequireComponent(typeof(BoxCollider), typeof(Interpolator))]
     public class SimpleTagalong : MonoBehaviour
     {
-        // Simple Tagalongs seek to stay at a fixed stopDistance from the Camera.
-        [Tooltip("The stopDistance in meters from the camera for the Tagalong to seek when updating its position.")]
+        // Simple Tagalongs seek to stay at a fixed distance from the Camera.
+        [Tooltip("The distance in meters from the camera for the Tagalong to seek when updating its position.")]
         public float TagalongDistance = 2.0f;
         [Tooltip("If true, forces the Tagalong to be TagalongDistance from the camera, even if it didn't need to move otherwise.")]
         public bool EnforceDistance = true;
@@ -75,7 +75,7 @@ namespace HoloToolkit.Unity
             else if (!interpolator.Running && EnforceDistance)
             {
                 // If the Tagalong is inside the camera's view frustum, and it is
-                // supposed to stay a fixed stopDistance from the camera, force the
+                // supposed to stay a fixed distance from the camera, force the
                 // tagalong to that location (without using the Interpolator).
                 Ray ray = new Ray(Camera.main.transform.position, transform.position - Camera.main.transform.position);
                 transform.position = ray.GetPoint(TagalongDistance);
@@ -122,7 +122,7 @@ namespace HoloToolkit.Unity
             {
                 // If the Tagalong needs to move to the right, that means it is to
                 // the left of the left frustum plane. Remember that plane and set
-                // our Ray's lookDirection to point towards that plane (remember the
+                // our Ray's direction to point towards that plane (remember the
                 // Ray's origin is already inside the view frustum.
                 plane = frustumPlanes[frustumLeft];
                 ray.direction = -Camera.main.transform.right;
@@ -136,7 +136,7 @@ namespace HoloToolkit.Unity
             }
             if (moveRight || moveLeft)
             {
-                // If the Tagalong needed to move in the X lookDirection, cast a Ray
+                // If the Tagalong needed to move in the X direction, cast a Ray
                 // from the default position to the plane we are working with.
                 plane.Raycast(ray, out distanceOffset);
 
@@ -165,11 +165,11 @@ namespace HoloToolkit.Unity
                 toPosition.y = ray.GetPoint(distanceOffset).y;
             }
 
-            // Create a ray that starts at the camera and points in the lookDirection
+            // Create a ray that starts at the camera and points in the direction
             // of the calculated toPosition.
             ray = new Ray(Camera.main.transform.position, toPosition - Camera.main.transform.position);
 
-            // Find the point along that ray that is the right stopDistance away and
+            // Find the point along that ray that is the right distance away and
             // update the calculated toPosition to be that point.
             toPosition = ray.GetPoint(TagalongDistance);
 

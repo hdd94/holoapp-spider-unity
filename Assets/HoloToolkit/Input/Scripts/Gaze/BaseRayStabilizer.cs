@@ -17,7 +17,7 @@ namespace HoloToolkit.Unity.InputModule
         public abstract Vector3 StablePosition { get; }
 
         /// <summary>
-        /// The stabilized lookRotation.
+        /// The stabilized rotation.
         /// </summary>
         public abstract Quaternion StableRotation { get; }
 

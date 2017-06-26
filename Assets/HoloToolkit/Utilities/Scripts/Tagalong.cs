@@ -31,12 +31,12 @@ namespace HoloToolkit.Unity
         [Range(3, 11), Tooltip("The number of rays to cast vertically across the Tagalong.")]
         public int VerticalRayCount = 3;
 
-        [Tooltip("Don't allow the Tagalong to come closer than this stopDistance.")]
+        [Tooltip("Don't allow the Tagalong to come closer than this distance.")]
         public float MinimumTagalongDistance = 1.0f;
         [Tooltip("When true, the Tagalong object maintains a fixed angular size.")]
         public bool MaintainFixedSize = true;
 
-        [Tooltip("The speed to update the Tagalong's stopDistance when compensating for depth (meters/second).")]
+        [Tooltip("The speed to update the Tagalong's distance when compensating for depth (meters/second).")]
         public float DepthUpdateSpeed = 4.0f;
 
         private float defaultTagalongDistance;
@@ -52,10 +52,10 @@ namespace HoloToolkit.Unity
         {
             base.Start();
 
-            // Remember the default for stopDistance.
+            // Remember the default for distance.
             defaultTagalongDistance = TagalongDistance;
 
-            // If the specified minimum stopDistance for the tagalong would be within the
+            // If the specified minimum distance for the tagalong would be within the
             // camera's near clipping plane, adjust it to be 10% beyond the near
             // clipping plane.
             if (Camera.main.nearClipPlane > MinimumTagalongDistance)
@@ -196,7 +196,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Calculates a target position for the Tagalong in either the horizontal or vertical lookDirection.
+        /// Calculates a target position for the Tagalong in either the horizontal or vertical direction.
         /// </summary>
         /// <param name="isHorizontal">If true, the calculate horizontally; vertically otherwise.</param>
         /// <param name="centermostEdge">A point along the collider that is the closest to the center of the FOV.</param>
@@ -230,13 +230,13 @@ namespace HoloToolkit.Unity
             Vector3 pointOnFrustum = rayTemp.GetPoint(distToFrustum);
 
             // Adjust the point found on the frustum plane to be the same
-            // stopDistance from the camera as targetPoint is, but still on the
+            // distance from the camera as targetPoint is, but still on the
             // frustum plane.
             rayTemp = new Ray(cameraPosition, pointOnFrustum - cameraPosition);
             float distanceToTarget = Vector3.Distance(cameraPosition, targetPoint);
             Vector3 recalculatedPointOnFrustum = rayTemp.GetPoint(distanceToTarget);
 
-            // Find the new calculated target position. First get the lookRotation
+            // Find the new calculated target position. First get the rotation
             // between the target and center of the collider.
             Quaternion rotQuat = Quaternion.FromToRotation(targetPoint - cameraPosition, center - cameraPosition);
             // Create the vector we want to rotate.
@@ -309,7 +309,7 @@ namespace HoloToolkit.Unity
             {
                 // The closestHitDistance is a straight-line from the camera to the
                 // point on the collider that was hit. Unless the closest hit was
-                // encountered on the center Raycast, using the stopDistance found will
+                // encountered on the center Raycast, using the distance found will
                 // actually push the tagalong too far away, and part of the object
                 // that was hit will show through the Tagalong. We can fix that
                 // with a little thing we like to call Trigonometry.

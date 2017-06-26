@@ -41,7 +41,7 @@ namespace HoloToolkit.Sharing
 
                     if (transformDataModel != null)
                     {
-                        // Set the position, lookRotation and scale to what they should be
+                        // Set the position, rotation and scale to what they should be
                         transform.localPosition = transformDataModel.Position.Value;
                         transform.localRotation = transformDataModel.Rotation.Value;
                         transform.localScale = transformDataModel.Scale.Value;

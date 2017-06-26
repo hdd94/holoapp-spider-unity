@@ -63,10 +63,10 @@ namespace HoloToolkit.Unity
             }
         }
 
-        [Tooltip("Use the GazeManager class to set the plane to the gazed upon hologram. If disabled, the plane will always be at a constant stopDistance.")]
+        [Tooltip("Use the GazeManager class to set the plane to the gazed upon hologram. If disabled, the plane will always be at a constant distance.")]
         public bool UseGazeManager = true;
 
-        [Tooltip("Default stopDistance to set plane if plane is gaze-locked or if no object is hit.")]
+        [Tooltip("Default distance to set plane if plane is gaze-locked or if no object is hit.")]
         public float DefaultPlaneDistance = 2.0f;
 
         [Tooltip("Visualize the plane at runtime.")]
@@ -78,7 +78,7 @@ namespace HoloToolkit.Unity
         private Vector3 planePosition;
 
         /// <summary>
-        /// Current stopDistance of the plane from the user's head. Only used when not using the target override
+        /// Current distance of the plane from the user's head. Only used when not using the target override
         /// or the GazeManager to set the plane's position. 
         /// </summary>
         private float currentPlaneDistance = 4.0f;
@@ -140,7 +140,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Gets the lookDirection of the gaze for purposes of placing the stabilization plane
+        /// Gets the direction of the gaze for purposes of placing the stabilization plane
         /// </summary>
         private Vector3 GazeNormal
         {
@@ -195,7 +195,7 @@ namespace HoloToolkit.Unity
             Vector3 gazeOrigin = GazeOrigin;
             Vector3 gazeDirection = GazeNormal;
 
-            // Calculate the delta between gaze origin's position and current hit position. If no object is hit, use default stopDistance.
+            // Calculate the delta between gaze origin's position and current hit position. If no object is hit, use default distance.
             float focusPointDistance;
             Vector3 gazeHitPosition;
             if (TryGetGazeHitPosition(out gazeHitPosition))
@@ -219,7 +219,7 @@ namespace HoloToolkit.Unity
         }
 
         /// <summary>
-        /// Configures the stabilization plane to update based on a fixed stopDistance away from you.
+        /// Configures the stabilization plane to update based on a fixed distance away from you.
         /// </summary>
         private void ConfigureFixedDistancePlane(float deltaTime)
         {

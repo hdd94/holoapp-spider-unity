@@ -39,7 +39,7 @@ namespace HoloToolkit.Unity.InputModule
         private readonly VectorRollingStatistics positionRollingStats = new VectorRollingStatistics();
 
         /// <summary>
-        /// Calculates standard deviation and averages for the gaze lookDirection.
+        /// Calculates standard deviation and averages for the gaze direction.
         /// </summary>
         private readonly VectorRollingStatistics directionRollingStats = new VectorRollingStatistics();
 
@@ -51,7 +51,7 @@ namespace HoloToolkit.Unity.InputModule
 
         /// <summary>
         /// Tunable parameter.
-        /// If the standard deviation for the lookDirection is above this value, we reset and stop stabilizing.
+        /// If the standard deviation for the direction is above this value, we reset and stop stabilizing.
         /// </summary>
         private const float DirectionStandardDeviationReset = 0.1f;
 
@@ -61,12 +61,12 @@ namespace HoloToolkit.Unity.InputModule
         private const int MinimumSamplesRequiredToStabalize = 30;
 
         /// <summary>
-        /// When not stabalizing this is the 'lerp' applied to the position and lookDirection of the gaze to smooth it over time.
+        /// When not stabalizing this is the 'lerp' applied to the position and direction of the gaze to smooth it over time.
         /// </summary>
         private const float UnstabalizedLerpFactor = 0.3f;
 
         /// <summary>
-        /// When stabalizing we will use the standard deviation of the position and lookDirection to create the lerp value.
+        /// When stabalizing we will use the standard deviation of the position and direction to create the lerp value.
         /// By default this value will be low and the cursor will be too sluggish, so we 'boost' it by this value.
         /// </summary>
         private const float StabalizedLerpBoost = 10.0f;
@@ -82,7 +82,7 @@ namespace HoloToolkit.Unity.InputModule
         /// Call this method with Raycasthit parameters to get stable values.
         /// </summary>
         /// <param name="position">Position value from a RaycastHit point.</param>
-        /// <param name="rotation">Rotation value from a RaycastHit lookRotation.</param>
+        /// <param name="rotation">Rotation value from a RaycastHit rotation.</param>
         public override void UpdateStability(Vector3 position, Quaternion rotation)
         {
             Vector3 gazePosition = position;
